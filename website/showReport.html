@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التقرير</title>
+  <link rel="stylesheet" href="repShow.css">
+  <link rel="shortcut icon" href="img/smallLogo.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script src="repShow.js"></script>
+
+</head>
+
+<body dir="rtl">
+
+  <section id="main" style="display: none;">
+    <br><br>
+    <h2 id="activityName">Activity Name</h2><br>
+
+    <div id="table-cont">
+      <table id="main_table">
+
+      </table>
+
+      <table id="chall_table">
+
+      </table>
+
+
+      <table id="links_table">
+      </table>
+
+      <table id="att_table">
+      </table>
+
+      <table id="emp_table">
+
+      </table>
+
+      <table id="parti_table">
+      </table>
+
+      <table id="beni_table">
+      </table>
+
+      <div id="charts">
+
+        <div class="chart" id="ch1">
+          <h6>المستفيدين</h6>
+          <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="chart" id="ch2">
+          <h6>الفئات المستهدفة</h6>
+          <canvas id="myChart1"></canvas>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+  </section>
+
+  <section id="tableShow" style="display: none;">
+    <h2>إختر نشاط</h2>
+
+    <input type="text" name="search" id="search" placeholder="# البحث">
+
+    <table class="table" id="table">
+
+    </table>
+
+  </section>
+
+
+</body>
+
+</html>

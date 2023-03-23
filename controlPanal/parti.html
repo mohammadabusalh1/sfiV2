@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="shortcut icon" href="img/smallLogo.png" />
+    <title>المشاركين</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 300;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    h2 {
+        font-size: 46px;
+    }
+
+    h3 {
+        font-size: 36px;
+    }
+
+    h4 {
+        font-size: 26px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .Darkbutton {
+        padding: 8px 25px;
+        background-color: transparent;
+        color: #C58940;
+        border: 1px solid #C58940;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 16px;
+        transition: 0.7s;
+    }
+
+    button {
+        background-color: #FAEAB1;
+        /* Sets the background color of the button to blue */
+        color: black;
+        /* Sets the text color of the button to white */
+        padding: 5px 10px;
+        /* Adds padding to the button */
+        border-radius: 5px;
+        /* Rounds the corners of the button */
+        border: none;
+        /* Removes the border from the button */
+        cursor: pointer;
+        /* Changes the cursor to a pointer when hovering over the button */
+        font-size: 16px;
+        /* Sets the font size of the button text */
+    }
+
+    #nav {
+        display: flex;
+        background-color: #FAF8F1;
+        justify-content: space-between;
+        padding: 20px 40px;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        right: 0;
+        box-shadow: 15px 20px 25px rgb(0, 0, 0, 0.05);
+        z-index: 10;
+    }
+
+    #links img {
+        cursor: pointer;
+    }
+
+    #links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #links img {
+        padding-left: 20px;
+    }
+
+    #links a {
+        color: #E5BA73;
+        padding: 0 12px;
+        font-weight: 600;
+    }
+
+    #links a .active {
+        color: #C58940;
+        position: relative;
+        font-weight: 1000;
+    }
+
+    #links a:hover {
+        color: #C58940;
+        font-weight: 800;
+    }
+
+    #nav button {
+        background-color: transparent;
+        border: none;
+        transform: rotate(180deg);
+        cursor: pointer;
+    }
+
+    #nav button span {
+        font-size: 32px;
+        color: #C58940;
+    }
+
+    #nav i {
+        font-size: 24px;
+        color: #C58940;
+        display: none;
+        padding-left: 18px;
+    }
+
+    #ic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    footer {
+        background-color: #FAF8F1;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 30px 40px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    footer #logo {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    footer #logo p {
+        padding-top: 8px;
+    }
+
+    footer #pages {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 30px 0;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer #pages a h6 {
+        color: #E5BA73;
+        font-weight: 600;
+        padding: 0 10px;
+    }
+
+    footer #pages a h6:hover {
+        font-weight: 800;
+        color: #C58940;
+    }
+
+    #smallList {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #FAF8F1;
+        padding: 20px;
+        text-align: center;
+        display: none;
+        position: sticky;
+        top: 90px;
+        left: 0;
+        z-index: 5;
+    }
+
+    #smallList #links2 a h6 {
+        padding: 12px 0;
+        color: #E5BA73;
+    }
+
+    #smallList #links2 a h6:hover {
+        padding: 12px 0;
+        color: #C58940;
+        font-weight: 800;
+    }
+
+    #info {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+    }
+
+    #info h6 {
+        padding-bottom: 8px;
+        font-weight: 200;
+    }
+
+    input {
+        margin-bottom: 16px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid hsl(33, 53%, 51%, 0.6);
+        box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.03);
+    }
+
+    #hero {
+        padding: 80px 120px;
+    }
+
+    #info select {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid hsl(33, 53%, 51%, 0.5);
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    #add {
+        margin-top: 40px;
+        box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.04);
+    }
+
+    #tableDis {
+        padding: 80px 120px;
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tableDis h2 {
+        padding-bottom: 60px;
+    }
+
+    #tableDis input {
+        width: 60%;
+        margin-bottom: 40px;
+        padding: 8px 20px;
+        font-size: 16px;
+        text-align: center;
+        font-weight: 500;
+        border: 1px solid hsl(33, 53%, 51%, 0.8);
+    }
+
+    table {
+        width: 30%;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid #C58940;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #E5BA73;
+        color: white;
+    }
+
+    th,
+    td {
+        padding: 8px 12px;
+    }
+
+    .remove {
+        cursor: pointer;
+    }
+
+    #edit {
+        display: none;
+        margin-top: 32px;
+    }
+
+    .dis {
+        display: none;
+    }
+
+
+    @media screen and (max-width:5800px) {
+        #tableDis {
+            padding-bottom: 32vw;
+        }
+    }
+
+    @media screen and (max-width:3800px) {
+        #tableDis {
+            padding-bottom: 21vw;
+        }
+    }
+
+    @media screen and (max-width:2800px) {
+        #tableDis {
+            padding-bottom: 11vw;
+        }
+    }
+
+    @media screen and (max-width:992px) {
+        #links a {
+            display: none;
+        }
+
+        #links img {
+            padding-left: 0;
+        }
+
+        #nav i {
+            display: block;
+        }
+
+        #info {
+            width: 100%;
+        }
+
+    }
+
+    @media screen and (max-width:576px) {
+        footer #pages a {
+            width: 100%;
+        }
+
+        #tableDis h2 {
+            font-size: 24px;
+        }
+
+        #tableDis input {
+            width: 100%;
+        }
+
+    }
+
+    @media screen and (max-width:392px) {
+        #nav button span {
+            display: none;
+        }
+
+        #nav i {
+            padding-left: 5px;
+        }
+
+        #links img {
+            width: 80%;
+        }
+
+        #tableDis h2 {
+            font-size: 14px;
+        }
+
+        #tableDis input {
+            padding: 8px 54px;
+        }
+    }
+</style>
+
+<body dir="rtl">
+
+    <script>
+        $(document).ready(function () {
+            if (localStorage.getItem('login') == 0 || localStorage.getItem('login') == null) {
+                window.location.replace("../login.html");
+            }
+        });
+
+        function reload(sql) {
+            $.ajax({
+                url: "phpFile/show.php",
+                data: { sql: sql },
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+                    ht = "<tr> <th>الاسم</th> <th>المسمى</th> <th>حذف</th> <th>تعديل</th></tr>";
+                    for (i = 0; i < data.length; i++) {
+                        ht += "<tr><td>" + data[i].participants_name + "</td> <td>" + data[i].nickname + "</td> <td><button data-id= '" +
+                            data[i].participants_name + "' class=\"remove-btn\">حذف <i class=\"fa fa-remove\"></i></button></td> <td><button data-id= '" +
+                            data[i].participants_name + "' class=\"edit-btn\">تعديل <i class=\"fas fa-edit\" aria-hidden=\"true\"></i></button></td></tr>";
+                    }
+                    $(".table").html(ht);
+                }
+            });
+        }
+    </script>
+
+    <section id="nav">
+        <div id="links">
+            <img src="img\logo.png" alt="...">
+            <a href="Home.html">
+                <h6>الرئيسية</h6>
+            </a>
+            <a href="users.html">
+                <h6>المستخدمين</h6>
+            </a>
+            <a href="projects.html">
+                <h6>المشاريع</h6>
+            </a>
+            <a href="parti.html">
+                <h6 class="active">المشاركين</h6>
+            </a>
+
+            <a href="programs.html">
+                <h6>البرامج</h6>
+            </a>
+            <a href="nickname.html">
+                <h6>المسميات</h6>
+            </a>
+        </div>
+
+        <div id="ic">
+            <i class="fa fa-list-ul" aria-hidden="true"></i>
+            <button><span class="material-symbols-outlined"> logout </span></button>
+        </div>
+    </section>
+
+    <section id="smallList">
+        <div id="links2">
+            <a href="Home.html">
+                <h6>الرئيسية</h6>
+            </a>
+            <a href="users.html">
+                <h6>المستخدمين</h6>
+            </a>
+            <a href="projects.html">
+                <h6>المشاريع</h6>
+            </a>
+            <a href="parti.html">
+                <h6>المشاركين</h6>
+            </a>
+
+            <a href="programs.html">
+                <h6>البرامج</h6>
+            </a>
+            <a href="nickname.html">
+                <h6>المسميات</h6>
+            </a>
+        </div>
+        <a href="../login.html">
+            <h6> تسجيل الخروج</h6>
+        </a>
+    </section>
+
+    <section id="hero">
+        <div id="info">
+            <h6>إسم المشارك</h6>
+            <input type="text" id="name">
+            <h6>المسمى</h6>
+            <select name="nicknames" id="nicknames">
+                <script>
+                    function nicknamesReload(sql) {
+                        $.ajax({
+                            url: "phpFile/show.php",
+                            data: { sql: sql },
+                            dataType: "json",
+                            type: "post",
+                            success: function (data) {
+                                ht = "";
+                                for (i = 0; i < data.length; i++) {
+                                    ht += "<option value=\"" + data[i].nickname + "\">" + data[i].nickname + "</option>";
+                                }
+                                $("#nicknames").html(ht);
+                            }
+                        });
+                    }
+                    nicknamesReload("SELECT * FROM `nicknames`");
+                </script>
+            </select>
+            <button id="add" class="Darkbutton">أضف</button>
+            <button id="edit" class="Darkbutton">تعديل</button>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $("#add").click(function () {
+                    nameAdd = $("#name").val();
+                    nicknames = $("#nicknames").val();
+                    sqlAdd = "INSERT INTO `participants`(`participants_name`, `nickname`) VALUES ('" + nameAdd
+                        + "','" + nicknames + "')";
+
+                    $.ajax({
+                        url: "phpFile/add.php",
+                        data: { sqlAdd: sqlAdd },
+                        type: "post",
+                        success: function (out) {
+                            alert(out);
+                        }
+                    });
+
+
+                    sql = "SELECT * FROM `participants`";
+                    reload(sql);
+
+
+                });
+            });
+        </script>
+
+        <script>
+            $("#add").prop("disabled", true);
+            $("#edit").prop("disabled", false);
+
+            $("#add").css({
+                "cursor": "auto"
+            });
+
+            $("#add,#edit").hover(function () {
+                $(this).css({
+                    "background-color": "#C58940",
+                    "color": "white"
+                });
+            }, function () {
+                $(this).css({
+                    "background-color": "transparent",
+                    "color": "#C58940"
+                });
+            });
+
+            $("#info input:nth-child(2)").keyup(function () {
+                if ($("#info input:nth-child(2)").val() == "") {
+
+                    $("#add").prop("disabled", true);
+                    $("#add").css({
+                        "cursor": "auto"
+                    });
+
+                } else {
+                    $("#add").prop("disabled", false);
+                    $("#add").css({
+                        "cursor": "pointer"
+                    });
+                }
+            });
+
+        </script>
+    </section>
+
+    <section id="tableDis">
+        <h2>جميع المشاركين</h2>
+        <input type="text" name="name" placeholder="# البحث">
+
+        <script>
+            $(document).ready(function () {
+                $("#tableDis input").keyup(function () {
+                    val = $(this).val();
+                    if (val == "") {
+                        sql = "SELECT * FROM `participants`";
+                    } else {
+                        sql = "SELECT * FROM `participants` WHERE `participants_name` like '%" + val + "%' || `nickname` like '%" + val + "%'";
+                    }
+                    reload(sql);
+                });
+            });
+        </script>
+
+        <table class="table" id="table">
+
+        </table>
+
+        <script>
+            $(document).ready(function () {
+                sql = "SELECT * FROM `participants`";
+                reload(sql);
+            });
+
+            $("#table").on('click', '.remove-btn', function () {
+                let n = confirm("تأكيد الحذف");
+                if (n == true) {
+                    id = $(this).data('id');
+                    sql = "DELETE FROM `participants` WHERE `participants_name` = '" + id + "'";
+                    $.ajax({
+                        url: "phpFile/remove.php",
+                        data: { sql: sql },
+                        type: "post",
+                        success: function (out) {
+                            reload("SELECT * FROM `participants`");
+                        }
+                    });
+                }
+
+            });
+
+            let id;
+            $("#table").on('click', '.edit-btn', function () {
+                id = $(this).data('id');
+                sql = "SELECT * FROM `participants` WHERE `participants_name`='" + id + "'";
+                $.ajax({
+                    url: "phpFile/show.php",
+                    data: { sql: sql },
+                    type: "post",
+                    dataType: "json",
+                    success: function (out) {
+
+                        participants_name = out[0].participants_name;
+                        nickname = out[0].nickname;
+
+                        $("#name").val(participants_name);
+                        $("#nicknames").val(nickname);
+
+                        setTimeout(function () {
+                            window.location.replace("parti.html#hero");
+                        }, 400);
+
+                        $("#add").toggle();
+                        $("#edit").toggle();
+                        $("#tableDis").toggle();
+                    }
+                });
+            });
+
+            $("#edit").click(function () {
+                participants_name = $("#name").val();
+                nickname = $("#nicknames").val();
+                sqlup = "UPDATE `participants` SET `participants_name`='" + participants_name + "',`nickname`='" + nickname
+                    + "' WHERE participants_name = '" + id + "'";
+
+                $.ajax({
+                    url: "phpFile/update.php",
+                    data: { sqlup: sqlup },
+                    type: "post",
+                    success: function () {
+                        $("#name").val("");
+                        $("#nicknames").val("");
+
+                        $("#add").toggle();
+                        $("#edit").toggle();
+                        $("#tableDis").toggle();
+
+                        reload("SELECT * FROM `participants`");
+                        setTimeout(function () {
+                            window.location.replace("parti.html#table");
+                        }, 400);
+                    }
+                });
+            });
+        </script>
+
+    </section>
+
+    <footer>
+
+        <div id="logo">
+            <img src="img\logo.png" alt="...">
+            <p>فلسطين، بيت لحم، شارع القدس الخليل - نزلة غزال - بالقرب من فرشات حرباوي
+        </div>
+
+        <div id="pages">
+            <a href="Home.html">
+                <h6>الرئيسية</h6>
+            </a>
+            <a href="users.html">
+                <h6>المستخدمين</h6>
+            </a>
+            <a href="projects.html">
+                <h6>المشاريع</h6>
+            </a>
+            <a href="parti.html">
+                <h6>المشاركين</h6>
+            </a>
+
+            <a href="programs.html">
+                <h6>البرامج</h6>
+            </a>
+            <a href="nickname.html">
+                <h6>المسميات</h6>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $("#nav i").click(function () {
+                $("#smallList").toggle(300);
+            });
+
+            $("#links img").click(function () {
+                window.location.replace("Home.html");
+            });
+
+            $("#nav button span").click(function () {
+                window.location.replace("../login.html");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

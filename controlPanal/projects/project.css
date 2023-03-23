@@ -1,0 +1,482 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 300;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 46px;
+}
+
+h3 {
+    font-size: 36px;
+}
+
+h4 {
+    font-size: 26px;
+}
+
+h6 {
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+button {
+    background-color: #FAEAB1;
+    /* Sets the background color of the button to blue */
+    color: black;
+    /* Sets the text color of the button to white */
+    padding: 5px 10px;
+    /* Adds padding to the button */
+    border-radius: 5px;
+    /* Rounds the corners of the button */
+    border: none;
+    /* Removes the border from the button */
+    cursor: pointer;
+    /* Changes the cursor to a pointer when hovering over the button */
+    font-size: 16px;
+    /* Sets the font size of the button text */
+    cursor: pointer;
+}
+
+
+.Darkbutton {
+    padding: 8px 25px;
+    background-color: transparent;
+    color: #C58940;
+    border: 1px solid #C58940;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.7s;
+}
+
+#nav {
+    display: flex;
+    background-color: #FAF8F1;
+    justify-content: space-between;
+    padding: 20px 40px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    right: 0;
+    box-shadow: 15px 20px 25px rgb(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+#links img {
+    cursor: pointer;
+}
+
+#links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#links img {
+    padding-left: 20px;
+}
+
+#links a {
+    color: #E5BA73;
+    padding: 0 12px;
+    font-weight: 600;
+}
+
+#links a .active {
+    color: #C58940;
+    position: relative;
+    font-weight: 1000;
+}
+
+#links a:hover {
+    color: #C58940;
+    font-weight: 800;
+}
+
+#nav button {
+    background-color: transparent;
+    border: none;
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+#nav button span {
+    font-size: 32px;
+    color: #C58940;
+}
+
+#nav i {
+    font-size: 24px;
+    color: #C58940;
+    display: none;
+    padding-left: 18px;
+}
+
+#ic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+footer {
+    background-color: #FAF8F1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 30px 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+footer #logo {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+footer #logo p {
+    padding-top: 8px;
+}
+
+footer #pages {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 0;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+footer #pages a h6 {
+    color: #E5BA73;
+    font-weight: 600;
+    padding: 0 10px;
+}
+
+footer #pages a h6:hover {
+    font-weight: 800;
+    color: #C58940;
+}
+
+#smallList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FAF8F1;
+    padding: 20px;
+    text-align: center;
+    display: none;
+    position: sticky;
+    top: 90px;
+    left: 0;
+    z-index: 5;
+}
+
+#smallList #links2 a h6 {
+    padding: 12px 0;
+    color: #E5BA73;
+}
+
+#smallList #links2 a h6:hover {
+    padding: 12px 0;
+    color: #C58940;
+    font-weight: 800;
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#info div h6 {
+    padding-bottom: 8px;
+    font-weight: 200;
+}
+
+#part1 {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+#part2 {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+input {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid hsl(33, 53%, 51%, 0.6);
+    box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.03);
+}
+
+#hero {
+    padding: 80px 120px;
+}
+
+#info div select {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid hsl(33, 53%, 51%, 0.5);
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+#add {
+    margin: 20px 0;
+    box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.04);
+}
+
+#tableDis {
+    padding: 80px 120px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tableDis h2 {
+    padding-bottom: 60px;
+}
+
+#tableDis input {
+    width: 60%;
+    margin-bottom: 40px;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid hsl(33, 53%, 51%, 0.8);
+}
+
+table {
+    width: 100%;
+}
+
+table,
+th,
+td {
+    border: 1px solid #C58940;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #E5BA73;
+    color: white;
+}
+
+th,
+td {
+    padding: 8px 12px;
+}
+
+.remove {
+    cursor: pointer;
+}
+
+
+#info textarea {
+    margin-bottom: 12px;
+}
+
+.center_flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 16px;
+}
+
+#info div div p {
+    padding-bottom: 16px;
+    color: #06283D;
+    cursor: pointer;
+}
+
+#info div div div select {
+    width: 70%;
+    margin: 0;
+}
+
+#edit {
+    display: none;
+}
+
+.more {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.more input {
+    margin: 0;
+}
+
+.dis {
+    display: none;
+}
+
+#projectValueDiv{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 12px;
+    white-space: nowrap;
+}
+#value{
+    margin-bottom: 0;
+    width: 100%;
+}
+
+#dateDiv{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 12px;
+    white-space: nowrap;  
+}
+
+#dateDiv input{
+    width: 100%;
+}
+
+.inserted{
+    border: 1px solid #C58940;
+    margin-bottom: 12px;
+    padding: 16px;
+    display: none;
+}
+
+.inserted div{
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.inserted div button{
+    padding: 0px 12px;
+}
+
+.inserted div h6{
+    padding: 8px;
+    border: 1px solid rgb(0, 0, 0,0.3);
+    border-radius: 8px;
+    margin: 4px;
+    text-align: start;
+    font-size: 14px;
+    width: 100%;
+    white-space: nowrap;
+}
+
+@media screen and (max-width:5800px) {
+    #tableDis{
+        padding-bottom: 26vw;
+    }
+}
+
+@media screen and (max-width:3800px) {
+    #tableDis{
+        padding-bottom: 19vw;
+    }
+}
+
+@media screen and (max-width:2800px) {
+    #tableDis{
+        padding-bottom: 8vw;
+    }
+}
+
+@media screen and (max-width:992px) {
+    #links a {
+        display: none;
+    }
+
+    #links img {
+        padding-left: 0;
+    }
+
+    #nav i {
+        display: block;
+    }
+
+    #info {
+        width: 100%;
+    }
+
+    #part1 {
+        width: 100%;
+    }
+
+    #part2 {
+        width: 100%;
+        margin-top: 32px;
+    }
+
+}
+
+@media screen and (max-width:576px) {
+    footer #pages a {
+        width: 100%;
+    }
+
+    #tableDis h2 {
+        font-size: 24px;
+    }
+
+    #tableDis input {
+        width: 100%;
+    }
+
+    #hero {
+        padding: 80px 42px;
+    }
+
+}
+
+@media screen and (max-width:392px) {
+    #nav button span {
+        display: none;
+    }
+
+    #nav i {
+        padding-left: 5px;
+    }
+
+    #links img {
+        width: 80%;
+    }
+
+    #tableDis h2 {
+        font-size: 14px;
+    }
+
+    #tableDis input {
+        padding: 8px 54px;
+    }
+}

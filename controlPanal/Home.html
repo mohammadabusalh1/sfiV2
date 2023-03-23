@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <meta name="author" content="Mohammad Abu Salh">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="img/smallLogo.png" />
+    <title>
+        الرئيسية
+    </title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    h2 {
+        font-size: 46px;
+    }
+
+    h3 {
+        font-size: 36px;
+    }
+
+    h4 {
+        font-size: 26px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .Darkbutton {
+        padding: 10px 25px;
+        background-color: #06283D;
+        color: white;
+        border: 1px solid #06283D;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    #nav {
+        display: flex;
+        background-color: #FAF8F1;
+        justify-content: space-between;
+        padding: 20px 40px;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        right: 0;
+        box-shadow: 15px 20px 25px rgb(0, 0, 0, 0.05);
+        z-index: 10;
+    }
+
+    #links img {
+        cursor: pointer;
+    }
+
+    #links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #links img {
+        padding-left: 20px;
+    }
+
+    #links a {
+        color: #E5BA73;
+        padding: 0 12px;
+        font-weight: 600;
+    }
+
+    #links a .active {
+        color: #C58940;
+        position: relative;
+        font-weight: 1000;
+    }
+
+    #links a:hover {
+        color: #C58940;
+        font-weight: 800;
+    }
+
+    #nav button {
+        background-color: transparent;
+        border: none;
+        transform: rotate(180deg);
+        cursor: pointer;
+    }
+
+    #nav button span {
+        font-size: 32px;
+        color: #C58940;
+    }
+
+    #nav i {
+        font-size: 24px;
+        color: #C58940;
+        display: none;
+        padding-left: 18px;
+    }
+
+    #ic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #wid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px 20px;
+        border: 1px solid hsl(33, 53%, 51%, 0.3);
+        border-radius: 12px;
+        box-shadow: 10px 15px 20px rgb(0, 0, 0, 0.04);
+        cursor: pointer;
+        width: 176px;
+        height: 176px;
+        margin: 20px 50px;
+        transition: 0.2s;
+    }
+
+    .card:hover {
+        box-shadow: 10px 15px 20px rgb(0, 0, 0, 0.08);
+        padding: 30px 30px;
+    }
+
+    .card span,
+    .card i {
+        font-size: 64px;
+        color: #E5BA73;
+        padding-bottom: 12px;
+    }
+
+    .card h3 {
+        font-weight: 100;
+        font-size: 32px;
+    }
+
+    footer {
+        background-color: #FAF8F1;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 30px 0;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin-top: 48px;
+    }
+
+    footer #logo {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    footer #logo p {
+        padding-top: 8px;
+    }
+
+    footer #pages {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 30px 0;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer #pages a h6 {
+        color: #E5BA73;
+        font-weight: 600;
+        padding: 0 10px;
+    }
+
+    footer #pages a h6:hover {
+        font-weight: 800;
+        color: #C58940;
+    }
+
+    #smallList {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #FAF8F1;
+        padding: 20px;
+        text-align: center;
+        display: none;
+        position: sticky;
+        top: 90px;
+        left: 0;
+        z-index: 5;
+    }
+
+    #smallList #links2 a h6 {
+        padding: 12px 0;
+        color: #E5BA73;
+    }
+
+    #smallList #links2 a h6:hover {
+        padding: 12px 0;
+        color: #C58940;
+        font-weight: 800;
+    }
+
+    @media screen and (min-width:940px) {
+        #cards{
+            padding-bottom: 37vh;
+        } 
+    }
+
+    @media screen and (min-width:1550px) {
+        #cards{
+            padding-bottom: 57vh;
+        } 
+    }
+
+    @media screen and (min-width:2000px) {
+        #cards{
+           padding-bottom: 57vh;
+        } 
+    }
+
+    @media screen and (max-width:992px) {
+        #links a {
+            display: none;
+        }
+
+        #links img {
+            padding-left: 0;
+        }
+
+        #nav i {
+            display: block;
+        }
+
+    }
+
+    @media screen and (max-width:992px) {
+        #cards{
+           padding-bottom: 20vh;
+        } 
+    }
+
+    @media screen and (max-width:576px) {
+        footer #pages a {
+            width: 100%;
+        }
+
+    }
+
+    @media screen and (max-width:392px) {
+        #nav button span {
+            display: none;
+        }
+
+        #nav i {
+            padding-left: 5px;
+        }
+
+        #links img {
+            width: 80%;
+        }
+
+        .card {
+            padding: 20px 0;
+        }
+
+    }
+</style>
+
+<body dir="rtl">
+
+    <section id="nav">
+        <div id="links">
+            <img src="img\logo.png" alt="...">
+            <a href="Home.html">
+                <h6 class="active">الرئيسية</h6>
+            </a>
+            <a href="users.html">
+                <h6>المستخدمين</h6>
+            </a>
+            <a href="projects/projects.html">
+                <h6>المشاريع</h6>
+            </a>
+            <a href="parti.html">
+                <h6>المشاركين</h6>
+            </a>
+
+            <a href="programs.html">
+                <h6>البرامج</h6>
+            </a>
+            <a href="nickname.html">
+                <h6>المسميات</h6>
+            </a>
+        </div>
+
+        <div id="ic">
+            <i class="fa fa-list-ul" aria-hidden="true"></i>
+            <button id="logoutButt"><span class="material-symbols-outlined"> logout </span></button>
+        </div>
+    </section>
+
+    <section id="smallList">
+        <div id="links2">
+            <a href="Home.html">
+                <h6>الرئيسية</h6>
+            </a>
+            <a href="users.html">
+                <h6>المستخدمين</h6>
+            </a>
+            <a href="projects/projects.html">
+                <h6>المشاريع</h6>
+            </a>
+            <a href="parti.html">
+                <h6>المشاركين</h6>
+            </a>
+
+            <a href="programs.html">
+                <h6>البرامج</h6>
+            </a>
+            <a href="nickname.html">
+                <h6>المسميات</h6>
+            </a>
+        </div>
+        <a href="../login.html">
+            <h6> تسجيل الخروج</h6>
+        </a>
+    </section>
+
+    <div id="wid">
+        <section id="cards">
+            <div class="card">
+                <span class="material-symbols-outlined">
+                    group
+                </span>
+                <h3>المستخدمين</h3>
+            </div>
+            <div class="card">
+                <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                <h3>المشاريع</h3>
+            </div>
+            <div class="card">
+                <span class="material-symbols-outlined">
+                    group_add
+                </span>
+                <h3>المشاركين</h3>
+            </div>
+            <div class="card">
+                <i class="fa fa-font-awesome" aria-hidden="true"></i>
+                <h3>المسميات</h3>
+            </div>
+            <div class="card">
+                <span class="material-symbols-outlined">
+                    energy_program_time_used
+                </span>
+                <h3>البرامج</h3>
+            </div>
+
+        </section>
+    </div>
+
+    <footer>
+
+        <div id="logo">
+            <img src="img\logo.png" alt="...">
+            <p>فلسطين، بيت لحم، شارع القدس الخليل - نزلة غزال - بالقرب من فرشات حرباوي
+        </div>
+
+        <div id="pages">
+            <a href="Home.html">
+                <h6>الرئيسية</h6>
+            </a>
+            <a href="users.html">
+                <h6>المستخدمين</h6>
+            </a>
+            <a href="projects.html">
+                <h6>المشاريع</h6>
+            </a>
+            <a href="parti.html">
+                <h6>المشاركين</h6>
+            </a>
+
+            <a href="programs.html">
+                <h6>البرامج</h6>
+            </a>
+            <a href="nickname.html">
+                <h6>المسميات</h6>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            if(localStorage.getItem('login')==0 || localStorage.getItem('login')== null){
+                window.location.replace("../login.html");
+            }
+            $("#nav i").click(function () {
+                $("#smallList").toggle(300);
+            });
+
+            $("#links img").click(function () {
+                window.location.replace("Home.html");
+            });
+
+            $("#nav button span").click(function () {
+                window.location.href = '../login.html';
+            });
+
+            $(".card:nth-child(1)").click(function () {
+                window.location.replace("users.html");
+            });
+            $(".card:nth-child(2)").click(function () {
+                window.location.replace("projects.html");
+            });
+            $(".card:nth-child(3)").click(function () {
+                window.location.replace("parti.html");
+            });
+            $(".card:nth-child(4)").click(function () {
+                window.location.replace("nickname.html");
+            });
+            $(".card:nth-child(5)").click(function () {
+                window.location.replace("programs.html");
+            });
+        });
+    </script>
+
+</body>
+
+</html>
