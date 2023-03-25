@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   font-family: "Times New Roman", Times, serif;
-  font-weight: 300;
 }
 
 h1 {
@@ -31,31 +30,13 @@ a {
 }
 
 .Darkbutton {
-  padding: 8px 25px;
-  background-color: transparent;
-  color: #c58940;
-  border: 1px solid #c58940;
+  padding: 10px 25px;
+  background-color: #06283d;
+  color: white;
+  border: 1px solid #06283d;
   border-radius: 4px;
   font-weight: 700;
-  font-size: 16px;
-  transition: 0.7s;
-}
-
-button {
-  background-color: #faeab1;
-  /* Sets the background color of the button to blue */
-  color: black;
-  /* Sets the text color of the button to white */
-  padding: 5px 10px;
-  /* Adds padding to the button */
-  border-radius: 5px;
-  /* Rounds the corners of the button */
-  border: none;
-  /* Removes the border from the button */
-  cursor: pointer;
-  /* Changes the cursor to a pointer when hovering over the button */
-  font-size: 16px;
-  /* Sets the font size of the button text */
+  font-size: 14px;
 }
 
 #nav {
@@ -127,14 +108,67 @@ button {
   align-items: center;
 }
 
+#wid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 20px;
+  border: 1px solid hsl(33, 53%, 51%, 0.3);
+  border-radius: 12px;
+  box-shadow: 10px 15px 20px rgb(0, 0, 0, 0.04);
+  cursor: pointer;
+  width: 176px;
+  height: 176px;
+  margin: 20px 50px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  box-shadow: 10px 15px 20px rgb(0, 0, 0, 0.08);
+  padding: 30px 30px;
+}
+
+.card span,
+.card i {
+  font-size: 64px;
+  color: #e5ba73;
+  padding-bottom: 12px;
+}
+
+.card h3 {
+  font-weight: 100;
+  font-size: 32px;
+}
+
 footer {
   background-color: #faf8f1;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 30px 40px;
+  padding: 30px 0;
   justify-content: center;
   align-items: center;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 48px;
 }
 
 footer #logo {
@@ -196,109 +230,21 @@ footer #pages a h6:hover {
   font-weight: 800;
 }
 
-#info {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-
-#info h6 {
-  padding-bottom: 8px;
-  font-weight: 200;
-}
-
-input {
-  margin-bottom: 16px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid hsl(33, 53%, 51%, 0.6);
-  box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.03);
-}
-
-#hero {
-  padding: 80px 120px;
-}
-
-#info select {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 1px solid hsl(33, 53%, 51%, 0.5);
-  font-size: 16px;
-  margin-top: 8px;
-}
-
-#info button {
-  margin-top: 40px;
-  box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.04);
-}
-
-#tableDis {
-  padding: 80px 120px;
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#tableDis h2 {
-  padding-bottom: 60px;
-}
-
-#tableDis input {
-  width: 60%;
-  margin-bottom: 40px;
-  padding: 8px 20px;
-  font-size: 16px;
-  text-align: center;
-  font-weight: 500;
-  border: 1px solid hsl(33, 53%, 51%, 0.8);
-}
-
-table {
-  width: 100%;
-}
-
-table,
-th,
-td {
-  border: 1px solid #c58940;
-  border-collapse: collapse;
-}
-
-th {
-  background-color: #e5ba73;
-  color: white;
-}
-
-th,
-td {
-  padding: 8px 12px;
-}
-
-.remove {
-  cursor: pointer;
-}
-
-#not{
-  color: red;
-}
-
-@media screen and (max-width: 5800px) {
-  #tableDis {
-    padding-bottom: 23vw;
+@media screen and (min-width: 940px) {
+  #cards {
+    padding-bottom: 37vh;
   }
 }
 
-@media screen and (max-width: 3800px) {
-  #tableDis {
-    padding-bottom: 19vw;
+@media screen and (min-width: 1550px) {
+  #cards {
+    padding-bottom: 57vh;
   }
 }
 
-@media screen and (max-width: 2800px) {
-  #tableDis {
-    padding-bottom: 13vw;
+@media screen and (min-width: 2000px) {
+  #cards {
+    padding-bottom: 57vh;
   }
 }
 
@@ -314,22 +260,16 @@ td {
   #nav i {
     display: block;
   }
+}
 
-  #info {
-    width: 100%;
+@media screen and (max-width: 992px) {
+  #cards {
+    padding-bottom: 20vh;
   }
 }
 
 @media screen and (max-width: 576px) {
   footer #pages a {
-    width: 100%;
-  }
-
-  #tableDis h2 {
-    font-size: 24px;
-  }
-
-  #tableDis input {
     width: 100%;
   }
 }
@@ -347,15 +287,7 @@ td {
     width: 80%;
   }
 
-  #tableDis h2 {
-    font-size: 14px;
+  .card {
+    padding: 20px 0;
   }
-
-  #tableDis input {
-    padding: 8px 54px;
-  }
-}
-
-#edit {
-  display: none;
 }

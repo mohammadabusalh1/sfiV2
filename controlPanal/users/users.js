@@ -3,7 +3,7 @@ $(document).ready(function () {
     localStorage.getItem("login") == 0 ||
     localStorage.getItem("login") == null
   ) {
-    window.location.replace("../login.html");
+    window.location.replace("../../login.html");
   }
 
   function reload(sql) {
@@ -64,9 +64,14 @@ $(document).ready(function () {
       data: { sqlAdd: sqlAdd },
       type: "post",
       success: function (out) {
-        alert(out);
+        if(out == "successfully"){
+        $("#not").text("تمت الاضافة");
         sql = "SELECT * FROM `users`";
         reload(sql);
+        $("input").val("");
+        }else{
+          $("#not").text(" لم تمت الاضافة");
+        }
       },
     });
   });

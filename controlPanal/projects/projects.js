@@ -3,7 +3,7 @@ $(document).ready(function () {
     localStorage.getItem("login") == 0 ||
     localStorage.getItem("login") == null
   ) {
-    window.location.replace("../login.html");
+    window.location.replace("../../login.html");
   }
 
   // get all financier name to select when crate projects
@@ -474,6 +474,7 @@ $(document).ready(function () {
             areasArray = [];
             targetsArray = [];
             $(".inserted").hide();
+            reload("SELECT * FROM `project`");
           } else {
             alert(out);
           }
@@ -553,13 +554,23 @@ $(document).ready(function () {
 
   //=============================================
 
+  function remove(sql) {
+    $.ajax({
+      url: "../phpFile/remove.php",
+      data: { sql: sql },
+      type: "post",
+      success: function (out) {},
+    });
+  }
+  let projectName;
   // add event listener to edit button
   $(document).on("click", ".edit-btn", function () {
     // get project name from button data-id attribute
-    var projectName = $(this).data("id");
+    projectName = $(this).data("id");
 
     $("#edit").toggle();
     $("#add").toggle();
+    $("#endWithoutSave").toggle();
     // make AJAX call to fetch project information
     $.ajax({
       url: "../phpFile/show.php",
@@ -658,8 +669,6 @@ $(document).ready(function () {
             }
             // Check if area is already in areaArray
 
-            areasArray.push(area);
-
             // Map AreaArray to an array of HTML elements
             const newAreaArray = areasArray.map((e) => {
               const div = $("<div>");
@@ -718,11 +727,128 @@ $(document).ready(function () {
           .addClass("alert-danger")
           .removeClass("alert-success")
           .show();
-        $("#add").hide();
+        $("#add").show();
         $("#edit").hide();
       },
     });
   });
 
+  $("#edit").click(function () {
+    nameAdd = $("#name").val();
+    value = $("#value").val();
+    valueType = $("#valueType").val();
+    satrtDate = $("#startDate").val();
+    endDate = $("#endDate").val();
+    idea = $("#idea").val();
+    sqlup =
+      "UPDATE `project` SET `project_name`='" +
+      nameAdd +
+      "',`project_value`='" +
+      value +
+      "',`project_idea`='" +
+      idea +
+      "',`value_type`='" +
+      valueType +
+      "',`start_date`='" +
+      satrtDate +
+      "',`end_date`='" +
+      endDate +
+      "' WHERE project_name = '" +
+      projectName +
+      "'";
+    $.ajax({
+      url: "../phpFile/update.php",
+      data: { sqlup: sqlup },
+      type: "post",
+      success: function () {
+        let sqlFinDelete =
+          "DELETE FROM `fin_pro` WHERE `project_name`='" + projectName + "'";
+        remove(sqlFinDelete);
+        let sqlgoalDelete =
+          "DELETE FROM `goal_pro` WHERE `project_name`='" + projectName + "'";
+        remove(sqlgoalDelete);
+        let sqlareaDelete =
+          "DELETE FROM `pro_area` WHERE `project_name`='" + projectName + "'";
+        remove(sqlareaDelete);
+        let sqlTargetDelete =
+          "DELETE FROM `targ_pro` WHERE `project_name`='" + projectName + "'";
+        remove(sqlTargetDelete);
 
+        if (finsArray.length > 0) {
+          for (i = 0; i < finsArray.length; i++) {
+            let sql =
+              "INSERT INTO `fin_pro`(`project_financier_name`, `project_name`) VALUES ('" +
+              finsArray[i] +
+              "','" +
+              nameAdd +
+              "')";
+            add(sql);
+          }
+        }
+
+        if (goalsArray.length > 0) {
+          for (i = 0; i < goalsArray.length; i++) {
+            let sql =
+              "INSERT INTO `goal_pro`(`goal_name`, `project_name`) VALUES ('" +
+              goalsArray[i] +
+              "','" +
+              nameAdd +
+              "')";
+            add(sql);
+          }
+        }
+
+        console.log(areasArray);
+        if (areasArray.length > 0) {
+          for (i = 0; i < areasArray.length; i++) {
+            let sql =
+              "INSERT INTO `pro_area`(`area_name`, `project_name`) VALUES ('" +
+              areasArray[i] +
+              "','" +
+              nameAdd +
+              "')";
+            add(sql);
+          }
+        }
+
+        if (targetsArray.length > 0) {
+          for (i = 0; i < targetsArray.length; i++) {
+            let sql =
+              "INSERT INTO `targ_pro`(`target_group`, `project_name`) VALUES ('" +
+              targetsArray[i] +
+              "','" +
+              nameAdd +
+              "')";
+            add(sql);
+          }
+        }
+        $("input").val("");
+        $("textarea").val("");
+        finsArray = [];
+        goalsArray = [];
+        areasArray = [];
+        targetsArray = [];
+        $(".inserted").hide();
+        $("#tableDis").show();
+        $("#edit").toggle();
+        $("#add").toggle();
+        $("#endWithoutSave").toggle();
+        reload("SELECT * FROM `project`");
+      },
+    });
+  });
+
+  $("#endWithoutSave").click(function () {
+    $("input").val("");
+    $("textarea").val("");
+    finsArray = [];
+    goalsArray = [];
+    areasArray = [];
+    targetsArray = [];
+    $(".inserted").hide();
+    $("#tableDis").show();
+    $("#edit").toggle();
+    $("#add").toggle();
+    $("#endWithoutSave").toggle();
+  });
 });

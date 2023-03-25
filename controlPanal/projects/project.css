@@ -70,8 +70,9 @@ button:hover{
     color: black; 
 }
 
-#edit{
+#edit,#endWithoutSave{
     margin-top: 24px;
+    display: none;
 }
 
 #nav {
@@ -334,9 +335,7 @@ td {
     margin: 0;
 }
 
-#edit {
-    display: none;
-}
+
 
 .more {
     display: none;
@@ -383,6 +382,7 @@ td {
     margin-bottom: 12px;
     padding: 16px;
     display: none;
+    white-space: nowrap;
 }
 
 .inserted div{
@@ -390,10 +390,12 @@ td {
     gap: 1rem;
     width: 100%;
     margin-bottom: 8px;
+    white-space: nowrap;
 }
 
 .inserted div button{
     padding: 0px 12px;
+    white-space: nowrap;
 }
 
 .inserted div h6{
