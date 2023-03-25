@@ -58,7 +58,20 @@ button {
     border-radius: 4px;
     font-weight: 700;
     font-size: 16px;
-    transition: 0.7s;
+
+}
+
+button{
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: #C58940;
+    color: black; 
+}
+
+#edit{
+    margin-top: 24px;
 }
 
 #nav {
@@ -393,6 +406,11 @@ td {
     width: 100%;
     white-space: nowrap;
 }
+
+#alert{
+    color: red;
+}
+
 
 @media screen and (max-width:5800px) {
     #tableDis{
