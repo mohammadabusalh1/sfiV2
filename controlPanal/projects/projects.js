@@ -718,6 +718,7 @@ $(document).ready(function () {
           },
         });
 
+        $("html, body").animate({ scrollTop: 0 }, "slow");
         $("#tableDis").hide();
       },
       error: function () {
@@ -850,5 +851,10 @@ $(document).ready(function () {
     $("#edit").toggle();
     $("#add").toggle();
     $("#endWithoutSave").toggle();
+  });
+
+  $("#nav button span").click(function () {
+    localStorage.setItem("login", 0);
+    window.location.href = "../../login.html";
   });
 });

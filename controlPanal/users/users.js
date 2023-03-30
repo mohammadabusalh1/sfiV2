@@ -43,7 +43,8 @@ $(document).ready(function () {
   });
 
   $("#nav button span").click(function () {
-    window.location.replace("../login.html");
+    localStorage.setItem("login", 0);
+    window.location.href = "../../login.html";
   });
 
   $("#add").click(function () {

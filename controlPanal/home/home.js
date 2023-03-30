@@ -14,22 +14,20 @@ $(document).ready(function () {
   });
 
   $("#nav button span").click(function () {
-    window.location.href = "../login.html";
+    localStorage.setItem("login", 0);
+    window.location.href = "../../login.html";
   });
 
   $(".card:nth-child(1)").click(function () {
-    window.location.replace("users.html");
+    window.location.replace("../users/users.html");
   });
   $(".card:nth-child(2)").click(function () {
-    window.location.replace("projects.html");
+    window.location.replace("../projects/projects.html");
   });
   $(".card:nth-child(3)").click(function () {
-    window.location.replace("parti.html");
+    window.location.replace("../parti/parti.html");
   });
   $(".card:nth-child(4)").click(function () {
-    window.location.replace("nickname.html");
-  });
-  $(".card:nth-child(5)").click(function () {
-    window.location.replace("programs.html");
+    window.location.replace("../programs/programs.html");
   });
 });

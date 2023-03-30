@@ -39,7 +39,6 @@ a {
   font-weight: 700;
   font-size: 16px;
   transition: 0.7s;
-  cursor: pointer;
 }
 
 button {
@@ -57,16 +56,6 @@ button {
   /* Changes the cursor to a pointer when hovering over the button */
   font-size: 16px;
   /* Sets the font size of the button text */
-}
-
-#not{
-  color: red;
-  margin-top: 24px;
-  font-size: 18px;
-}
-
-#edit{
-  display: none;
 }
 
 #nav {
@@ -207,19 +196,7 @@ footer #pages a h6:hover {
   font-weight: 800;
 }
 
-#info {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
-
-#info h6 {
-  padding-bottom: 8px;
-  font-weight: 200;
-}
-
 input {
-  margin-bottom: 16px;
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid hsl(33, 53%, 51%, 0.6);
@@ -228,9 +205,12 @@ input {
 
 #hero {
   padding: 80px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-#info select {
+select {
   padding: 8px 16px;
   border-radius: 8px;
   border: 1px solid hsl(33, 53%, 51%, 0.5);
@@ -238,9 +218,28 @@ input {
   margin-top: 8px;
 }
 
-#info button {
-  margin-top: 40px;
-  box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.04);
+#hero button{
+  margin-top: 24px;
+  width: 40%;
+}
+
+#hero button:hover{
+  background-color: #c58940;
+  color: #222;
+}
+
+#hero div {
+  width: 40%;
+}
+
+#hero div h6{
+  padding-bottom: 8px;
+}
+
+#hero div input,
+#hero div select {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #tableDis {
@@ -267,7 +266,8 @@ input {
 }
 
 table {
-  width: 30%;
+  width: 40%;
+  overflow-x: auto;
 }
 
 table,
@@ -297,6 +297,11 @@ td {
 
 .dis {
   display: none;
+}
+
+#not{
+  color: red;
+  font-size: 18px;
 }
 
 @media screen and (max-width: 5800px) {

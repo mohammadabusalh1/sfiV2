@@ -21,7 +21,7 @@ $(document).ready(function () {
         if (data.length > 0) {
           if (pir == "admin") {
             localStorage.setItem("login", 1);
-            window.location.replace("controlPanal/Home.html");
+            window.location.replace("controlPanal/home/Home.html");
           } else if (pir == "user") {
             window.location.replace("website/Mian.html");
             localStorage.setItem("login", 1);

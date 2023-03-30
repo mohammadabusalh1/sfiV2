@@ -13,11 +13,14 @@ $(document).ready(function () {
       dataType: "json",
       type: "post",
       success: function (data) {
-        ht = "<tr> <th>البرنامج</th> <th>حذف</th></tr>";
+        ht = "<tr> <th>البرنامج</th> <th>تعديل</th> <th>حذف</th></tr>";
         for (i = 0; i < data.length; i++) {
           ht +=
             "<tr><td>" +
             data[i].program_name +
+            "</td><td><button data-id= '" +
+            data[i].program_name +
+            '\' class="edit-btn">تعديل <i class="fa fa-edit"></i></button></td>' +
             "<td><button data-id= '" +
             data[i].program_name +
             '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
@@ -37,7 +40,12 @@ $(document).ready(function () {
       data: { sqlAdd: sqlAdd },
       type: "post",
       success: function (out) {
-        alert(out);
+        if (out == "successfully") {
+          $("#not").text('تمت إضافة "' + nameAdd + '" إلى البرامج');
+          $("#name").val("");
+        } else {
+          $("#not").text("يوجد خطأ: " + out);
+        }
       },
     });
 
@@ -45,9 +53,9 @@ $(document).ready(function () {
     reload(sql);
   });
 
-  $("#info button").prop("disabled", true);
+  $("#info #add").prop("disabled", true);
 
-  $("#info button").css({
+  $("#info #add").css({
     cursor: "auto",
   });
 
@@ -110,6 +118,56 @@ $(document).ready(function () {
     }
   });
 
+  let programName;
+  $("#table").on("click", ".edit-btn", function () {
+    programName = $(this).data("id");
+    $("#name").val(programName);
+    $("#edit").show();
+    $("#add").hide();
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
+
+  $("#edit").click(function () {
+    let newProgramName = $("#name").val();
+    sql =
+      "UPDATE `activities` SET `program_name`='" +
+      newProgramName +
+      "' WHERE `program_name`='" +
+      programName +
+      "'";
+    $.ajax({
+      url: "../phpFile/update.php",
+      data: { sqlup: sql },
+      type: "post",
+      success: function (out) {
+        if (out == "New record update successfully") {
+          sql =
+            "UPDATE `programs` SET `program_name`='" +
+            newProgramName +
+            "' WHERE `program_name`='" +
+            programName +
+            "'";
+          $.ajax({
+            url: "../phpFile/update.php",
+            data: { sqlup: sql },
+            type: "post",
+            success: function (out) {
+              if (out == "New record update successfully") {
+                $("input").val("");
+                reload("SELECT * FROM `programs`");
+                $("#not").text("تمت تعديل: (" + programName+ ") الى ("+newProgramName+")");
+              } else {
+                $("#not").text("يوجد هذا الخطأ: " + out);
+              }
+            },
+          });
+        } else {
+          $("#not").text("يوجد هذا الخطأ: " + out);
+        }
+      },
+    });
+  });
+
   $("#nav i").click(function () {
     $("#smallList").toggle(300);
   });
@@ -119,6 +177,7 @@ $(document).ready(function () {
   });
 
   $("#nav button span").click(function () {
-    window.location.replace("../login.html");
+    localStorage.setItem("login", 0);
+    window.location.href = "../../login.html";
   });
 });
