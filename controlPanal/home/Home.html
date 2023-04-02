@@ -1,135 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <meta name="author" content="Mohammad Abu Salh">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="author" content="Mohammad Abu Salh" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="shortcut icon" href="../img/smallLogo.png" />
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css" />
     <script src="home.js"></script>
-    <title>
-        الرئيسية
-    </title>
-</head>
+    <title>الرئيسية</title>
+  </head>
 
-
-
-<body dir="rtl">
-
+  <body dir="rtl">
     <section id="nav">
-        <div id="links">
-            <img src="../img/logo.png" alt="...">
-            <a href="../home/Home.html">
-                <h6 class="active">الرئيسية</h6>
-              </a>
-              <a href="../users/users.html">
-                <h6>المستخدمين</h6>
-              </a>
-              <a href="../projects/projects.html">
-                <h6>المشاريع</h6>
-              </a>
-              <a href="../parti/parti.html">
-                <h6>المسؤولين</h6>
-              </a>
-      
-              <a href="../programs/programs.html">
-                <h6>البرامج</h6>
-              </a>
-        </div>
+      <div id="links">
+        <img src="../img/logo.png" alt="..." />
+        <a href="../home/Home.html">
+          <h6 class="active">الرئيسية</h6>
+        </a>
+        <a href="../users/users.html">
+          <h6>المستخدمين</h6>
+        </a>
+        <a href="../projects/projects.html">
+          <h6>المشاريع</h6>
+        </a>
+        <a href="../parti/parti.html">
+          <h6>المسؤولين</h6>
+        </a>
 
-        <div id="ic">
-            <i class="fa fa-list-ul" aria-hidden="true"></i>
-            <button id="logoutButt"><span class="material-symbols-outlined"> logout </span></button>
+        <a href="../programs/programs.html">
+          <h6>البرامج</h6>
+        </a>
+
+        <div id="other">
+          <h6>
+            المزيد
+            <span class="material-symbols-outlined"> arrow_drop_down </span>
+          </h6>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="../otherPages/aim/aim.html">إضافة أهداف</a>
+            <a href="../otherPages/activityType/activityType.html"
+              >إضافة أنواع للنشاط</a
+            >
+            <a href="../otherPages/area/area.html">إضافة محافظات</a>
+            <a href="../otherPages/fin/fin.html">إضافة ممولين</a>
+            <a href="../otherPages/target/target.html">إضافة فئات عمرية</a>
+          </div>
         </div>
+      </div>
+
+      <div id="ic">
+        <i class="fa fa-list-ul" aria-hidden="true"></i>
+        <button id="logoutButt">
+          <span class="material-symbols-outlined"> logout </span>
+        </button>
+      </div>
     </section>
 
     <section id="smallList">
-        <div id="links2">
-            <a href="../home/Home.html">
-                <h6 class="active">الرئيسية</h6>
-              </a>
-              <a href="../users/users.html">
-                <h6>المستخدمين</h6>
-              </a>
-              <a href="../projects/projects.html">
-                <h6>المشاريع</h6>
-              </a>
-              <a href="../parti/parti.html">
-                <h6>المسؤولين</h6>
-              </a>
-      
-              <a href="../programs/programs.html">
-                <h6>البرامج</h6>
-              </a>
-        </div>
-        <a href="../login.html">
-            <h6> تسجيل الخروج</h6>
+      <div id="links2">
+        <a href="../home/Home.html">
+          <h6 class="active">الرئيسية</h6>
         </a>
+        <a href="../users/users.html">
+          <h6>المستخدمين</h6>
+        </a>
+        <a href="../projects/projects.html">
+          <h6>المشاريع</h6>
+        </a>
+        <a href="../parti/parti.html">
+          <h6>المسؤولين</h6>
+        </a>
+
+        <a href="../programs/programs.html">
+          <h6>البرامج</h6>
+        </a>
+
+        <a href="../otherPages/aim/aim.html"> <h6>إضافة أهداف</h6></a>
+        <a href="../otherPages/activityType/activityType.html"
+          ><h6>إضافة أنواع للنشاط</h6></a
+        >
+        <a href="../otherPages/area/area.html"><h6>إضافة محافظات</h6></a>
+        <a href="../otherPages/fin/fin.html"><h6>إضافة ممولين</h6></a>
+        <a href="../otherPages/target/target.html"><h6>إضافة فئات عمرية</h6></a>
+      </div>
+      <a href="../../login.html">
+        <h6 id="logout_word">تسجيل الخروج</h6>
+      </a>
     </section>
 
     <div id="wid">
-        <section id="cards">
-            <div class="card">
-                <span class="material-symbols-outlined">
-                    group
-                </span>
-                <h3>المستخدمين</h3>
-            </div>
-            <div class="card">
-                <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                <h3>المشاريع</h3>
-            </div>
-            <div class="card">
-                <span class="material-symbols-outlined">
-                    group_add
-                </span>
-                <h3>المسؤولين</h3>
-            </div>
-            <div class="card">
-                <span class="material-symbols-outlined">
-                    energy_program_time_used
-                </span>
-                <h3>البرامج</h3>
-            </div>
-
-        </section>
+      <section id="cards">
+        <div class="card">
+          <span class="material-symbols-outlined"> group </span>
+          <h3>المستخدمين</h3>
+        </div>
+        <div class="card">
+          <i class="fa fa-pie-chart" aria-hidden="true"></i>
+          <h3>المشاريع</h3>
+        </div>
+        <div class="card">
+          <span class="material-symbols-outlined"> group_add </span>
+          <h3>المسؤولين</h3>
+        </div>
+        <div class="card">
+          <span class="material-symbols-outlined">
+            energy_program_time_used
+          </span>
+          <h3>البرامج</h3>
+        </div>
+      </section>
     </div>
 
     <footer>
+      <div id="logo">
+        <img src="../img/logo.png" alt="..." />
+        <p>
+          فلسطين، بيت لحم، شارع القدس الخليل - نزلة غزال - بالقرب من فرشات
+          حرباوي
+        </p>
+      </div>
 
-        <div id="logo">
-            <img src="../img/logo.png" alt="...">
-            <p>فلسطين، بيت لحم، شارع القدس الخليل - نزلة غزال - بالقرب من فرشات حرباوي
-        </div>
+      <div id="pages">
+        <a href="../home/Home.html">
+          <h6>الرئيسية</h6>
+        </a>
+        <a href="../users/users.html">
+          <h6>المستخدمين</h6>
+        </a>
+        <a href="../projects/projects.html">
+          <h6>المشاريع</h6>
+        </a>
+        <a href="../parti/parti.html">
+          <h6>المسؤولين</h6>
+        </a>
 
-        <div id="pages">
-            <a href="../home/Home.html">
-                <h6>الرئيسية</h6>
-              </a>
-              <a href="../users/users.html">
-                <h6>المستخدمين</h6>
-              </a>
-              <a href="../projects/projects.html">
-                <h6>المشاريع</h6>
-              </a>
-              <a href="../parti/parti.html">
-                <h6>المسؤولين</h6>
-              </a>
-      
-              <a href="../programs/programs.html">
-                <h6>البرامج</h6>
-              </a>
-        </div>
+        <a href="../programs/programs.html">
+          <h6>البرامج</h6>
+        </a>
+      </div>
     </footer>
-
-    
-
-</body>
-
+  </body>
 </html>

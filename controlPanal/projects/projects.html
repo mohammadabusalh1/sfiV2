@@ -24,7 +24,7 @@
       <div id="links">
         <img src="../img/logo.png" alt="..." />
         <a href="../home/Home.html">
-          <h6>الرئيسية</h6>
+          <h6 >الرئيسية</h6>
         </a>
         <a href="../users/users.html">
           <h6>المستخدمين</h6>
@@ -39,24 +39,42 @@
         <a href="../programs/programs.html">
           <h6>البرامج</h6>
         </a>
+
+        <div id="other">
+          <h6>
+            المزيد
+            <span class="material-symbols-outlined"> arrow_drop_down </span>
+          </h6>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="../otherPages/aim/aim.html">إضافة أهداف</a>
+            <a href="../otherPages/activityType/activityType.html"
+              >إضافة أنواع للنشاط</a
+            >
+            <a href="../otherPages/area/area.html">إضافة محافظات</a>
+            <a href="../otherPages/fin/fin.html">إضافة ممولين</a>
+            <a href="../otherPages/target/target.html">إضافة فئات عمرية</a>
+          </div>
+        </div>
       </div>
 
       <div id="ic">
         <i class="fa fa-list-ul" aria-hidden="true"></i>
-        <button><span class="material-symbols-outlined"> logout </span></button>
+        <button id="logoutButt">
+          <span class="material-symbols-outlined"> logout </span>
+        </button>
       </div>
     </section>
 
     <section id="smallList">
       <div id="links2">
         <a href="../home/Home.html">
-          <h6>الرئيسية</h6>
+          <h6 class="active">الرئيسية</h6>
         </a>
         <a href="../users/users.html">
           <h6>المستخدمين</h6>
         </a>
         <a href="../projects/projects.html">
-          <h6 class="active">المشاريع</h6>
+          <h6>المشاريع</h6>
         </a>
         <a href="../parti/parti.html">
           <h6>المسؤولين</h6>
@@ -65,9 +83,17 @@
         <a href="../programs/programs.html">
           <h6>البرامج</h6>
         </a>
+
+        <a href="../otherPages/aim/aim.html"> <h6>إضافة أهداف</h6></a>
+        <a href="../otherPages/activityType/activityType.html"
+          ><h6>إضافة أنواع للنشاط</h6></a
+        >
+        <a href="../otherPages/area/area.html"><h6>إضافة محافظات</h6></a>
+        <a href="../otherPages/fin/fin.html"><h6>إضافة ممولين</h6></a>
+        <a href="../otherPages/target/target.html"><h6>إضافة فئات عمرية</h6></a>
       </div>
       <a href="../../login.html">
-        <h6>تسجيل الخروج</h6>
+        <h6 id="logout_word">تسجيل الخروج</h6>
       </a>
     </section>
 
@@ -76,7 +102,7 @@
         <div id="part1">
           <h6>إسم المشروع</h6>
           <input type="text" id="name" />
-          <br>
+          <br />
           <h6>قيمة المشروع</h6>
           <div id="projectValueDiv">
             <input type="number" id="value" />
@@ -86,10 +112,10 @@
               <option value="دولار">دولار</option>
             </select>
           </div>
-          <br>
+          <br />
           <h6>فكرة المشروع</h6>
           <textarea name="idea" id="idea" cols="10" rows="3"></textarea>
-          <br>
+          <br />
 
           <h6>تاريخ المشروع</h6>
           <div id="dateDiv">
@@ -98,7 +124,7 @@
             <span>الى</span>
             <input type="Date" id="endDate" />
           </div>
-          <br>
+          <br />
         </div>
 
         <div id="part2">
@@ -109,10 +135,7 @@
               <button id="addFin" class="Darkbutton app">أضف</button>
             </div>
 
-            <div id="finsInserted" class="inserted">
-             
-            </div>
-
+            <div id="finsInserted" class="inserted"></div>
           </div>
 
           <div id="goals">
@@ -122,9 +145,7 @@
               <button id="addGoal" class="Darkbutton app">أضف</button>
             </div>
 
-            <div id="goalInserted" class="inserted">
-
-            </div>
+            <div id="goalInserted" class="inserted"></div>
           </div>
 
           <div id="areas">
@@ -134,9 +155,7 @@
               <button id="addArea" class="Darkbutton app">أضف</button>
             </div>
 
-            <div id="areaInserted" class="inserted">
-
-            </div>
+            <div id="areaInserted" class="inserted"></div>
           </div>
 
           <div id="targets">
@@ -146,10 +165,7 @@
               <button id="addTarget" class="Darkbutton app">أضف</button>
             </div>
 
-            <div id="targetInserted" class="inserted">
-
-            </div>
-
+            <div id="targetInserted" class="inserted"></div>
           </div>
 
           <button id="add" class="Darkbutton">أضف</button>

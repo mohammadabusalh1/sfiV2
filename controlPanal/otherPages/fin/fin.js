@@ -28,8 +28,8 @@ $(document).ready(function () {
             "-" +
             data[i].governorate +
             "-" +
-            data[i].city+
-          ('\'\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>');
+            data[i].city +
+            '\'\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
         }
         $(".table").html(ht);
       },
@@ -111,5 +111,14 @@ $(document).ready(function () {
       });
     } else {
     }
+  });
+
+  $("#other").click(function () {
+    $(".dropdown-content").toggle();
+  });
+
+  $("#nav button span").click(function () {
+    localStorage.setItem("login", 0);
+    window.location.href = "../../../login.html";
   });
 });

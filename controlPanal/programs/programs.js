@@ -155,7 +155,13 @@ $(document).ready(function () {
               if (out == "New record update successfully") {
                 $("input").val("");
                 reload("SELECT * FROM `programs`");
-                $("#not").text("تمت تعديل: (" + programName+ ") الى ("+newProgramName+")");
+                $("#not").text(
+                  "تمت تعديل: (" +
+                    programName +
+                    ") الى (" +
+                    newProgramName +
+                    ")"
+                );
               } else {
                 $("#not").text("يوجد هذا الخطأ: " + out);
               }
@@ -179,5 +185,9 @@ $(document).ready(function () {
   $("#nav button span").click(function () {
     localStorage.setItem("login", 0);
     window.location.href = "../../login.html";
+  });
+
+  $("#other").click(function () {
+    $(".dropdown-content").toggle();
   });
 });

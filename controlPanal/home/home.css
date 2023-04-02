@@ -39,6 +39,63 @@ a {
   font-size: 14px;
 }
 
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #2980b9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 70%;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+#other {
+  cursor: pointer;
+}
+
+#other h6 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 #nav {
   display: flex;
   background-color: #faf8f1;
@@ -60,15 +117,16 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1.5rem;
 }
 
 #links img {
   padding-left: 20px;
 }
 
-#links a {
+#links a,
+#links h6 {
   color: #e5ba73;
-  padding: 0 12px;
   font-weight: 600;
 }
 
@@ -78,7 +136,8 @@ a {
   font-weight: 1000;
 }
 
-#links a:hover {
+#links a:hover h6,
+#links div h6:hover {
   color: #c58940;
   font-weight: 800;
 }
@@ -112,6 +171,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 90vh;
 }
 
 #cards {
@@ -214,9 +274,21 @@ footer #pages a h6:hover {
   text-align: center;
   display: none;
   position: sticky;
-  top: 90px;
+  top: 82px;
   left: 0;
   z-index: 5;
+}
+
+#logout_word {
+  margin-top: 8px;
+  border: 1px solid #06283d;
+  padding: 8px 12px;
+  transition: 0.2s;
+}
+
+#logout_word:hover {
+  background-color: #06283d;
+  color: white;
 }
 
 #smallList #links2 a h6 {
@@ -231,25 +303,20 @@ footer #pages a h6:hover {
 }
 
 @media screen and (min-width: 940px) {
-  #cards {
-    padding-bottom: 37vh;
-  }
+
 }
 
 @media screen and (min-width: 1550px) {
-  #cards {
-    padding-bottom: 57vh;
-  }
+
 }
 
 @media screen and (min-width: 2000px) {
-  #cards {
-    padding-bottom: 57vh;
-  }
+
 }
 
 @media screen and (max-width: 992px) {
-  #links a {
+  #links a,
+  #links div {
     display: none;
   }
 
@@ -263,9 +330,7 @@ footer #pages a h6:hover {
 }
 
 @media screen and (max-width: 992px) {
-  #cards {
-    padding-bottom: 20vh;
-  }
+
 }
 
 @media screen and (max-width: 576px) {

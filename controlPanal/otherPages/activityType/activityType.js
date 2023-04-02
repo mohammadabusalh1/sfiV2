@@ -68,4 +68,13 @@ $(document).ready(function () {
     } else {
     }
   });
+
+  $("#other").click(function () {
+    $(".dropdown-content").toggle();
+  });
+
+  $("#nav button span").click(function () {
+    localStorage.setItem("login", 0);
+    window.location.href = "../../../login.html";
+  });
 });

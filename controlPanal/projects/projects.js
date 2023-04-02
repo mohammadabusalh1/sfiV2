@@ -857,4 +857,8 @@ $(document).ready(function () {
     localStorage.setItem("login", 0);
     window.location.href = "../../login.html";
   });
+
+  $("#other").click(function () {
+    $(".dropdown-content").toggle();
+  });
 });

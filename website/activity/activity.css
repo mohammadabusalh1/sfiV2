@@ -78,9 +78,15 @@ button:hover {
     color: var(--main-color);
 }
 
+.navbare{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
 .navbare a {
     display: inline-block;
-    margin: 0 2rem;
 }
 
 .navbare a:hover h6 {
@@ -138,88 +144,6 @@ footer #box_cont .box h4 {
     padding-bottom: 12px;
 }
 
-#service {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 80px;
-}
-
-#service #card_cont {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 40px 80px;
-    width: 40%;
-}
-
-#service #card_cont a {
-    padding: 20px;
-    text-align: center;
-    border: 1px solid hsl(33, 53%, 51%, 0.5);
-    border-radius: 12px;
-    box-shadow: var(--box-shadow2);
-    transition: 0.5s;
-    margin: 10px 0;
-}
-
-#service #card_cont a:hover {
-    box-shadow: var(--box-shadow);
-    padding: 30px;
-}
-
-.slids {
-    height: 80vh;
-    box-shadow: var(--box-shadow2);
-}
-
-.slide {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.slid3 {
-    background-image: url("../img/slid1.jpg");
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-}
-
-.slid2 {
-    background-image: url("../img/slid2.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-
-}
-
-.slid1 {
-    background-image: url("../img/slid3.jpg");
-    background-position: 80 80;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-}
-
-.tit h2 {
-    color: white;
-    background-color: hsl(0, 0%, 13%, 0.7);
-    padding: 4px 12px;
-}
-
-.tit h6 {
-    color: var(--main-color);
-    background-color: hsl(0, 0%, 13%, 0.7);
-    padding: 4px 12px;
-}
-
 .hero {
     display: flex;
     flex-direction: column;
@@ -230,12 +154,13 @@ footer #box_cont .box h4 {
 }
 
 .hero .inf {
-    width: 100%;
+    width: 40%;
 }
 
 .butt {
-    width: 50%;
+    width: 100%;
     margin: 8px 0;
+    cursor: pointer;
 }
 
 .add2 {
@@ -247,8 +172,14 @@ footer #box_cont .box h4 {
 .hero .inf input,
 .hero .inf select,
 textarea {
-    width: 50%;
+    width: 100%;
     margin-bottom: 12px;
+    padding: 2px 8px;
+    box-sizing: border-box;
+}
+
+.hero .inf h6{
+    padding-bottom: 4px;
 }
 
 #he2,
@@ -306,9 +237,17 @@ td {
     overflow-x: auto;
 }
 
-.hero .inf select {
-    width: 50.5%;
+#dates{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
+
+#dates h6{
+    font-size: 16px;
+    font-weight: 400;
+}
+
 
 @media screen and (max-width:5800px) {
     #tableShow {
@@ -429,6 +368,7 @@ td {
         position: absolute;
         top: 100%;
         left: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;

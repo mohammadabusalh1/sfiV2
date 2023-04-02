@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الرئيسية</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="../../img/smallLogo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  </head>
+
+  <body dir="rtl">
+
+    <!-- navbare start -->
+    <section id="header">
+      <a href="Mian.html">
+        <h4>ملتقى الطلبة</h4>
+      </a>
+      <nav class="navbare">
+        <a href="Mian.html">
+          <h6 class="active">الرئيسية</h6>
+        </a>
+        <a href="../activity.html">
+          <h6>الانشطة</h6>
+        </a>
+        <a href="../report.html">
+          <h6>التقارير</h6>
+        </a>
+      </nav>
+      <div>
+        <i id="bar" class="fas fa-bars"></i>
+        <a id="logout" href="../login.html">
+          <i class="fas fa-arrow-circle-left"></i
+        ></a>
+      </div>
+    </section>
+
+    <script>
+      $("#bar").click(function () {
+        $(".navbare").toggleClass("active");
+        $(this).toggleClass("fa-times");
+      });
+    </script>
+
+    <!-- hero start -->
+    <section id="hero">
+      <div class="swiper mySwiper slids">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slid1 slide">
+            <div class="tit">
+              <h2>نربط شباب فلسطين بشباب العالم</h2>
+              <h6>
+                نسعى لتوفير فرص التبادل الشبابي وتعزيز المعرفة الفكرية والثقافية
+              </h6>
+            </div>
+          </div>
+          <div class="swiper-slide slid2 slide">
+            <div class="tit">
+              <h2>نبني قادة الغد</h2>
+              <h6>
+                تنمية المهارات اللازمة لمشاركة الشباب في عقد وإدارة مناظرات
+                فعالة تسهم في إثراء الحوار البنّاء والديمقراطي في البلدان
+                العربية
+              </h6>
+            </div>
+          </div>
+          <div class="swiper-slide slid3 slide">
+            <div class="tit">
+              <h2>بناء قدرات الشباب</h2>
+              <h6>
+                مجتمع فلسطيني مدني ديمقراطي يسعى الى دعم مشاركة الشباب والاعتراف
+                بحقوقه
+              </h6>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+
+      <script>
+        var swiper = new Swiper(".mySwiper", {
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+      </script>
+    </section>
+    <!-- hero end -->
+
+    <!-- service start -->
+    <section id="service">
+      <h2>الخدمات</h2>
+
+      <div id="card_cont">
+        <a href="../activity.html">
+          <img
+            src="../../img/activity.jpg"
+            alt="..."
+            width="150px"
+            height="150px"
+          />
+          <h6>الأنشطة</h6>
+        </a>
+
+        <a href="../report.html">
+          <img src="../../img/report.jpg" alt="..." width="150px" height="150px" />
+          <h6>التقارير</h6>
+        </a>
+      </div>
+    </section>
+    <!-- service end -->
+
+    <!-- start footer -->
+    <footer>
+      <div id="box_cont">
+        <div class="box">
+          <h4>روابط سريعة</h4>
+          <a href="Mian.html"
+            ><i class="fa fa-angle-left" aria-hidden="true"></i>
+            <h6>الرئيسية</h6>
+          </a>
+          <a href="../activity.html"
+            ><i class="fa fa-angle-left" aria-hidden="true"></i>
+            <h6>الأنشطة</h6>
+          </a>
+          <a href="../report.html"
+            ><i class="fa fa-angle-left" aria-hidden="true"></i>
+            <h6>التقارير</h6>
+          </a>
+        </div>
+
+        <div class="box">
+          <h4>تواصل معنا</h4>
+          <a href="#"
+            ><i class="fa fa-phone" aria-hidden="true"></i>
+            <h6>97022751882+</h6>
+          </a>
+          <a href="#"
+            ><i class="fa fa-envelope" aria-hidden="true"></i>
+            <h6>info@ysfi.ps</h6>
+          </a>
+        </div>
+
+        <div class="box">
+          <h4>تابعنا</h4>
+          <a target="_blank" href="https://www.facebook.com/SFI.Palestine"
+            ><i class="fab fa-facebook-f"></i>
+            <h6>فيسبوك</h6>
+          </a>
+          <a href="Mian.html"
+            ><i class="fab fa-instagram" aria-hidden="true"></i>
+            <h6>انستاجرام</h6>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

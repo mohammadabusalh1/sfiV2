@@ -30,4 +30,8 @@ $(document).ready(function () {
   $(".card:nth-child(4)").click(function () {
     window.location.replace("../programs/programs.html");
   });
+
+  $("#other").click(function(){
+    $(".dropdown-content").toggle();
+  });
 });

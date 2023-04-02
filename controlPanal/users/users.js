@@ -65,12 +65,12 @@ $(document).ready(function () {
       data: { sqlAdd: sqlAdd },
       type: "post",
       success: function (out) {
-        if(out == "successfully"){
-        $("#not").text("تمت الاضافة");
-        sql = "SELECT * FROM `users`";
-        reload(sql);
-        $("input").val("");
-        }else{
+        if (out == "successfully") {
+          $("#not").text("تمت الاضافة");
+          sql = "SELECT * FROM `users`";
+          reload(sql);
+          $("input").val("");
+        } else {
           $("#not").text(" لم تمت الاضافة");
         }
       },
@@ -213,5 +213,9 @@ $(document).ready(function () {
         }, 400);
       },
     });
+  });
+
+  $("#other").click(function () {
+    $(".dropdown-content").toggle();
   });
 });

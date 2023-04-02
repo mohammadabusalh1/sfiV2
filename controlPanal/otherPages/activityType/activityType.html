@@ -39,18 +39,36 @@
         <a href="../../programs/programs.html">
           <h6>البرامج</h6>
         </a>
+
+        <div id="other">
+          <h6>
+            المزيد
+            <span class="material-symbols-outlined"> arrow_drop_down </span>
+          </h6>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="../aim/aim.html">إضافة أهداف</a>
+            <a href="../activityType/activityType.html"
+              >إضافة أنواع للنشاط</a
+            >
+            <a href="../area/area.html">إضافة محافظات</a>
+            <a href="../fin/fin.html">إضافة ممولين</a>
+            <a href="../target/target.html">إضافة فئات عمرية</a>
+          </div>
+        </div>
       </div>
 
       <div id="ic">
         <i class="fa fa-list-ul" aria-hidden="true"></i>
-        <button><span class="material-symbols-outlined"> logout </span></button>
+        <button id="logoutButt">
+          <span class="material-symbols-outlined"> logout </span>
+        </button>
       </div>
     </section>
 
     <section id="smallList">
       <div id="links2">
         <a href="../../home/Home.html">
-          <h6>الرئيسية</h6>
+          <h6 class="active">الرئيسية</h6>
         </a>
         <a href="../../users/users.html">
           <h6>المستخدمين</h6>
@@ -59,21 +77,29 @@
           <h6>المشاريع</h6>
         </a>
         <a href="../../parti/parti.html">
-          <h6 class="active">المسؤولين</h6>
+          <h6>المسؤولين</h6>
         </a>
 
         <a href="../../programs/programs.html">
           <h6>البرامج</h6>
         </a>
+
+        <a href="../../aim/aim.html"> <h6>إضافة أهداف</h6></a>
+        <a href="../../activityType/activityType.html"
+          ><h6>إضافة أنواع للنشاط</h6></a
+        >
+        <a href="../../area/area.html"><h6>إضافة محافظات</h6></a>
+        <a href="../../fin/fin.html"><h6>إضافة ممولين</h6></a>
+        <a href="../../target/target.html"><h6>إضافة فئات عمرية</h6></a>
       </div>
-      <a href="../../login.html">
-        <h6>تسجيل الخروج</h6>
+      <a href="../../../login.html">
+        <h6 id="logout_word">تسجيل الخروج</h6>
       </a>
     </section>
 
     <section id="hero">
       <div>
-        <h6> نوع النشاط</h6>
+        <h6>نوع النشاط</h6>
         <input type="text" id="activityType" />
       </div>
       <button id="add" class="Darkbutton">أضف</button>
@@ -89,7 +115,7 @@
 
     <footer>
       <div id="logo">
-        <img src="../../img/logo.png" alt="..." />
+        <img src="../../../img/logo.png" alt="..." />
         <p>
           فلسطين، بيت لحم، شارع القدس الخليل - نزلة غزال - بالقرب من فرشات
           حرباوي
