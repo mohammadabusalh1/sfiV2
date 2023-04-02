@@ -77,44 +77,6 @@ $(document).ready(function () {
     });
   });
 
-  $("#info button").prop("disabled", true);
-
-  $("#info button").css({
-    cursor: "auto",
-  });
-
-  $("#info button").hover(
-    function () {
-      $(this).css({
-        "background-color": "#C58940",
-        color: "white",
-      });
-    },
-    function () {
-      $(this).css({
-        "background-color": "transparent",
-        color: "#C58940",
-      });
-    }
-  );
-
-  $("#info input:nth-child(4),#info input:nth-child(2)").keyup(function () {
-    if (
-      $("#info input:nth-child(2)").val() == "" ||
-      $("#info input:nth-child(4)").val() == ""
-    ) {
-      $("#info button").prop("disabled", true);
-      $("#info button").css({
-        cursor: "auto",
-      });
-    } else {
-      $("#info button").prop("disabled", false);
-      $("#info button").css({
-        cursor: "pointer",
-      });
-    }
-  });
-
   $("#tableDis input").keyup(function () {
     val = $(this).val();
     if (val == "") {
@@ -178,8 +140,18 @@ $(document).ready(function () {
 
         $("#add").toggle();
         $("#edit").toggle();
+        $("#cancelEdit").toggle();
+        $("#tableDis").toggle();
       },
     });
+  });
+
+  $("#cancelEdit").click(function () {
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#tableDis").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#edit").click(function () {
@@ -207,6 +179,7 @@ $(document).ready(function () {
 
         $("#add").toggle();
         $("#edit").toggle();
+        $("#cancelEdit").toggle();
         reload("SELECT * FROM `users`");
         setTimeout(function () {
           window.location.replace("users.html#table");
@@ -218,4 +191,5 @@ $(document).ready(function () {
   $("#other").click(function () {
     $(".dropdown-content").toggle();
   });
+
 });

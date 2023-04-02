@@ -21,7 +21,7 @@ $(document).ready(function () {
         for (i = 0; i < data.length; i++) {
           ht +=
             "<tr><td>" +
-            data[i].administrator_name +
+            data[i].emp_name +
             "</td> <td>" +
             data[i].sex +
             "</td> <td>" +
@@ -37,17 +37,40 @@ $(document).ready(function () {
             "</td> <td>" +
             data[i].city +
             "</td> <td><button data-id= '" +
-            data[i].administrator_name +
+            data[i].emp_id +
             '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td> <td><button data-id= \'' +
-            data[i].administrator_name +
+            data[i].emp_id +
             '\' class="edit-btn">تعديل <i class="fas fa-edit" aria-hidden="true"></i></button></td></tr>';
         }
         $(".table").html(ht);
       },
     });
   }
-  sql = "SELECT * FROM `administrator`";
+
+  sql = "SELECT * FROM `employees`";
   reload(sql);
+
+  function goalReload(sql) {
+    $.ajax({
+      url: "../phpFile/show.php",
+      data: { sql: sql },
+      dataType: "json",
+      type: "post",
+      success: function (data) {
+        ht = "";
+        for (i = 0; i < data.length; i++) {
+          ht +=
+            '<option value="' +
+            data[i].area_name +
+            '">' +
+            data[i].area_name +
+            "</option>";
+        }
+        $("#gov").html(ht);
+      },
+    });
+  }
+  goalReload("SELECT * FROM `area`");
 
   $("#add").click(function () {
     nameAdd = $("#name").val();
@@ -58,6 +81,7 @@ $(document).ready(function () {
     gov = $("#gov").val();
     city = $("#city").val();
     birthday = $("#birthday").val();
+    $("input").css("border-color", "gray");
 
     if (
       nameAdd === "" ||
@@ -102,7 +126,7 @@ $(document).ready(function () {
       }
     } else {
       sqlAdd =
-        "INSERT INTO `administrator`(`administrator_name`, `sex`, `university_degree`, `birthday`, `phone`, `email`, `governorate`, `city`) VALUES ('" +
+        "INSERT INTO `employees`(`emp_name`, `sex`, `university_degree`, `birthday`, `phone`, `email`, `governorate`, `city`) VALUES ('" +
         nameAdd +
         "','" +
         sex +
@@ -127,7 +151,7 @@ $(document).ready(function () {
           if (out == "successfully") {
             $("input").val("");
             $("#not").text("تمت الأضافة");
-            reload("SELECT * FROM `administrator`");
+            reload("SELECT * FROM `employees`");
           } else {
             $("#not").text("لم يتم حفظ البيانات: " + out);
           }
@@ -136,14 +160,13 @@ $(document).ready(function () {
     }
   });
 
-
   $("#tableDis input").keyup(function () {
     val = $(this).val();
     if (val == "") {
-      sql = "SELECT * FROM `administrator`";
+      sql = "SELECT * FROM `employees`";
     } else {
       sql =
-        "SELECT * FROM `administrator` WHERE `administrator_name` like '%" +
+        "SELECT * FROM `employees` WHERE `emp_name` like '%" +
         val +
         "%' || `sex` like '%" +
         val +
@@ -158,7 +181,8 @@ $(document).ready(function () {
         "%'|| `governorate` like '%" +
         val +
         "%'|| `city` like '%" +
-        val +"%'";
+        val +
+        "%'";
     }
     reload(sql);
   });
@@ -167,15 +191,14 @@ $(document).ready(function () {
     let n = confirm("تأكيد الحذف");
     if (n == true) {
       id = $(this).data("id");
-      sql =
-        "DELETE FROM `administrator` WHERE `administrator_name` = '" + id + "'";
+      sql = "DELETE FROM `employees` WHERE `emp_id` = '" + id + "'";
       $.ajax({
         url: "../phpFile/remove.php",
         data: { sql: sql },
         type: "post",
         success: function (out) {
           if (out == "remove successfully") {
-            reload("SELECT * FROM `administrator`");
+            reload("SELECT * FROM `employees`");
           } else {
             $("#not").text("لم يتم الحذف: " + out);
           }
@@ -188,14 +211,15 @@ $(document).ready(function () {
   $("#table").on("click", ".edit-btn", function () {
     id = $(this).data("id");
     sql =
-      "SELECT * FROM `administrator` WHERE `administrator_name`='" + id + "'";
+      "SELECT * FROM `employees` WHERE `emp_id` ='" + id + "'";
+      console.log(sql);
     $.ajax({
       url: "../phpFile/show.php",
       data: { sql: sql },
       type: "post",
       dataType: "json",
       success: function (out) {
-        administrator_name = out[0].administrator_name;
+        emp_name = out[0].emp_name;
         sex = out[0].sex;
         university_degree = out[0].university_degree;
         birthday = out[0].birthday;
@@ -204,7 +228,7 @@ $(document).ready(function () {
         governorate = out[0].governorate;
         city = out[0].city;
 
-        $("#name").val(administrator_name);
+        $("#name").val(emp_name);
         $("#sex").val(sex);
         $("#degree").val(university_degree);
         $("#phone").val(phone);
@@ -217,10 +241,18 @@ $(document).ready(function () {
 
         $("#add").hide();
         $("#edit").show();
+        $("#cancelEdit").show();
         $("#tableDis").hide();
-        $("#cancelEdit").toggle();
       },
     });
+  });
+
+  $("#cancelEdit").click(function(){
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#tableDis").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#edit").click(function () {
@@ -233,7 +265,7 @@ $(document).ready(function () {
     city = $("#city").val();
     birthday = $("#birthday").val();
     sqlup =
-      "UPDATE `administrator` SET `administrator_name`='" +
+      "UPDATE `employees` SET `emp_name`='" +
       nameAdd +
       "',`sex`='" +
       sex +
@@ -249,7 +281,7 @@ $(document).ready(function () {
       gov +
       "',`city`='" +
       city +
-      "' WHERE `administrator_name`='" +
+      "' WHERE `emp_id`='" +
       id +
       "'";
 
@@ -261,7 +293,7 @@ $(document).ready(function () {
         if (out == "New record update successfully") {
           $("input").val("");
           $("#not").text("تم التعديل");
-          reload("SELECT * FROM `administrator`");
+          reload("SELECT * FROM `employees`");
           $("#add").toggle();
           $("#edit").toggle();
           $("#tableDis").toggle();
@@ -271,14 +303,6 @@ $(document).ready(function () {
         }
       },
     });
-  });
-
-  $("#cancelEdit").click(function(){
-    $("input").val("");
-    $("#add").toggle();
-    $("#edit").toggle();
-    $("#tableDis").toggle();
-    $("#cancelEdit").toggle();
   });
 
   $("#nav i").click(function () {

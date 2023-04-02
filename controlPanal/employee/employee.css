@@ -1,0 +1,449 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: 300;
+  }
+  
+  h1 {
+    font-size: 50px;
+  }
+  
+  h2 {
+    font-size: 46px;
+  }
+  
+  h3 {
+    font-size: 36px;
+  }
+  
+  h4 {
+    font-size: 26px;
+  }
+  
+  h6 {
+    font-size: 18px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  button {
+    background-color: #faeab1;
+    /* Sets the background color of the button to blue */
+    color: black;
+    /* Sets the text color of the button to white */
+    padding: 5px 10px;
+    /* Adds padding to the button */
+    border-radius: 5px;
+    /* Rounds the corners of the button */
+    border: none;
+    /* Removes the border from the button */
+    /* Changes the cursor to a pointer when hovering over the button */
+    font-size: 16px;
+    /* Sets the font size of the button text */
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover{
+    background-color: #C58940;
+    color: black;
+  }
+  
+  .Darkbutton {
+    padding: 8px 25px;
+    background-color: transparent;
+    color: #c58940;
+    border: 1px solid #c58940;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  
+  .dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover,
+  .dropbtn:focus {
+    background-color: #2980b9;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 70%;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  #other {
+    cursor: pointer;
+  }
+  
+  #other h6 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #c58940;
+  }
+  
+  
+  #nav {
+    display: flex;
+    background-color: #faf8f1;
+    justify-content: space-between;
+    padding: 20px 40px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    right: 0;
+    box-shadow: 15px 20px 25px rgb(0, 0, 0, 0.05);
+    z-index: 10;
+  }
+  
+  #links img {
+    cursor: pointer;
+  }
+  
+  #links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  #links img {
+    padding-left: 20px;
+  }
+  
+  #links a {
+    color: #e5ba73;
+    font-weight: 600;
+  }
+  
+  #links a .active {
+    color: #c58940;
+    position: relative;
+    font-weight: 1000;
+  }
+  
+  #links a:hover h6,
+  #links div h6:hover {
+    color: #c58940;
+    font-weight: 800;
+  }
+  
+  #nav button {
+    background-color: transparent;
+    border: none;
+    transform: rotate(180deg);
+    cursor: pointer;
+  }
+  
+  #nav button span {
+    font-size: 32px;
+    color: #c58940;
+  }
+  
+  #nav i {
+    font-size: 24px;
+    color: #c58940;
+    display: none;
+    padding-left: 18px;
+  }
+  
+  #ic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  footer {
+    background-color: #faf8f1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 30px 40px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  footer #logo {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  footer #logo p {
+    padding-top: 8px;
+  }
+  
+  footer #pages {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 0;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+  
+  footer #pages a h6 {
+    color: #e5ba73;
+    font-weight: 600;
+    padding: 0 10px;
+  }
+  
+  footer #pages a h6:hover {
+    font-weight: 800;
+    color: #c58940;
+  }
+  
+  #smallList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #faf8f1;
+    padding: 20px;
+    text-align: center;
+    display: none;
+    position: sticky;
+    top: 90px;
+    left: 0;
+    z-index: 5;
+  }
+  
+  #smallList #links2 a h6 {
+    padding: 12px 0;
+    color: #e5ba73;
+  }
+  
+  #smallList #links2 a h6:hover {
+    padding: 12px 0;
+    color: #c58940;
+    font-weight: 800;
+  }
+  
+  #info {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    gap: 1.5rem;
+  }
+  
+  #info div {
+    width: 100%;
+  }
+  
+  #info div h6 {
+    padding-bottom: 4px;
+  }
+  
+  #info h6 {
+    font-weight: 200;
+  }
+  
+  #info select {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid hsl(33, 53%, 51%, 0.5);
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  input {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid hsl(33, 53%, 51%, 0.6);
+    box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.03);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  #hero {
+    padding: 80px 120px;
+  }
+  
+  #not,
+  #not2 {
+    color: red;
+    font-size: 18px;
+  }
+  
+  #add {
+    margin-top: 40px;
+    box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.04);
+  }
+  
+  #tableDis {
+    padding: 80px 120px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+  }
+  
+  #tableDis h2 {
+    padding-bottom: 60px;
+  }
+  
+  #tableDis input {
+    width: 60%;
+    margin-bottom: 40px;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid hsl(33, 53%, 51%, 0.8);
+  }
+  
+  table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  table,
+  th,
+  td {
+    border: 1px solid #c58940;
+    border-collapse: collapse;
+  }
+  
+  th {
+    background-color: #e5ba73;
+    color: white;
+  }
+  
+  th,
+  td {
+    padding: 8px 12px;
+  }
+  
+  .remove {
+    cursor: pointer;
+  }
+  
+  #edit {
+    display: none;
+    margin-top: 32px;
+  }
+  
+  .dis {
+    display: none;
+  }
+
+  #cancelEdit{
+    display: none;
+  }
+  
+  @media screen and (max-width: 5800px) {
+    #tableDis {
+      padding-bottom: 32vw;
+    }
+  }
+  
+  @media screen and (max-width: 3800px) {
+    #tableDis {
+      padding-bottom: 21vw;
+    }
+  }
+  
+  @media screen and (max-width: 2800px) {
+    #tableDis {
+      padding-bottom: 11vw;
+    }
+  }
+  
+  @media screen and (max-width: 992px) {
+    #links a {
+      display: none;
+    }
+  
+    #links img {
+      padding-left: 0;
+    }
+  
+    #nav i {
+      display: block;
+    }
+  
+    #info {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    footer #pages a {
+      width: 100%;
+    }
+  
+    #tableDis h2 {
+      font-size: 24px;
+    }
+  
+    #tableDis input {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 392px) {
+    #nav button span {
+      display: none;
+    }
+  
+    #nav i {
+      padding-left: 5px;
+    }
+  
+    #links img {
+      width: 80%;
+    }
+  
+    #tableDis h2 {
+      font-size: 14px;
+    }
+  
+    #tableDis input {
+      padding: 8px 54px;
+    }
+  }
+  

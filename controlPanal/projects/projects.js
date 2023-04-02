@@ -799,7 +799,6 @@ $(document).ready(function () {
           }
         }
 
-        console.log(areasArray);
         if (areasArray.length > 0) {
           for (i = 0; i < areasArray.length; i++) {
             let sql =

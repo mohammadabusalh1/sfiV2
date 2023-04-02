@@ -66,6 +66,19 @@ $(document).ready(function () {
     }
   });
 
+  $("#tableDis input").keyup(function () {
+    val = $(this).val();
+    if (val == "") {
+      sql = "SELECT * FROM `area`";
+    } else {
+      sql =
+        "SELECT * FROM `area` WHERE `area_name` like '%" +
+        val +
+        "%'";
+    }
+    reload(sql);
+  });
+
   $("#other").click(function () {
     $(".dropdown-content").toggle();
   });

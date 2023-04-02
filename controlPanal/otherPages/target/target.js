@@ -67,12 +67,25 @@ $(document).ready(function () {
     }
   });
 
+  $("#tableDis input").keyup(function () {
+    val = $(this).val();
+    if (val == "") {
+      sql = "SELECT * FROM `target_groups`";
+    } else {
+      sql =
+        "SELECT * FROM `target_groups` WHERE `target_group` like '%" +
+        val +
+        "%'";
+    }
+    reload(sql);
+  });
+
   $("#other").click(function () {
     $(".dropdown-content").toggle();
   });
 
-  // $("#nav button span").click(function () {
-  //   localStorage.setItem("login", 0);
-  //   window.location.href = "../../../login.html";
-  // });
+  $("#nav button span").click(function () {
+    localStorage.setItem("login", 0);
+    window.location.href = "../../../login.html";
+  });
 });

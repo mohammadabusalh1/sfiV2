@@ -53,41 +53,6 @@ $(document).ready(function () {
     reload(sql);
   });
 
-  $("#info #add").prop("disabled", true);
-
-  $("#info #add").css({
-    cursor: "auto",
-  });
-
-  $("#info button").hover(
-    function () {
-      $(this).css({
-        "background-color": "#C58940",
-        color: "white",
-      });
-    },
-    function () {
-      $(this).css({
-        "background-color": "transparent",
-        color: "#C58940",
-      });
-    }
-  );
-
-  $("#info input:nth-child(2)").keyup(function () {
-    if ($("#info input:nth-child(2)").val() == "") {
-      $("#info button").prop("disabled", true);
-      $("#info button").css({
-        cursor: "auto",
-      });
-    } else {
-      $("#info button").prop("disabled", false);
-      $("#info button").css({
-        cursor: "pointer",
-      });
-    }
-  });
-
   $("#tableDis input").keyup(function () {
     val = $(this).val();
     if (val == "") {
@@ -124,7 +89,16 @@ $(document).ready(function () {
     $("#name").val(programName);
     $("#edit").show();
     $("#add").hide();
+    $("#cancelEdit").toggle();
     $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
+
+  $("#cancelEdit").click(function () {
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#tableDis").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#edit").click(function () {
@@ -154,6 +128,7 @@ $(document).ready(function () {
             success: function (out) {
               if (out == "New record update successfully") {
                 $("input").val("");
+                $("#cancelEdit").toggle();
                 reload("SELECT * FROM `programs`");
                 $("#not").text(
                   "تمت تعديل: (" +

@@ -66,6 +66,19 @@ $(document).ready(function () {
     }
   });
 
+  $("#tableDis input").keyup(function () {
+    val = $(this).val();
+    if (val == "") {
+      sql = "SELECT * FROM `goals`";
+    } else {
+      sql =
+        "SELECT * FROM `goals` WHERE `goal_name` like '%" +
+        val +
+        "%'";
+    }
+    reload(sql);
+  });
+
   $("#other").click(function () {
     $(".dropdown-content").toggle();
   });

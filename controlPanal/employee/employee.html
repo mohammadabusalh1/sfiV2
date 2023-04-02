@@ -14,9 +14,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="../img/smallLogo.png" />
-    <link rel="stylesheet" href="parti.css" />
-    <script src="parti.js"></script>
-    <title>المسؤولين</title>
+    <link rel="stylesheet" href="employee.css" />
+    <script src="employee.js"></script>
+    <title>الموظفين</title>
   </head>
 
   <body dir="rtl">
@@ -24,7 +24,7 @@
       <div id="links">
         <img src="../img/logo.png" alt="..." />
         <a href="../home/Home.html">
-          <h6 >الرئيسية</h6>
+          <h6>الرئيسية</h6>
         </a>
         <a href="../users/users.html">
           <h6>المستخدمين</h6>
@@ -33,10 +33,10 @@
           <h6>المشاريع</h6>
         </a>
         <a href="../parti/parti.html">
-          <h6 class="active">المسؤولين</h6>
+          <h6>المسؤولين</h6>
         </a>
-        <a href="../employee/employee.html">
-          <h6>الموظفين</h6>
+        <a href="employee.html">
+          <h6 class="active">الموظفين</h6>
         </a>
         <a href="../programs/programs.html">
           <h6>البرامج</h6>
@@ -102,7 +102,7 @@
     <section id="hero">
       <div id="info">
         <div>
-          <h6>إسم السؤول</h6>
+          <h6>إسم الموظف</h6>
           <input type="text" id="name" />
         </div>
         <div>
@@ -130,7 +130,7 @@
         </div>
         <div>
           <h6>المحافظة</h6>
-          <input type="text" id="gov" />
+          <select name="gov" id="gov"></select>
         </div>
         <div>
           <h6>المنطقة</h6>
@@ -144,7 +144,7 @@
     </section>
 
     <section id="tableDis">
-      <h2>جميع المسؤولين</h2>
+      <h2>جميع الموظفين</h2>
       <input type="text" name="name" placeholder="# البحث" />
 
       <table class="table" id="table"></table>

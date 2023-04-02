@@ -464,6 +464,8 @@ td {
   color: red;
 }
 
+
+
 @media screen and (max-width: 5800px) {
   #tableDis {
     padding-bottom: 26vw;

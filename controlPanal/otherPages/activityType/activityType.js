@@ -69,6 +69,19 @@ $(document).ready(function () {
     }
   });
 
+  $("#tableDis input").keyup(function () {
+    val = $(this).val();
+    if (val == "") {
+      sql = "SELECT * FROM `activity_type`";
+    } else {
+      sql =
+        "SELECT * FROM `activity_type` WHERE `activity_type` like '%" +
+        val +
+        "%'";
+    }
+    reload(sql);
+  });
+
   $("#other").click(function () {
     $(".dropdown-content").toggle();
   });

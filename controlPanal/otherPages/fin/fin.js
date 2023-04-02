@@ -113,6 +113,23 @@ $(document).ready(function () {
     }
   });
 
+  $("#tableDis input").keyup(function () {
+    val = $(this).val();
+    if (val == "") {
+      sql = "SELECT * FROM `financier`";
+    } else {
+      sql =
+        "SELECT * FROM `financier` WHERE `project_financier_name` like '%" +
+        val +
+        "%' || `governorate` like '%" +
+        val +
+        "%' || `city` like '%" +
+        val +
+        "%'";
+    }
+    reload(sql);
+  });
+
   $("#other").click(function () {
     $(".dropdown-content").toggle();
   });

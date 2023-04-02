@@ -30,6 +30,31 @@ a {
   color: black;
 }
 
+
+button {
+  background-color: #faeab1;
+  /* Sets the background color of the button to blue */
+  color: black;
+  /* Sets the text color of the button to white */
+  padding: 5px 10px;
+  /* Adds padding to the button */
+  border-radius: 5px;
+  /* Rounds the corners of the button */
+  border: none;
+  /* Removes the border from the button */
+  /* Changes the cursor to a pointer when hovering over the button */
+  font-size: 16px;
+  /* Sets the font size of the button text */
+  cursor: pointer;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #C58940;
+  color: black;
+}
+
 .Darkbutton {
   padding: 8px 25px;
   background-color: transparent;
@@ -353,6 +378,10 @@ td {
 }
 
 .dis {
+  display: none;
+}
+
+#cancelEdit {
   display: none;
 }
 
