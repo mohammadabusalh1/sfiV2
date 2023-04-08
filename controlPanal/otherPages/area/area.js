@@ -13,14 +13,16 @@ $(document).ready(function () {
       dataType: "json",
       type: "post",
       success: function (data) {
-        ht = "<tr> <th>المحافظة</th> <th>حذف</th></tr>";
+        ht = "<tr> <th>المحافظة</th> <th>تعديل</th> <th>حذف</th></tr>";
         for (i = 0; i < data.length; i++) {
           ht +=
-            "<tr><td>" +
-            data[i].area_name +
-            "</td><td><button data-id= '" +
-            data[i].area_name +
-            '\'\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
+          "<tr><td>" +
+          data[i].area_name +
+          "</td><td><button data-id= '" +
+          data[i].area_name +
+          '\' class="edit-btn">تعديل <i class="fa fa-edit"></i></button></td><td><button data-id= \'' +
+          data[i].area_name +
+          '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td></tr>';
         }
         $(".table").html(ht);
       },
@@ -64,6 +66,61 @@ $(document).ready(function () {
       });
     } else {
     }
+  });
+
+  let areaName;
+  $("#table").on("click", ".edit-btn", function () {
+    areaName = $(this).data("id");
+    $("#gov").val(areaName);
+    $("#edit").show();
+    $("#add").hide();
+    $("#cancelEdit").toggle();
+    $("#not").text("");
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
+
+  $("#edit").click(function () {
+    let newareaName = $("#gov").val();
+    sql =
+      "UPDATE `area` SET `area_name`='" +
+      newareaName +
+      "' WHERE `area_name`='" +
+      areaName +
+      "'";
+    $.ajax({
+      url: "../../phpFile/update.php",
+      data: { sqlup: sql },
+      type: "post",
+      success: function (out) {
+        if (out == "New record update successfully") {
+          if (out == "New record update successfully") {
+            $("input").val("");
+            $("#cancelEdit").hide();
+            $("#edit").hide();
+            $("#add").show();
+            reload("SELECT * FROM `area`");
+            $("#not").text(
+              "تم تعديل: (" +
+                areaName +
+                ") الى (" +
+                newareaName +
+                ")"
+            );
+          } else {
+            $("#not").text("يوجد هذا الخطأ: " + out);
+          }
+        } else {
+          $("#not").text("يوجد هذا الخطأ: " + out);
+        }
+      },
+    });
+  });
+
+  $("#cancelEdit").click(function () {
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#tableDis input").keyup(function () {

@@ -13,14 +13,16 @@ $(document).ready(function () {
       dataType: "json",
       type: "post",
       success: function (data) {
-        ht = "<tr> <th>الهدف</th> <th>حذف</th></tr>";
+        ht = "<tr> <th>الهدف</th> <th>تعديل</th> <th>حذف</th></tr>";
         for (i = 0; i < data.length; i++) {
           ht +=
             "<tr><td>" +
             data[i].goal_name +
             "</td><td><button data-id= '" +
             data[i].goal_name +
-            '\'\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
+            '\' class="edit-btn">تعديل <i class="fa fa-edit"></i></button></td><td><button data-id= \'' +
+            data[i].goal_name +
+            '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td></tr>';
         }
         $(".table").html(ht);
       },
@@ -30,9 +32,7 @@ $(document).ready(function () {
 
   $("#add").click(function () {
     let aim = $("#aim").val();
-
     sqlAdd = "INSERT INTO `goals`(`goal_name`) VALUES ('" + aim + "')";
-
     $.ajax({
       url: "../../phpFile/add.php",
       data: { sqlAdd: sqlAdd },
@@ -43,7 +43,7 @@ $(document).ready(function () {
           $("#not").text("تمت الأضافة بنجاح");
           reload("SELECT * FROM `goals`");
         } else {
-          $("#not").text("لم تتم الأضافة ");
+          $("#not").text("لم تتم الأضافة يرجى التأكد من المدخل");
         }
       },
     });
@@ -59,11 +59,63 @@ $(document).ready(function () {
         data: { sql: sql },
         type: "post",
         success: function (out) {
-          reload("SELECT * FROM `goals`");
+          if (out == "remove successfully") {
+            reload("SELECT * FROM `goals`");
+          } else {
+            alert("لم يتم الحذف بسبب: " + out);
+          }
         },
       });
     } else {
     }
+  });
+
+  let aimName;
+  $("#table").on("click", ".edit-btn", function () {
+    aimName = $(this).data("id");
+    $("#aim").val(aimName);
+    $("#edit").show();
+    $("#add").hide();
+    $("#cancelEdit").toggle();
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
+
+  $("#edit").click(function () {
+    let newAimName = $("#aim").val();
+    sql =
+      "UPDATE `goals` SET `goal_name`='" +
+      newAimName +
+      "' WHERE `goal_name`='" +
+      aimName +
+      "'";
+    $.ajax({
+      url: "../../phpFile/update.php",
+      data: { sqlup: sql },
+      type: "post",
+      success: function (out) {
+        if (out == "New record update successfully") {
+          if (out == "New record update successfully") {
+            $("input").val("");
+            $("#cancelEdit").toggle();
+            reload("SELECT * FROM `goals`");
+            $("#not").text(
+              "تم تعديل: (" + aimName + ") الى (" + newAimName + ")"
+            );
+          } else {
+            $("#not").text("يوجد هذا الخطأ: " + out);
+          }
+        } else {
+          $("#not").text("يوجد هذا الخطأ: " + out);
+        }
+      },
+    });
+  });
+
+  $("#cancelEdit").click(function () {
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#tableDis input").keyup(function () {
@@ -71,10 +123,7 @@ $(document).ready(function () {
     if (val == "") {
       sql = "SELECT * FROM `goals`";
     } else {
-      sql =
-        "SELECT * FROM `goals` WHERE `goal_name` like '%" +
-        val +
-        "%'";
+      sql = "SELECT * FROM `goals` WHERE `goal_name` like '%" + val + "%'";
     }
     reload(sql);
   });

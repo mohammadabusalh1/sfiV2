@@ -23,7 +23,7 @@ $(document).ready(function () {
             localStorage.setItem("login", 1);
             window.location.replace("controlPanal/home/Home.html");
           } else if (pir == "user") {
-            window.location.replace("website/Mian.html");
+            window.location.replace("website/home/Mian.html");
             localStorage.setItem("login", 1);
           }
         } else {

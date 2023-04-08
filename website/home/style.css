@@ -85,14 +85,14 @@ button:hover {
     gap: 4rem;
 }
 
-.navbare a {
-    display: inline-block;
-}
 
 .navbare a:hover h6 {
     color: var(--main-color);
 }
 
+#logout {
+    cursor: pointer;
+}
 
 #logout i {
     font-size: 26px;

@@ -248,6 +248,13 @@ td {
     font-weight: 400;
 }
 
+#logout{
+    cursor: pointer;
+}
+
+#not{
+    color: red;
+}
 
 @media screen and (max-width:5800px) {
     #tableShow {

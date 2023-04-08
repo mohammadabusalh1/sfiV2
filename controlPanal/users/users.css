@@ -290,8 +290,12 @@ input {
 }
 
 #info button {
-  margin-top: 40px;
+  margin-top: 12px;
   box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.04);
+}
+
+#pir{
+  margin-bottom: 24px;
 }
 
 #tableDis {

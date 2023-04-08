@@ -13,14 +13,16 @@ $(document).ready(function () {
       dataType: "json",
       type: "post",
       success: function (data) {
-        ht = "<tr> <th>نوع النشاط</th> <th>حذف</th></tr>";
+        ht = "<tr> <th>نوع النشاط</th> <th>تعديل</th> <th>حذف</th></tr>";
         for (i = 0; i < data.length; i++) {
           ht +=
             "<tr><td>" +
             data[i].activity_type +
             "</td><td><button data-id= '" +
             data[i].activity_type +
-            '\'\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
+            '\' class="edit-btn">تعديل <i class="fa fa-edit"></i></button></td><td><button data-id= \'' +
+            data[i].activity_type +
+            '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td></tr>';
         }
         $(".table").html(ht);
       },
@@ -67,6 +69,61 @@ $(document).ready(function () {
       });
     } else {
     }
+  });
+
+  let activityTypeName;
+  $("#table").on("click", ".edit-btn", function () {
+    activityTypeName = $(this).data("id");
+    $("#activityType").val(activityTypeName);
+    $("#edit").show();
+    $("#add").hide();
+    $("#cancelEdit").toggle();
+    $("#not").text("");
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
+
+  $("#edit").click(function () {
+    let newactivityTypeName = $("#activityType").val();
+    sql =
+      "UPDATE `activity_type` SET `activity_type`='" +
+      newactivityTypeName +
+      "' WHERE `activity_type`='" +
+      activityTypeName +
+      "'";
+    $.ajax({
+      url: "../../phpFile/update.php",
+      data: { sqlup: sql },
+      type: "post",
+      success: function (out) {
+        if (out == "New record update successfully") {
+          if (out == "New record update successfully") {
+            $("input").val("");
+            $("#cancelEdit").hide();
+            $("#edit").hide();
+            $("#add").show();
+            reload("SELECT * FROM `activity_type`");
+            $("#not").text(
+              "تم تعديل: (" +
+                activityTypeName +
+                ") الى (" +
+                newactivityTypeName +
+                ")"
+            );
+          } else {
+            $("#not").text("يوجد هذا الخطأ: " + out);
+          }
+        } else {
+          $("#not").text("يوجد هذا الخطأ: " + out);
+        }
+      },
+    });
+  });
+
+  $("#cancelEdit").click(function () {
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#tableDis input").keyup(function () {

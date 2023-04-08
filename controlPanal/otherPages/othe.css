@@ -277,7 +277,6 @@ select {
 }
 
 #hero button {
-  margin-top: 24px;
   width: 40%;
 }
 
@@ -351,6 +350,7 @@ td {
 
 #edit {
   display: none;
+  margin-top: 24px;
 }
 
 .dis {
@@ -360,6 +360,10 @@ td {
 #not {
   color: red;
   font-size: 18px;
+}
+
+#cancelEdit{
+  display: none;
 }
 
 @media screen and (max-width: 5800px) {

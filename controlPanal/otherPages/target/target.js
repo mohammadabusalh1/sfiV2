@@ -13,14 +13,16 @@ $(document).ready(function () {
       dataType: "json",
       type: "post",
       success: function (data) {
-        ht = "<tr> <th>الفئة العمرية</th> <th>حذف</th></tr>";
+        ht = "<tr> <th>الفئة العمرية</th> <th>تعديل</th> <th>حذف</th></tr>";
         for (i = 0; i < data.length; i++) {
           ht +=
             "<tr><td>" +
             data[i].target_group +
             "</td><td><button data-id= '" +
             data[i].target_group +
-            '\'\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
+            '\' class="edit-btn">تعديل <i class="fa fa-edit"></i></button></td><td><button data-id= \'' +
+            data[i].target_group +
+            '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td></tr>';
         }
         $(".table").html(ht);
       },
@@ -65,6 +67,57 @@ $(document).ready(function () {
       });
     } else {
     }
+  });
+
+  let targetName;
+  $("#table").on("click", ".edit-btn", function () {
+    targetName = $(this).data("id");
+    $("#target").val(targetName);
+    $("#edit").show();
+    $("#add").hide();
+    $("#cancelEdit").toggle();
+    $("#not").text("");
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
+
+  $("#edit").click(function () {
+    let newtargetName = $("#target").val();
+    sql =
+      "UPDATE `target_groups` SET `target_group`='" +
+      newtargetName +
+      "' WHERE `target_group`='" +
+      targetName +
+      "'";
+    $.ajax({
+      url: "../../phpFile/update.php",
+      data: { sqlup: sql },
+      type: "post",
+      success: function (out) {
+        if (out == "New record update successfully") {
+          if (out == "New record update successfully") {
+            $("input").val("");
+            $("#cancelEdit").hide();
+            $("#edit").hide();
+            $("#add").show();
+            reload("SELECT * FROM `target_groups`");
+            $("#not").text(
+              "تم تعديل: (" + targetName + ") الى (" + newtargetName + ")"
+            );
+          } else {
+            $("#not").text("يوجد هذا الخطأ: " + out);
+          }
+        } else {
+          $("#not").text("يوجد هذا الخطأ: " + out);
+        }
+      },
+    });
+  });
+
+  $("#cancelEdit").click(function () {
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#tableDis input").keyup(function () {

@@ -14,7 +14,7 @@ $(document).ready(function () {
       type: "post",
       success: function (data) {
         ht =
-          "<tr> <th>الممول</th> <th>المحافظة</th> <th>المنطقة</th> <th>حذف</th></tr>";
+          "<tr> <th>الممول</th> <th>المحافظة</th> <th>المنطقة</th> <th>تعديل</th> <th>حذف</th></tr>";
         for (i = 0; i < data.length; i++) {
           ht +=
             "<tr><td>" +
@@ -29,7 +29,13 @@ $(document).ready(function () {
             data[i].governorate +
             "-" +
             data[i].city +
-            '\'\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
+            '\' class="edit-btn">تعديل <i class="fa fa-edit"></i></button></td> <td><button data-id= \'' +
+            data[i].project_financier_name +
+            "-" +
+            data[i].governorate +
+            "-" +
+            data[i].city +
+            '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td>';
         }
         $(".table").html(ht);
       },
@@ -111,6 +117,81 @@ $(document).ready(function () {
       });
     } else {
     }
+  });
+
+  let fin;
+  let id;
+  $("#table").on("click", ".edit-btn", function () {
+    id = $(this).data("id");
+    const arr = id.split("-");
+    fin = arr;
+    $("#name").val(arr[0]);
+    $("#gov").val(arr[1]);
+    $("#area").val(arr[2]);
+    $("#edit").show();
+    $("#add").hide();
+    $("#cancelEdit").toggle();
+    $("#not").text("");
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  });
+
+  $("#edit").click(function () {
+    let newfinName = $("#name").val();
+    let newGovName = $("#gov").val();
+    let newAreaName = $("#area").val();
+    sql =
+      "UPDATE `financier` SET `project_financier_name` ='" +
+      newfinName +
+      "', `governorate`='" +
+      newGovName +
+      "',`city`='" +
+      newAreaName +
+      "'  WHERE `project_financier_name` ='" +
+      fin[0] +
+      "' && `governorate`='" +
+      fin[1] +
+      "' && `city`='" +
+      fin[2] +
+      "'";
+    console.log(sql);
+    $.ajax({
+      url: "../../phpFile/update.php",
+      data: { sqlup: sql },
+      type: "post",
+      success: function (out) {
+        if (out == "New record update successfully") {
+          if (out == "New record update successfully") {
+            $("input").val("");
+            $("#cancelEdit").hide();
+            $("#edit").hide();
+            $("#add").show();
+            reload("SELECT * FROM `financier`");
+            $("#not").text(
+              "تم تعديل: (" +
+                id +
+                ") الى (" +
+                newfinName +
+                "-" +
+                newGovName +
+                "-" +
+                newAreaName +
+                ")"
+            );
+          } else {
+            $("#not").text("يوجد هذا الخطأ: " + out);
+          }
+        } else {
+          $("#not").text("يوجد هذا الخطأ: " + out);
+        }
+      },
+    });
+  });
+
+  $("#cancelEdit").click(function () {
+    $("input").val("");
+    $("#add").toggle();
+    $("#edit").toggle();
+    $("#cancelEdit").toggle();
   });
 
   $("#tableDis input").keyup(function () {

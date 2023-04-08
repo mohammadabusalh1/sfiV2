@@ -55,11 +55,9 @@ button {
 button:hover{
     opacity: 0.9;
 }
-
 .active{
     color: var(--main-color);
 }
-
 
 #header {
     display: flex;
@@ -133,6 +131,50 @@ footer #box_cont .box h4 {
     padding-bottom: 12px;
 }
 
+.hero{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--padding2);
+    width: 80%;
+    overflow-x: auto;
+}
+
+.hero .inf{
+width: 100%;
+}
+
+#next,#next2,#next3,#next4,#next5,.next6{
+width: 50%;
+margin: 4px 0;
+}
+
+#next{
+    margin-top: 24px; 
+ }
+
+#prev1,#prev2,#prev3,#prev4,#prev5{
+    width: 50%;
+    margin: 4px 0;
+    }
+    
+
+.add2{
+    width: auto;
+    margin: 2px 0 24px 0;
+    display: block; 
+}
+
+.hero .inf input,.hero .inf select,textarea{
+    width: 50%;
+    margin-bottom: 12px;
+}
+
+#he2,#he3,#he4{
+    display: none;
+}
+
 table {
     width: 80%;
     margin: 40px 0;
@@ -155,82 +197,40 @@ td {
     padding: 8px 12px;
 }
 
-#tableShow {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 40px;
-    overflow-x: auto;
+#bt_att{
+    margin-top: 12px;
 }
 
-#search {
-    width: 40%;
-    border-radius: 8px;
-    padding: 4px 12px;
-    margin: 20px 0;
+#hero6 h6{
+    padding-bottom: 12px;
 }
 
-#filter{
-    padding: var(--padding2);
-}
-
-#filter h2 {
-    padding-bottom: 40px;
-}
-
-.fill{
-    margin: 24px 0px;
-}
-
-.fill select{
+#linkTable a {
+    width: 750px;
     display: block;
-    width: 331px;
-    text-indent: 24px;
+    overflow: auto;
+    direction: ltr;
 }
 
-.in2{
-    width: 312px;
-    display: block;
-    margin: 8px 0;
-    padding: 0 8px;
+#logout{
+    cursor: pointer;
 }
-
-.app{
-    display: block;
-}
-
-.chick{
-    margin-left: 4px;
-}
-
-.bt_next{
-    width: 331px;
-}
-
-#attribute{
-padding: var(--padding2);
-display: none;
-}
-
-#attribute h2{
-    padding-bottom: 40px;
-}
-
-#attribute button{
-   margin-top: 24px;
-}
-
 
 @media screen and (max-width:5800px) {
-    #filter {
-        padding-bottom: 22vw;
+    .hero {
+        padding-bottom: 33vw;
     }
 }
 
 @media screen and (max-width:3800px) {
-    #filter {
-        padding-bottom: 14vw;
+    .hero {
+        padding-bottom: 23vw;
+    }
+}
+
+@media screen and (max-width:2800px) {
+    .hero {
+        padding-bottom: 13vw;
     }
 }
 
@@ -245,6 +245,14 @@ display: none;
         display: block;
         transition: 0.2s linear;
 
+    }
+
+    .hero .inf input, .hero .inf select, textarea{
+        width: 100%;
+    }
+
+    .hero{
+        padding: 40px 20px;
     }
 
     .fa-times {

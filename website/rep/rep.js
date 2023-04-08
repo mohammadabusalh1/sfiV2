@@ -344,4 +344,10 @@ $(document).ready(function () {
 
     });
 
+
+    $("#logout").click(function(){
+        localStorage.setItem("login", 0);
+        window.location.replace("../../login.html");
+      });
+
 });

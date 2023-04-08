@@ -131,7 +131,7 @@ $(document).ready(function () {
                 $("#cancelEdit").toggle();
                 reload("SELECT * FROM `programs`");
                 $("#not").text(
-                  "تمت تعديل: (" +
+                  "تم تعديل: (" +
                     programName +
                     ") الى (" +
                     newProgramName +

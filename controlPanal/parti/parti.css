@@ -152,7 +152,7 @@ button:hover{
 
 #links a {
   color: #e5ba73;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 #links a .active {
@@ -164,7 +164,6 @@ button:hover{
 #links a:hover h6,
 #links div h6:hover {
   color: #c58940;
-  font-weight: 800;
 }
 
 #nav button {
@@ -231,7 +230,6 @@ footer #pages a h6 {
 }
 
 footer #pages a h6:hover {
-  font-weight: 800;
   color: #c58940;
 }
 
@@ -258,7 +256,6 @@ footer #pages a h6:hover {
 #smallList #links2 a h6:hover {
   padding: 12px 0;
   color: #c58940;
-  font-weight: 800;
 }
 
 #info {

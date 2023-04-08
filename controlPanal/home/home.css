@@ -4,6 +4,17 @@
   font-family: "Times New Roman", Times, serif;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 h1 {
   font-size: 50px;
 }
@@ -171,7 +182,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  padding: 48px 80px;
 }
 
 #cards {
@@ -180,6 +191,7 @@ a {
   justify-content: center;
   align-items: center;
   padding: 40px 0;
+  gap: 5rem;
 }
 
 .card {
@@ -188,6 +200,7 @@ a {
   align-items: center;
   justify-content: center;
   text-align: center;
+  gap: 2rem;
   padding: 20px 20px;
   border: 1px solid hsl(33, 53%, 51%, 0.3);
   border-radius: 12px;
@@ -195,7 +208,6 @@ a {
   cursor: pointer;
   width: 176px;
   height: 176px;
-  margin: 20px 50px;
   transition: 0.2s;
 }
 
@@ -208,7 +220,6 @@ a {
 .card i {
   font-size: 64px;
   color: #e5ba73;
-  padding-bottom: 12px;
 }
 
 .card h3 {
@@ -224,9 +235,6 @@ footer {
   padding: 30px 0;
   justify-content: center;
   align-items: center;
-  position: relative;
-  bottom: 0;
-  left: 0;
   width: 100%;
   margin-top: 48px;
 }
@@ -303,15 +311,12 @@ footer #pages a h6:hover {
 }
 
 @media screen and (min-width: 940px) {
-
 }
 
 @media screen and (min-width: 1550px) {
-
 }
 
 @media screen and (min-width: 2000px) {
-
 }
 
 @media screen and (max-width: 992px) {
@@ -330,7 +335,6 @@ footer #pages a h6:hover {
 }
 
 @media screen and (max-width: 992px) {
-
 }
 
 @media screen and (max-width: 576px) {
@@ -354,5 +358,9 @@ footer #pages a h6:hover {
 
   .card {
     padding: 20px 0;
+  }
+
+  #logo img{
+    width: 12rem;
   }
 }

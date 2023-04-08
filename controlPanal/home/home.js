@@ -6,7 +6,7 @@ $(document).ready(function () {
     window.location.replace("../../login.html");
   }
   $("#nav i").click(function () {
-    $("#smallList").toggle(300);
+    $("#smallList").toggle(100);
   });
 
   $("#links img").click(function () {
@@ -29,6 +29,27 @@ $(document).ready(function () {
   });
   $(".card:nth-child(4)").click(function () {
     window.location.replace("../programs/programs.html");
+  });
+  $(".card:nth-child(5)").click(function () {
+    window.location.replace("../employee/employee.html");
+  });
+  $(".card:nth-child(6)").click(function () {
+    window.location.replace("../otherPages/aim/aim.html");
+  });
+  $(".card:nth-child(7)").click(function () {
+    window.location.replace("../otherPages/activityType/activityType.html");
+  });
+  $(".card:nth-child(8)").click(function () {
+    window.location.replace("../otherPages/area/area.html");
+  });
+  $(".card:nth-child(9)").click(function () {
+    window.location.replace("../otherPages/fin/fin.html");
+  });
+  $(".card:nth-child(10)").click(function () {
+    window.location.replace("../otherPages/target/target.html");
+  });
+  $(".card:nth-child(11)").click(function () {
+    window.location.replace("../otherPages/nickname/nickname.html");
   });
 
   $("#other").click(function(){
