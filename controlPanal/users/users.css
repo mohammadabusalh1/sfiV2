@@ -30,6 +30,17 @@ a {
   color: black;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .Darkbutton {
   padding: 8px 25px;
   background-color: transparent;
@@ -38,6 +49,13 @@ a {
   border-radius: 4px;
   font-weight: 700;
   font-size: 16px;
+}
+
+#logout_word {
+  margin-top: 8px;
+  border: 1px solid #06283d;
+  padding: 8px 12px;
+  transition: 0.2s;
 }
 
 button {
@@ -58,8 +76,8 @@ button {
   transition: 0.3s;
 }
 
-button:hover{
-  background-color: #C58940;
+button:hover {
+  background-color: #c58940;
   color: black;
 }
 
@@ -148,7 +166,8 @@ button:hover{
   padding-left: 20px;
 }
 
-#links a , #links div h6{
+#links a,
+#links div h6 {
   color: #e5ba73;
   font-weight: 600;
 }
@@ -187,6 +206,7 @@ button:hover{
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 footer {
@@ -294,17 +314,18 @@ input {
   box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.04);
 }
 
-#pir{
+#pir {
   margin-bottom: 24px;
 }
 
 #tableDis {
-  padding: 80px 120px;
+  padding: 60px 80px;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 #tableDis h2 {
@@ -354,26 +375,13 @@ td {
   display: none;
 }
 
-@media screen and (max-width: 5800px) {
-  #tableDis {
-    padding-bottom: 23vw;
-  }
-}
-
-@media screen and (max-width: 3800px) {
-  #tableDis {
-    padding-bottom: 19vw;
-  }
-}
-
-@media screen and (max-width: 2800px) {
-  #tableDis {
-    padding-bottom: 13vw;
-  }
+#edit {
+  display: none;
 }
 
 @media screen and (max-width: 992px) {
-  #links a {
+  #links a,
+  #links div h6 {
     display: none;
   }
 
@@ -395,6 +403,10 @@ td {
     width: 100%;
   }
 
+  #links img {
+    width: 12rem;
+  }
+
   #tableDis h2 {
     font-size: 24px;
   }
@@ -405,8 +417,16 @@ td {
 }
 
 @media screen and (max-width: 392px) {
+
+  .fa-list-dots:before, .fa-list-ul:before{
+    font-size: 18px;
+  }
   #nav button span {
     display: none;
+  }
+
+  footer #logo img {
+    width: 12rem;
   }
 
   #nav i {
@@ -414,7 +434,7 @@ td {
   }
 
   #links img {
-    width: 80%;
+    width: 10rem;
   }
 
   #tableDis h2 {
@@ -424,8 +444,22 @@ td {
   #tableDis input {
     padding: 8px 54px;
   }
+  #hero {
+    padding: 12px;
+  }
+
+  #nav{
+    padding: 12px;
+  }
+
+  #tableDis{
+    overflow-x: auto;  }
 }
 
-#edit {
-  display: none;
+
+
+@media screen and (max-width: 252px) {
+  #links img {
+    width: 6rem;
+  }
 }

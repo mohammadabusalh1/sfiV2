@@ -13,27 +13,27 @@ $(document).ready(function () {
       dataType: "json",
       type: "post",
       success: function (data) {
-        ht = "<tr> <th>المحافظة</th> <th>تعديل</th> <th>حذف</th></tr>";
+        ht = "<tr> <th>المسميات</th> <th>تعديل</th> <th>حذف</th></tr>";
         for (i = 0; i < data.length; i++) {
           ht +=
             "<tr><td>" +
-            data[i].area_name +
+            data[i].nickname +
             "</td><td><button data-id= '" +
-            data[i].area_name +
+            data[i].nickname +
             '\' class="edit-btn">تعديل <i class="fa fa-edit"></i></button></td><td><button data-id= \'' +
-            data[i].area_name +
+            data[i].nickname +
             '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td></tr>';
         }
         $(".table").html(ht);
       },
     });
   }
-  reload("SELECT * FROM `area`");
+  reload("SELECT * FROM `nicknames`");
 
   $("#add").click(function () {
-    let gov = $("#gov").val();
+    let name = $("#name").val();
 
-    sqlAdd = "INSERT INTO `area`(`area_name`) VALUES ('" + gov + "')";
+    sqlAdd = "INSERT INTO `nicknames`(`nickname`) VALUES ('" + name + "')";
 
     $.ajax({
       url: "../../phpFile/add.php",
@@ -43,7 +43,7 @@ $(document).ready(function () {
         if (out == "successfully") {
           $("input").val("");
           $("#not").text("تمت الأضافة بنجاح");
-          reload("SELECT * FROM `area`");
+          reload("SELECT * FROM `nicknames`");
         } else {
           $("#not").text("لم تتم الأضافة ");
         }
@@ -55,23 +55,27 @@ $(document).ready(function () {
     let n = confirm("تأكيد الحذف");
     if (n == true) {
       let id = $(this).data("id");
-      sql = "DELETE FROM `area` WHERE `area_name` = '" + id + "'";
+      sql = "DELETE FROM `nicknames` WHERE `nickname` = '" + id + "'";
       $.ajax({
         url: "../../phpFile/remove.php",
         data: { sql: sql },
         type: "post",
         success: function (out) {
-          reload("SELECT * FROM `area`");
+          if (out == "remove successfully") {
+            reload("SELECT * FROM `nicknames`");
+          } else {
+            alert(out);
+          }
         },
       });
     } else {
     }
   });
 
-  let areaName;
+  let nicknamesName;
   $("#table").on("click", ".edit-btn", function () {
-    areaName = $(this).data("id");
-    $("#gov").val(areaName);
+    nicknamesName = $(this).data("id");
+    $("#name").val(nicknamesName);
     $("#edit").show();
     $("#add").hide();
     $("#cancelEdit").toggle();
@@ -80,12 +84,12 @@ $(document).ready(function () {
   });
 
   $("#edit").click(function () {
-    let newareaName = $("#gov").val();
+    let newnicknamesName = $("#name").val();
     sql =
-      "UPDATE `area` SET `area_name`='" +
-      newareaName +
-      "' WHERE `area_name`='" +
-      areaName +
+      "UPDATE `nicknames` SET `nickname`='" +
+      newnicknamesName +
+      "' WHERE `nickname`='" +
+      nicknamesName +
       "'";
     $.ajax({
       url: "../../phpFile/update.php",
@@ -97,9 +101,9 @@ $(document).ready(function () {
           $("#cancelEdit").hide();
           $("#edit").hide();
           $("#add").show();
-          reload("SELECT * FROM `area`");
+          reload("SELECT * FROM `nicknames`");
           $("#not").text(
-            "تم تعديل: (" + areaName + ") الى (" + newareaName + ")"
+            "تم تعديل: (" + nicknamesName + ") الى (" + newnicknamesName + ")"
           );
         } else {
           $("#not").text("يوجد هذا الخطأ: " + out);
@@ -118,9 +122,10 @@ $(document).ready(function () {
   $("#tableDis input").keyup(function () {
     val = $(this).val();
     if (val == "") {
-      sql = "SELECT * FROM `area`";
+      sql = "SELECT * FROM `nicknames`";
     } else {
-      sql = "SELECT * FROM `area` WHERE `area_name` like '%" + val + "%'";
+      sql =
+        "SELECT * FROM `nicknames` WHERE `nickname` like '%" + val + "%'";
     }
     reload(sql);
   });

@@ -35,7 +35,7 @@ $(document).ready(function () {
   }
 
   $("#nav i").click(function () {
-    $("#smallList").toggle(300);
+    $("#smallList").toggle(200);
   });
 
   $("#links img").click(function () {
