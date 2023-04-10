@@ -67,9 +67,8 @@ button {
   transition: 0.3s;
 }
 
-
-button:hover{
-  background-color: #C58940;
+button:hover {
+  background-color: #c58940;
   color: black;
 }
 
@@ -316,7 +315,6 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: auto;
 }
 
 #tableDis h2 {
@@ -335,7 +333,6 @@ input {
 
 table {
   width: 100%;
-  overflow-x: auto;
 }
 
 table,
@@ -372,26 +369,21 @@ td {
   display: none;
 }
 
-@media screen and (max-width: 5800px) {
-  #tableDis {
-    padding-bottom: 32vw;
-  }
+@media screen and (min-width: 2900px) {
+html,
+body {
+  height: 100%;
 }
 
-@media screen and (max-width: 3800px) {
-  #tableDis {
-    padding-bottom: 21vw;
-  }
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
-@media screen and (max-width: 2800px) {
-  #tableDis {
-    padding-bottom: 11vw;
-  }
 }
-
 @media screen and (max-width: 992px) {
-  #links a {
+  #links a,
+  #other {
     display: none;
   }
 
@@ -408,6 +400,54 @@ td {
   }
 }
 
+/* Styles for small screens */
+@media only screen and (max-width: 600px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th,
+  td {
+    padding: 5px;
+  }
+
+  #tableDis {
+    padding: 24px;
+  }
+
+  footer #logo {
+    width: 100%;
+  }
+
+  footer #logo p {
+    width: 100%;
+  }
+  footer #pages {
+    gap: 1rem;
+  }
+}
+
+/* Styles for larger screens */
+@media only screen and (min-width: 600px) {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  tfoot {
+    display: table-row-group;
+  }
+  tfoot tr:last-child {
+    font-weight: bold;
+  }
+}
+
 @media screen and (max-width: 576px) {
   footer #pages a {
     width: 100%;
@@ -419,6 +459,10 @@ td {
 
   #tableDis input {
     width: 100%;
+  }
+
+  #hero {
+    padding: 40px 24px;
   }
 }
 
@@ -441,5 +485,17 @@ td {
 
   #tableDis input {
     padding: 8px 54px;
+  }
+
+  #logo img {
+    width: 24vh;
+  }
+
+  #nav {
+    padding: 8px;
+  }
+
+  #nav i {
+    font-size: 16px;
   }
 }

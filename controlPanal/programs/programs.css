@@ -30,7 +30,6 @@ a {
   color: black;
 }
 
-
 button {
   background-color: #faeab1;
   /* Sets the background color of the button to blue */
@@ -50,8 +49,8 @@ button {
   cursor: pointer;
 }
 
-button:hover{
-  background-color: #C58940;
+button:hover {
+  background-color: #c58940;
   color: black;
 }
 
@@ -179,7 +178,8 @@ button {
   padding-left: 20px;
 }
 
-#links a, #links div h6 {
+#links a,
+#links div h6 {
   color: #e5ba73;
   font-weight: 600;
 }
@@ -349,7 +349,7 @@ input {
 }
 
 table {
-  width: 30%;
+  width: 100%;
 }
 
 table,
@@ -385,26 +385,22 @@ td {
   display: none;
 }
 
-@media screen and (max-width: 5800px) {
-  #tableDis {
-    padding-bottom: 33vw;
+@media screen and (min-width: 1800px) {
+  html,
+  body {
+    height: 100%;
   }
-}
 
-@media screen and (max-width: 3800px) {
-  #tableDis {
-    padding-bottom: 22vw;
-  }
-}
-
-@media screen and (max-width: 2800px) {
-  #tableDis {
-    padding-bottom: 11vw;
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 
 @media screen and (max-width: 992px) {
-  #links a {
+  #links a,
+  #links div h6 {
     display: none;
   }
 
@@ -421,6 +417,55 @@ td {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th,
+  td {
+    padding: 5px;
+  }
+
+  #tableDis {
+    padding: 24px;
+  }
+
+  footer #logo {
+    width: 100%;
+  }
+
+  footer #logo p {
+    width: 100%;
+  }
+  footer #pages {
+    gap: 1rem;
+  }
+
+  #hero {
+    padding: 40px 12px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th,
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  tfoot {
+    display: table-row-group;
+  }
+  tfoot tr:last-child {
+    font-weight: bold;
+  }
+}
+
 @media screen and (max-width: 576px) {
   footer #pages a {
     width: 100%;
@@ -432,6 +477,7 @@ td {
 
   #tableDis input {
     width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -454,5 +500,17 @@ td {
 
   #tableDis input {
     padding: 8px 54px;
+  }
+
+  #logo img{
+    width: 24vh;
+  }
+
+  #nav{
+    padding: 8px;
+  }
+
+  #nav i{
+    font-size: 16px;
   }
 }

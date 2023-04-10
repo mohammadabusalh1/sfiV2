@@ -34,23 +34,31 @@ $(document).ready(function () {
     nameAdd = $("#name").val();
     sqlAdd =
       "INSERT INTO `programs`(`program_name`) VALUES ('" + nameAdd + "')";
-
-    $.ajax({
-      url: "../phpFile/add.php",
-      data: { sqlAdd: sqlAdd },
-      type: "post",
-      success: function (out) {
-        if (out == "successfully") {
-          $("#not").text('تمت إضافة "' + nameAdd + '" إلى البرامج');
-          $("#name").val("");
-        } else {
-          $("#not").text("يوجد خطأ: " + out);
-        }
-      },
-    });
-
-    sql = "SELECT * FROM `programs`";
-    reload(sql);
+    if ($("#name").val() === "") {
+      $("#not").text("يرجى ملء جميع الحقول !");
+      if ($("#name").val() === "") {
+        $("#name").css("border-color", "red");
+      } else {
+        $("#name").css("border-color", "hsl(33, 53%, 51%, 0.6)");
+      }
+    } else {
+      $("#name").css("border-color", "hsl(33, 53%, 51%, 0.6)");
+      $.ajax({
+        url: "../phpFile/add.php",
+        data: { sqlAdd: sqlAdd },
+        type: "post",
+        success: function (out) {
+          if (out == "successfully") {
+            $("#not").text('تمت إضافة "' + nameAdd + '" إلى البرامج');
+            $("#name").val("");
+            sql = "SELECT * FROM `programs`";
+            reload(sql);
+          } else {
+            $("#not").text("يوجد خطأ: " + out);
+          }
+        },
+      });
+    }
   });
 
   $("#tableDis input").keyup(function () {
@@ -131,11 +139,7 @@ $(document).ready(function () {
                 $("#cancelEdit").toggle();
                 reload("SELECT * FROM `programs`");
                 $("#not").text(
-                  "تم تعديل: (" +
-                    programName +
-                    ") الى (" +
-                    newProgramName +
-                    ")"
+                  "تم تعديل: (" + programName + ") الى (" + newProgramName + ")"
                 );
               } else {
                 $("#not").text("يوجد هذا الخطأ: " + out);

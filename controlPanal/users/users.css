@@ -398,6 +398,39 @@ td {
   }
 }
 
+/* Styles for small screens */
+@media only screen and (max-width: 600px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th,
+  td {
+    padding: 5px;
+  }
+}
+
+/* Styles for larger screens */
+@media only screen and (min-width: 600px) {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  tfoot {
+    display: table-row-group;
+  }
+  tfoot tr:last-child {
+    font-weight: bold;
+  }
+}
+
 @media screen and (max-width: 576px) {
   footer #pages a {
     width: 100%;
@@ -407,18 +440,38 @@ td {
     width: 12rem;
   }
 
+  #tableDis {
+    padding: 8px;
+  }
+
   #tableDis h2 {
     font-size: 24px;
   }
 
   #tableDis input {
     width: 100%;
+    box-sizing: border-box;
+  }
+
+  footer #logo {
+    width: 100%;
+  }
+
+  footer #logo p {
+    width: 100%;
+  }
+  footer #pages {
+    gap: 1rem;
+  }
+
+  #nav button{
+    display: none;
   }
 }
 
 @media screen and (max-width: 392px) {
-
-  .fa-list-dots:before, .fa-list-ul:before{
+  .fa-list-dots:before,
+  .fa-list-ul:before {
     font-size: 18px;
   }
   #nav button span {
@@ -427,6 +480,18 @@ td {
 
   footer #logo img {
     width: 12rem;
+  }
+
+  #nav {
+    padding: 8px;
+  }
+
+  #hero {
+    padding: 40px 24px;
+  }
+
+  #logo img {
+    width: 24vh;
   }
 
   #nav i {
@@ -447,16 +512,7 @@ td {
   #hero {
     padding: 12px;
   }
-
-  #nav{
-    padding: 12px;
-  }
-
-  #tableDis{
-    overflow-x: auto;  }
 }
-
-
 
 @media screen and (max-width: 252px) {
   #links img {

@@ -60,21 +60,48 @@ $(document).ready(function () {
       pirAdd +
       "')";
 
-    $.ajax({
-      url: "../phpFile/add.php",
-      data: { sqlAdd: sqlAdd },
-      type: "post",
-      success: function (out) {
-        if (out == "successfully") {
-          $("#not").text("تمت الاضافة");
-          sql = "SELECT * FROM `users`";
-          reload(sql);
-          $("input").val("");
-        } else {
-          $("#not").text(" لم تمت الاضافة");
-        }
-      },
-    });
+    if (
+      $("#name").val() === "" ||
+      $("#password").val() === "" ||
+      $("#pir").val() === ""
+    ) {
+      $("#not").text("يرجى ملء جميع الحقول !");
+
+      // Check if any of the input values are empty
+      if ($("#name").val() === "") {
+        $("#name").css("border-color", "red");
+      } else {
+        $("#name").css("border-color", "");
+      }
+
+      if ($("#password").val() === "") {
+        $("#password").css("border-color", "red");
+      } else {
+        $("#password").css("border-color", "");
+      }
+
+      if ($("#pir").val() === "") {
+        $("#pir").css("border-color", "red");
+      } else {
+        $("#pir").css("border-color", "");
+      }
+    } else {
+      $.ajax({
+        url: "../phpFile/add.php",
+        data: { sqlAdd: sqlAdd },
+        type: "post",
+        success: function (out) {
+          if (out == "successfully") {
+            $("#not").text("تمت الاضافة");
+            sql = "SELECT * FROM `users`";
+            reload(sql);
+            $("input").val("");
+          } else {
+            $("#not").text(" لم تمت الاضافة");
+          }
+        },
+      });
+    }
   });
 
   $("#tableDis input").keyup(function () {
@@ -191,5 +218,4 @@ $(document).ready(function () {
   $("#other").click(function () {
     $(".dropdown-content").toggle();
   });
-
 });

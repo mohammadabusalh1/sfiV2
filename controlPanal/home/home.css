@@ -4,17 +4,6 @@
   font-family: "Times New Roman", Times, serif;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-body{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 h1 {
   font-size: 50px;
 }
@@ -310,6 +299,19 @@ footer #pages a h6:hover {
   font-weight: 800;
 }
 
+@media screen and (min-width: 1800px) {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
 @media screen and (max-width: 992px) {
   #links a,
   #links div {
@@ -325,12 +327,24 @@ footer #pages a h6:hover {
   }
 }
 
-@media screen and (max-width: 992px) {
-}
-
 @media screen and (max-width: 576px) {
   footer #pages a {
     width: 100%;
+  }
+
+  footer #logo {
+    width: 100%;
+  }
+
+  footer #logo p {
+    width: 80%;
+  }
+  footer #pages {
+    gap: 1rem;
+  }
+
+  #nav {
+    padding: 16px 8px;
   }
 }
 
@@ -344,14 +358,14 @@ footer #pages a h6:hover {
   }
 
   #links img {
-    width: 80%;
+    width: 100%;
   }
 
   .card {
     padding: 20px 0;
   }
 
-  #logo img{
+  #logo img {
     width: 12rem;
   }
 }
