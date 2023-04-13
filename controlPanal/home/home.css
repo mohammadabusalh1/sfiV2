@@ -271,7 +271,7 @@ footer #pages a h6:hover {
   text-align: center;
   display: none;
   position: sticky;
-  top: 82px;
+  top: 9.6vw;
   left: 0;
   z-index: 5;
 }
@@ -314,7 +314,7 @@ footer #pages a h6:hover {
 
 @media screen and (max-width: 992px) {
   #links a,
-  #links div {
+  #links div,#nav button span {
     display: none;
   }
 
@@ -346,6 +346,10 @@ footer #pages a h6:hover {
   #nav {
     padding: 16px 8px;
   }
+
+  #links img {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 392px) {
@@ -367,5 +371,13 @@ footer #pages a h6:hover {
 
   #logo img {
     width: 12rem;
+  }
+
+  #links img {
+    width: 60%;
+  }
+
+  #nav i{
+    font-size: 20px;
   }
 }

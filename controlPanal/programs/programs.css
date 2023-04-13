@@ -400,7 +400,7 @@ td {
 
 @media screen and (max-width: 992px) {
   #links a,
-  #links div h6 {
+  #links div h6,#nav button span,#nav button {
     display: none;
   }
 
@@ -479,6 +479,10 @@ td {
     width: 100%;
     box-sizing: border-box;
   }
+
+  #links img {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 392px) {
@@ -491,7 +495,7 @@ td {
   }
 
   #links img {
-    width: 80%;
+    width: 60%;
   }
 
   #tableDis h2 {
@@ -511,6 +515,6 @@ td {
   }
 
   #nav i{
-    font-size: 16px;
+    font-size: 20px;
   }
 }

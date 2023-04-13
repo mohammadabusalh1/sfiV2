@@ -33,25 +33,36 @@ $(document).ready(function () {
   $("#add").click(function () {
     let activity_type = $("#activityType").val();
 
-    sqlAdd =
-      "INSERT INTO `activity_type`(`activity_type`) VALUES ('" +
-      activity_type +
-      "')";
+    if (activity_type == "") {
+      $("#not").text("يرجى ملء جميع الحقول !");
+      if ($("#activityType").val() === "") {
+        $("#activityType").css("border-color", "red");
+      } else {
+        $("#activityType").css("border-color", "#ccc");
+      }
+    } else {
+      $("#not").text("");
+      $("#activityType").css("border-color", "#ccc");
+      sqlAdd =
+        "INSERT INTO `activity_type`(`activity_type`) VALUES ('" +
+        activity_type +
+        "')";
 
-    $.ajax({
-      url: "../../phpFile/add.php",
-      data: { sqlAdd: sqlAdd },
-      type: "post",
-      success: function (out) {
-        if (out == "successfully") {
-          $("input").val("");
-          $("#not").text("تمت الأضافة بنجاح");
-          reload("SELECT * FROM `activity_type`");
-        } else {
-          $("#not").text("لم تتم الأضافة ");
-        }
-      },
-    });
+      $.ajax({
+        url: "../../phpFile/add.php",
+        data: { sqlAdd: sqlAdd },
+        type: "post",
+        success: function (out) {
+          if (out == "successfully") {
+            $("input").val("");
+            $("#not").text("تمت الأضافة بنجاح");
+            reload("SELECT * FROM `activity_type`");
+          } else {
+            $("#not").text("لم تتم الأضافة ");
+          }
+        },
+      });
+    }
   });
 
   $("#table").on("click", ".remove-btn", function () {
@@ -124,6 +135,7 @@ $(document).ready(function () {
     $("#add").toggle();
     $("#edit").toggle();
     $("#cancelEdit").toggle();
+    $("#not").text("");
   });
 
   $("#tableDis input").keyup(function () {
@@ -146,5 +158,9 @@ $(document).ready(function () {
   $("#nav button span").click(function () {
     localStorage.setItem("login", 0);
     window.location.href = "../../../login.html";
+  });
+
+  $("#nav i").click(function () {
+    $("#smallList").toggle(100);
   });
 });

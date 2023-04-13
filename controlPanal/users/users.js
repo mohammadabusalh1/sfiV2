@@ -86,6 +86,7 @@ $(document).ready(function () {
         $("#pir").css("border-color", "");
       }
     } else {
+      $("input").css("border-color", "#ccc");
       $.ajax({
         url: "../phpFile/add.php",
         data: { sqlAdd: sqlAdd },
@@ -97,7 +98,7 @@ $(document).ready(function () {
             reload(sql);
             $("input").val("");
           } else {
-            $("#not").text(" لم تمت الاضافة");
+            $("#not").text(" لم تتم الاضافة يرجى التأكد من البيانات: "+out);
           }
         },
       });
@@ -179,6 +180,7 @@ $(document).ready(function () {
     $("#edit").toggle();
     $("#tableDis").toggle();
     $("#cancelEdit").toggle();
+    $("#alert").text("");
   });
 
   $("#edit").click(function () {
@@ -199,11 +201,11 @@ $(document).ready(function () {
       url: "../phpFile/update.php",
       data: { sqlup: sqlup },
       type: "post",
-      success: function () {
-        $("#name").val("");
+      success: function (out) {
+        if(out == "New record update successfully"){
+          $("input").val("");
         $("#password").prop("type", "password");
-        $("#password").val("");
-
+        $("#tableDis").toggle();
         $("#add").toggle();
         $("#edit").toggle();
         $("#cancelEdit").toggle();
@@ -211,6 +213,9 @@ $(document).ready(function () {
         setTimeout(function () {
           window.location.replace("users.html#table");
         }, 400);
+        }else{
+          $("#alert").text(" لم تتم الاضافة يرجى التأكد من البيانات: " + out);
+        }
       },
     });
   });

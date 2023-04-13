@@ -33,22 +33,33 @@ $(document).ready(function () {
   $("#add").click(function () {
     let gov = $("#gov").val();
 
-    sqlAdd = "INSERT INTO `area`(`area_name`) VALUES ('" + gov + "')";
+    if (gov == "") {
+      $("#not").text("يرجى ملء جميع الحقول !");
+      if ($("#gov").val() === "") {
+        $("#gov").css("border-color", "red");
+      } else {
+        $("#gov").css("border-color", "#ccc");
+      }
+    } else {
+      $("#not").text("");
+      $("#gov").css("border-color", "#ccc");
+      sqlAdd = "INSERT INTO `area`(`area_name`) VALUES ('" + gov + "')";
 
-    $.ajax({
-      url: "../../phpFile/add.php",
-      data: { sqlAdd: sqlAdd },
-      type: "post",
-      success: function (out) {
-        if (out == "successfully") {
-          $("input").val("");
-          $("#not").text("تمت الأضافة بنجاح");
-          reload("SELECT * FROM `area`");
-        } else {
-          $("#not").text("لم تتم الأضافة ");
-        }
-      },
-    });
+      $.ajax({
+        url: "../../phpFile/add.php",
+        data: { sqlAdd: sqlAdd },
+        type: "post",
+        success: function (out) {
+          if (out == "successfully") {
+            $("input").val("");
+            $("#not").text("تمت الأضافة بنجاح");
+            reload("SELECT * FROM `area`");
+          } else {
+            $("#not").text("لم تتم الأضافة ");
+          }
+        },
+      });
+    }
   });
 
   $("#table").on("click", ".remove-btn", function () {
@@ -113,6 +124,7 @@ $(document).ready(function () {
     $("#add").toggle();
     $("#edit").toggle();
     $("#cancelEdit").toggle();
+    $("#not").text("");
   });
 
   $("#tableDis input").keyup(function () {
@@ -132,5 +144,8 @@ $(document).ready(function () {
   $("#nav button span").click(function () {
     localStorage.setItem("login", 0);
     window.location.href = "../../../login.html";
+  });
+  $("#nav i").click(function () {
+    $("#smallList").toggle(100);
   });
 });

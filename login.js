@@ -1,5 +1,7 @@
 $(document).ready(function () {
-  localStorage.setItem("login", 0);
+  if(localStorage.getItem("login") == null){
+    localStorage.setItem("login", 0);
+  }
   $("#login").click(function () {
     name = $("#nameIn").val();
     pass = $("#password").val();

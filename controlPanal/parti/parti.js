@@ -38,8 +38,12 @@ $(document).ready(function () {
             data[i].city +
             "</td> <td><button data-id= '" +
             data[i].administrator_name +
+            "-" +
+            data[i].email +
             '\' class="remove-btn">حذف <i class="fa fa-remove"></i></button></td> <td><button data-id= \'' +
             data[i].administrator_name +
+            "-" +
+            data[i].email +
             '\' class="edit-btn">تعديل <i class="fas fa-edit" aria-hidden="true"></i></button></td></tr>';
         }
         $(".table").html(ht);
@@ -101,6 +105,7 @@ $(document).ready(function () {
         $(emptyFields.join(",")).css("border-color", "red");
       }
     } else {
+      $("input").css("border-color", "#ccc");
       sqlAdd =
         "INSERT INTO `administrator`(`administrator_name`, `sex`, `university_degree`, `birthday`, `phone`, `email`, `governorate`, `city`) VALUES ('" +
         nameAdd +
@@ -136,6 +141,27 @@ $(document).ready(function () {
     }
   });
 
+  function areaReload(sql) {
+    $.ajax({
+      url: "../phpFile/show.php",
+      data: { sql: sql },
+      dataType: "json",
+      type: "post",
+      success: function (data) {
+        ht = "";
+        for (i = 0; i < data.length; i++) {
+          ht +=
+            '<option value="' +
+            data[i].area_name +
+            '">' +
+            data[i].area_name +
+            "</option>";
+        }
+        $("#gov").html(ht);
+      },
+    });
+  }
+  areaReload("SELECT * FROM `area`");
 
   $("#tableDis input").keyup(function () {
     val = $(this).val();
@@ -158,7 +184,8 @@ $(document).ready(function () {
         "%'|| `governorate` like '%" +
         val +
         "%'|| `city` like '%" +
-        val +"%'";
+        val +
+        "%'";
     }
     reload(sql);
   });
@@ -167,8 +194,13 @@ $(document).ready(function () {
     let n = confirm("تأكيد الحذف");
     if (n == true) {
       id = $(this).data("id");
+      const myArray = id.split("-");
       sql =
-        "DELETE FROM `administrator` WHERE `administrator_name` = '" + id + "'";
+        "DELETE FROM `administrator` WHERE `administrator_name` = '" +
+        myArray[0] +
+        "' && `email`='" +
+        myArray[1] +
+        "'";
       $.ajax({
         url: "../phpFile/remove.php",
         data: { sql: sql },
@@ -184,11 +216,16 @@ $(document).ready(function () {
     }
   });
 
-  let id;
+  let myArray;
   $("#table").on("click", ".edit-btn", function () {
-    id = $(this).data("id");
+    let id = $(this).data("id");
+    myArray = id.split("-");
     sql =
-      "SELECT * FROM `administrator` WHERE `administrator_name`='" + id + "'";
+      "SELECT * FROM `administrator` WHERE `administrator_name`='" +
+      myArray[0] +
+      "' && `email`='" +
+      myArray[1] +
+      "'";
     $.ajax({
       url: "../phpFile/show.php",
       data: { sql: sql },
@@ -250,7 +287,9 @@ $(document).ready(function () {
       "',`city`='" +
       city +
       "' WHERE `administrator_name`='" +
-      id +
+      myArray[0] +
+      "' && `email`='" +
+      myArray[1] +
       "'";
 
     $.ajax({
@@ -273,12 +312,13 @@ $(document).ready(function () {
     });
   });
 
-  $("#cancelEdit").click(function(){
+  $("#cancelEdit").click(function () {
     $("input").val("");
     $("#add").toggle();
     $("#edit").toggle();
     $("#tableDis").toggle();
     $("#cancelEdit").toggle();
+    $("#not").text("");
   });
 
   $("#nav i").click(function () {
@@ -296,5 +336,38 @@ $(document).ready(function () {
 
   $("#other").click(function () {
     $(".dropdown-content").toggle();
+  });
+
+   $("#save").click(function () {
+
+    let nameAdd = $("#name").val();
+    let sex = $("#sex").val();
+    let degree = $("#degree").val();
+    let phone = $("#phone").val();
+    let email = $("#email").val();
+    let gov = $("#gov").val();
+    let city = $("#city").val();
+    let birthday = $("#birthday").val();
+
+    localStorage.setItem("name", nameAdd);
+    localStorage.setItem("sex", sex);
+    localStorage.setItem("degree", degree);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("email", email);
+    localStorage.setItem("gov", gov);
+    localStorage.setItem("city", city);
+    localStorage.setItem("birthday", birthday);
+  });
+
+  $("#reload").click(function () {
+
+    $("#name").val(localStorage.getItem("name"));
+    $("#sex").val(localStorage.getItem("sex"));
+    $("#degree").val(localStorage.getItem("degree"));
+    $("#phone").val(localStorage.getItem("phone"));
+    $("#email").val(localStorage.getItem("email"));
+    $("#gov").val(localStorage.getItem("gov"));
+    $("#city").val(localStorage.getItem("city"));
+    $("#birthday").val(localStorage.getItem("birthday"));
   });
 });

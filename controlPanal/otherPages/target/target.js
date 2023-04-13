@@ -118,6 +118,7 @@ $(document).ready(function () {
     $("#add").toggle();
     $("#edit").toggle();
     $("#cancelEdit").toggle();
+    $("#not").text("");
   });
 
   $("#tableDis input").keyup(function () {
@@ -140,5 +141,9 @@ $(document).ready(function () {
   $("#nav button span").click(function () {
     localStorage.setItem("login", 0);
     window.location.href = "../../../login.html";
+  });
+
+  $("#nav i").click(function () {
+    $("#smallList").toggle(100);
   });
 });

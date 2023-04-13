@@ -373,6 +373,25 @@ td {
   display: none;
 }
 
+#reloadIcons{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.relode{
+  padding: 12px;
+  margin-bottom: 24px;
+  background-color: #c58940;
+  border-radius: 4px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.relode:hover{
+  opacity: 0.8;
+}
+
 @media screen and (min-width: 2900px) {
   html,
   body {
@@ -388,7 +407,7 @@ td {
 @media screen and (max-width: 992px) {
   #links a,
   #other,
-  #nav button span {
+  #nav button span,#nav button {
     display: none;
   }
 
@@ -464,6 +483,10 @@ td {
   }
   footer #pages {
     gap: 1rem;
+  }
+
+  #links img {
+    width: 80%;
   }
 }
 

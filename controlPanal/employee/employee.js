@@ -49,8 +49,9 @@ $(document).ready(function () {
 
   sql = "SELECT * FROM `employees`";
   reload(sql);
+  
 
-  function goalReload(sql) {
+  function areaReload(sql) {
     $.ajax({
       url: "../phpFile/show.php",
       data: { sql: sql },
@@ -70,7 +71,7 @@ $(document).ready(function () {
       },
     });
   }
-  goalReload("SELECT * FROM `area`");
+  areaReload("SELECT * FROM `area`");
 
   $("#add").click(function () {
     nameAdd = $("#name").val();
@@ -125,6 +126,7 @@ $(document).ready(function () {
         $(emptyFields.join(",")).css("border-color", "red");
       }
     } else {
+      $("input").css("border-color", "#ccc");
       sqlAdd =
         "INSERT INTO `employees`(`emp_name`, `sex`, `university_degree`, `birthday`, `phone`, `email`, `governorate`, `city`) VALUES ('" +
         nameAdd +
@@ -209,6 +211,7 @@ $(document).ready(function () {
 
   let id;
   $("#table").on("click", ".edit-btn", function () {
+    $("#not").text("");
     id = $(this).data("id");
     sql =
       "SELECT * FROM `employees` WHERE `emp_id` ='" + id + "'";
@@ -253,6 +256,7 @@ $(document).ready(function () {
     $("#edit").toggle();
     $("#tableDis").toggle();
     $("#cancelEdit").toggle();
+    $("#not").text("");
   });
 
   $("#edit").click(function () {
@@ -320,5 +324,38 @@ $(document).ready(function () {
 
   $("#other").click(function () {
     $(".dropdown-content").toggle();
+  });
+
+  $("#save").click(function () {
+
+    let nameAdd = $("#name").val();
+    let sex = $("#sex").val();
+    let degree = $("#degree").val();
+    let phone = $("#phone").val();
+    let email = $("#email").val();
+    let gov = $("#gov").val();
+    let city = $("#city").val();
+    let birthday = $("#birthday").val();
+
+    localStorage.setItem("name", nameAdd);
+    localStorage.setItem("sex", sex);
+    localStorage.setItem("degree", degree);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("email", email);
+    localStorage.setItem("gov", gov);
+    localStorage.setItem("city", city);
+    localStorage.setItem("birthday", birthday);
+  });
+
+  $("#reload").click(function () {
+
+    $("#name").val(localStorage.getItem("name"));
+    $("#sex").val(localStorage.getItem("sex"));
+    $("#degree").val(localStorage.getItem("degree"));
+    $("#phone").val(localStorage.getItem("phone"));
+    $("#email").val(localStorage.getItem("email"));
+    $("#gov").val(localStorage.getItem("gov"));
+    $("#city").val(localStorage.getItem("city"));
+    $("#birthday").val(localStorage.getItem("birthday"));
   });
 });

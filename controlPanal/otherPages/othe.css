@@ -155,7 +155,8 @@ button {
   font-weight: 1000;
 }
 
-#links a:hover, #links div:hover h6 {
+#links a:hover,
+#links div:hover h6 {
   color: #c58940;
   font-weight: 800;
 }
@@ -238,7 +239,7 @@ footer #pages a h6:hover {
   text-align: center;
   display: none;
   position: sticky;
-  top: 90px;
+  top: 9.6vw;
   left: 0;
   z-index: 5;
 }
@@ -320,10 +321,11 @@ select {
   text-align: center;
   font-weight: 500;
   border: 1px solid hsl(33, 53%, 51%, 0.8);
+  box-sizing: border-box;
 }
 
 table {
-  width: 40%;
+  width: 80%;
   overflow-x: auto;
 }
 
@@ -362,30 +364,35 @@ td {
   font-size: 18px;
 }
 
-#cancelEdit{
+#cancelEdit {
   display: none;
 }
 
-@media screen and (max-width: 5800px) {
-  #tableDis {
-    padding-bottom: 33vw;
-  }
+#logout_word {
+  margin-top: 8px;
+  border: 1px solid #06283d;
+  padding: 8px 12px;
+  transition: 0.2s;
 }
 
-@media screen and (max-width: 3800px) {
-  #tableDis {
-    padding-bottom: 22vw;
+@media screen and (min-width: 2000px) {
+  html,
+  body {
+    height: 100%;
   }
-}
 
-@media screen and (max-width: 2800px) {
-  #tableDis {
-    padding-bottom: 11vw;
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 
 @media screen and (max-width: 992px) {
-  #links a {
+  #links a,
+  #other h6,
+  #nav button span,
+  #nav button {
     display: none;
   }
 
@@ -402,6 +409,35 @@ td {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th,
+  td {
+    padding: 5px;
+  }
+
+  #tableDis {
+    padding: 24px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th,
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+}
+
 @media screen and (max-width: 576px) {
   footer #pages a {
     width: 100%;
@@ -414,6 +450,38 @@ td {
   #tableDis input {
     width: 100%;
   }
+
+  #hero {
+    padding: 40px 60px;
+  }
+
+  footer #pages {
+    gap: 1rem;
+  }
+
+  #hero div {
+    width: 90%;
+  }
+
+  #hero button {
+    width: 90%;
+  }
+
+  #tableDis {
+    padding: 80px 40px;
+  }
+
+  footer #logo {
+    width: 100%;
+  }
+
+  footer #logo p {
+    width: 100%;
+  }
+
+  #links img {
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 392px) {
@@ -423,10 +491,11 @@ td {
 
   #nav i {
     padding-left: 5px;
+    font-size: 20px;
   }
 
   #links img {
-    width: 80%;
+    width: 60%;
   }
 
   #tableDis h2 {
@@ -435,5 +504,17 @@ td {
 
   #tableDis input {
     padding: 8px 54px;
+  }
+
+  #logo img {
+    width: 24vh;
+  }
+
+  #hero {
+    padding: 40px 20px;
+  }
+
+  #tableDis {
+    padding: 80px 20px;
   }
 }

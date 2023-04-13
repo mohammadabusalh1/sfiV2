@@ -354,43 +354,51 @@ $(document).ready(function () {
       $("#value").val() === "" ||
       $("#idea").val() === "" ||
       $("#startDate").val() === "" ||
-      $("#endDate").val() === ""
+      $("#endDate").val() === "" ||
+      $("#endDate").val() < $("#startDate").val()
     ) {
-      $("#alert").text("يرجى ملء جميع الحقول !");
+      $("#alert").text("يرجى ملء جميع الحقول بالشكل الصحيح !");
 
       // Check if any of the input values are empty
       if ($("#name").val() === "") {
         $("#name").css("border-color", "red");
       } else {
-        $("#name").css("border-color", "");
+        $("#name").css("border-color", "#ccc");
       }
 
       if ($("#value").val() === "") {
         $("#value").css("border-color", "red");
       } else {
-        $("#value").css("border-color", "");
+        $("#value").css("border-color", "#ccc");
       }
 
       if ($("#idea").val() === "") {
         $("#idea").css("border-color", "red");
       } else {
-        $("#idea").css("border-color", "");
+        $("#idea").css("border-color", "#ccc");
       }
 
+      console.log($("#startDate").val());
       if ($("#startDate").val() === "") {
         $("#startDate").css("border-color", "red");
       } else {
-        $("#startDate").css("border-color", "");
+        $("#startDate").css("border-color", "#ccc");
       }
 
       if ($("#endDate").val() === "") {
         $("#endDate").css("border-color", "red");
       } else {
-        $("#endDate").css("border-color", "");
+        $("#endDate").css("border-color", "#ccc");
+      }
+
+      if ($("#endDate").val() < $("#startDate").val()) {
+        $("#endDate").css("border-color", "red");
+        $("#startDate").css("border-color", "red");
       }
 
       return false;
     } else {
+      $("input, textarea").css("border-color", "#ccc");
       var name = $("#name").val();
       var value = $("#value").val();
       var valueType = $("#valueType").val();
@@ -468,7 +476,7 @@ $(document).ready(function () {
             }
 
             $("#alert").text("تمت الأضافة");
-            $("input").val("");
+            $("input, textarea").val("");
             finsArray = [];
             goalsArray = [];
             areasArray = [];
@@ -476,7 +484,7 @@ $(document).ready(function () {
             $(".inserted").hide();
             reload("SELECT * FROM `project`");
           } else {
-            alert(out);
+            $("#alert").text(" لم تتم الاضافة يرجى التأكد من البيانات: " + out);
           }
         },
       });
@@ -735,6 +743,7 @@ $(document).ready(function () {
   });
 
   $("#edit").click(function () {
+    $("#alert").text("");
     nameAdd = $("#name").val();
     value = $("#value").val();
     valueType = $("#valueType").val();
@@ -761,86 +770,89 @@ $(document).ready(function () {
       url: "../phpFile/update.php",
       data: { sqlup: sqlup },
       type: "post",
-      success: function () {
-        let sqlFinDelete =
-          "DELETE FROM `fin_pro` WHERE `project_name`='" + projectName + "'";
-        remove(sqlFinDelete);
-        let sqlgoalDelete =
-          "DELETE FROM `goal_pro` WHERE `project_name`='" + projectName + "'";
-        remove(sqlgoalDelete);
-        let sqlareaDelete =
-          "DELETE FROM `pro_area` WHERE `project_name`='" + projectName + "'";
-        remove(sqlareaDelete);
-        let sqlTargetDelete =
-          "DELETE FROM `targ_pro` WHERE `project_name`='" + projectName + "'";
-        remove(sqlTargetDelete);
+      success: function (out) {
+        if (out == "New record update successfully") {
+          let sqlFinDelete =
+            "DELETE FROM `fin_pro` WHERE `project_name`='" + projectName + "'";
+          remove(sqlFinDelete);
+          let sqlgoalDelete =
+            "DELETE FROM `goal_pro` WHERE `project_name`='" + projectName + "'";
+          remove(sqlgoalDelete);
+          let sqlareaDelete =
+            "DELETE FROM `pro_area` WHERE `project_name`='" + projectName + "'";
+          remove(sqlareaDelete);
+          let sqlTargetDelete =
+            "DELETE FROM `targ_pro` WHERE `project_name`='" + projectName + "'";
+          remove(sqlTargetDelete);
 
-        if (finsArray.length > 0) {
-          for (i = 0; i < finsArray.length; i++) {
-            let sql =
-              "INSERT INTO `fin_pro`(`project_financier_name`, `project_name`) VALUES ('" +
-              finsArray[i] +
-              "','" +
-              nameAdd +
-              "')";
-            add(sql);
+          if (finsArray.length > 0) {
+            for (i = 0; i < finsArray.length; i++) {
+              let sql =
+                "INSERT INTO `fin_pro`(`project_financier_name`, `project_name`) VALUES ('" +
+                finsArray[i] +
+                "','" +
+                nameAdd +
+                "')";
+              add(sql);
+            }
           }
-        }
 
-        if (goalsArray.length > 0) {
-          for (i = 0; i < goalsArray.length; i++) {
-            let sql =
-              "INSERT INTO `goal_pro`(`goal_name`, `project_name`) VALUES ('" +
-              goalsArray[i] +
-              "','" +
-              nameAdd +
-              "')";
-            add(sql);
+          if (goalsArray.length > 0) {
+            for (i = 0; i < goalsArray.length; i++) {
+              let sql =
+                "INSERT INTO `goal_pro`(`goal_name`, `project_name`) VALUES ('" +
+                goalsArray[i] +
+                "','" +
+                nameAdd +
+                "')";
+              add(sql);
+            }
           }
-        }
 
-        if (areasArray.length > 0) {
-          for (i = 0; i < areasArray.length; i++) {
-            let sql =
-              "INSERT INTO `pro_area`(`area_name`, `project_name`) VALUES ('" +
-              areasArray[i] +
-              "','" +
-              nameAdd +
-              "')";
-            add(sql);
+          if (areasArray.length > 0) {
+            for (i = 0; i < areasArray.length; i++) {
+              let sql =
+                "INSERT INTO `pro_area`(`area_name`, `project_name`) VALUES ('" +
+                areasArray[i] +
+                "','" +
+                nameAdd +
+                "')";
+              add(sql);
+            }
           }
-        }
 
-        if (targetsArray.length > 0) {
-          for (i = 0; i < targetsArray.length; i++) {
-            let sql =
-              "INSERT INTO `targ_pro`(`target_group`, `project_name`) VALUES ('" +
-              targetsArray[i] +
-              "','" +
-              nameAdd +
-              "')";
-            add(sql);
+          if (targetsArray.length > 0) {
+            for (i = 0; i < targetsArray.length; i++) {
+              let sql =
+                "INSERT INTO `targ_pro`(`target_group`, `project_name`) VALUES ('" +
+                targetsArray[i] +
+                "','" +
+                nameAdd +
+                "')";
+              add(sql);
+            }
           }
+          $("input").val("");
+          $("textarea").val("");
+          finsArray = [];
+          goalsArray = [];
+          areasArray = [];
+          targetsArray = [];
+          $(".inserted").hide();
+          $("#tableDis").show();
+          $("#edit").toggle();
+          $("#add").toggle();
+          $("#endWithoutSave").toggle();
+          reload("SELECT * FROM `project`");
+        } else {
+          $("#alert").text(" لم تتم الاضافة يرجى التأكد من البيانات: " + out);
         }
-        $("input").val("");
-        $("textarea").val("");
-        finsArray = [];
-        goalsArray = [];
-        areasArray = [];
-        targetsArray = [];
-        $(".inserted").hide();
-        $("#tableDis").show();
-        $("#edit").toggle();
-        $("#add").toggle();
-        $("#endWithoutSave").toggle();
-        reload("SELECT * FROM `project`");
       },
     });
   });
 
   $("#endWithoutSave").click(function () {
-    $("input").val("");
-    $("textarea").val("");
+    $("input, textarea").val("");
     finsArray = [];
     goalsArray = [];
     areasArray = [];
@@ -850,6 +862,7 @@ $(document).ready(function () {
     $("#edit").toggle();
     $("#add").toggle();
     $("#endWithoutSave").toggle();
+    $("#alert").text("");
   });
 
   $("#nav button span").click(function () {
@@ -859,5 +872,108 @@ $(document).ready(function () {
 
   $("#other").click(function () {
     $(".dropdown-content").toggle();
+  });
+
+  $("#nav i").click(function () {
+    $("#smallList").toggle(100);
+  });
+
+  $("#save").click(function () {
+
+    var name = $("#name").val();
+    var value = $("#value").val();
+    var valueType = $("#valueType").val();
+    var idea = $("#idea").val();
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("value", value);
+    localStorage.setItem("valueType", valueType);
+    localStorage.setItem("idea", idea);
+    localStorage.setItem("startDate", startDate);
+    localStorage.setItem("endDate", endDate);
+    localStorage.setItem("finsArray", finsArray);
+    localStorage.setItem("areasArray", areasArray);
+    localStorage.setItem("goalsArray", goalsArray);
+    localStorage.setItem("targetsArray", targetsArray);
+  });
+
+  $("#reload").click(function () {
+
+    $("#name").val(localStorage.getItem("name"));
+    $("#value").val(localStorage.getItem("value"));
+    $("#valueType").val(localStorage.getItem("valueType"));
+    $("#idea").val(localStorage.getItem("idea"));
+    $("#startDate").val(localStorage.getItem("startDate"));
+    $("#endDate").val(localStorage.getItem("endDate"));
+
+    finsArray = localStorage.getItem("finsArray").split(",");
+    areasArray = localStorage.getItem("areasArray").split(",");
+    goalsArray = localStorage.getItem("goalsArray").split(",");
+    targetsArray = localStorage.getItem("targetsArray").split(",");
+
+    const newTargetArray = targetsArray.map((e) => {
+      const div = $("<div>");
+      const h6 = $("<h6>").text(e);
+      const button = $("<button>")
+        .text("حذف")
+        .addClass("removeTarget")
+        .data("id", e);
+      div.append(h6, button);
+      return div;
+    });
+
+    // Add the new HTML elements to targetsInsertedDiv
+    targetsInsertedDiv.html(newTargetArray);
+    targetsInsertedDiv.show();
+
+     // Map AreaArray to an array of HTML elements
+     const newAreaArray = areasArray.map((e) => {
+      const div = $("<div>");
+      const h6 = $("<h6>").text(e);
+      const button = $("<button>")
+        .text("حذف")
+        .addClass("removeArea")
+        .data("id", e);
+      div.append(h6, button);
+      return div;
+    });
+
+    // Add the new HTML elements to areasInsertedDiv
+    areasInsertedDiv.html(newAreaArray);
+    areasInsertedDiv.show();
+
+     // Map goalArray to an array of HTML elements
+     const newGoalArray = goalsArray.map((e) => {
+      const div = $("<div>");
+      const h6 = $("<h6>").text(e);
+      const button = $("<button>")
+        .text("حذف")
+        .addClass("removeGoal")
+        .data("id", e);
+      div.append(h6, button);
+      return div;
+    });
+
+    // Add the new HTML elements to goalInsertedDiv
+    goalsInsertedDiv.html(newGoalArray);
+    goalsInsertedDiv.show();
+
+    const newFinsArray = finsArray.map((e) => {
+      const div = $("<div>");
+      const h6 = $("<h6>").text(e);
+      const button = $("<button>")
+        .text("حذف")
+        .addClass("removeFin")
+        .data("id", e);
+      div.append(h6, button);
+      return div;
+    });
+
+    // Add the new HTML elements to finsInsertedDiv
+    finsInsertedDiv.html(newFinsArray);
+    finsInsertedDiv.show();
+
   });
 });

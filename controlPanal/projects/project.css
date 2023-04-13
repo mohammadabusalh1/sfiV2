@@ -242,7 +242,7 @@ footer #pages a h6:hover {
   text-align: center;
   display: none;
   position: sticky;
-  top: 90px;
+  top: 9.6vw;
   left: 0;
   z-index: 5;
 }
@@ -454,6 +454,32 @@ td {
   color: red;
 }
 
+#logout_word {
+  margin-top: 8px;
+  border: 1px solid #06283d;
+  padding: 8px 12px;
+  transition: 0.2s;
+}
+
+#reloadIcons{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.relode{
+  padding: 12px;
+  margin-bottom: 24px;
+  background-color: #c58940;
+  border-radius: 4px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.relode:hover{
+  opacity: 0.8;
+}
+
 @media screen and (min-width: 3000px) {
   html,
   body {
@@ -469,7 +495,7 @@ td {
 
 @media screen and (max-width: 992px) {
   #links a,
-  #links div h6 {
+  #links div h6,#nav button span, #nav button {
     display: none;
   }
 
@@ -556,6 +582,10 @@ td {
   #tableDis input {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  #links img {
+    width: 80%;
   }
 }
 

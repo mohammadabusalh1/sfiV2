@@ -262,7 +262,7 @@ footer #pages a h6:hover {
   text-align: center;
   display: none;
   position: sticky;
-  top: 90px;
+  top: 9.6vw;
   left: 0;
   z-index: 5;
 }
@@ -381,7 +381,7 @@ td {
 
 @media screen and (max-width: 992px) {
   #links a,
-  #links div h6 {
+  #links div h6, #nav button span, #nav button {
     display: none;
   }
 
@@ -420,7 +420,6 @@ td {
   th,
   td {
     padding: 8px;
-    text-align: left;
     border-bottom: 1px solid #ddd;
   }
   tfoot {

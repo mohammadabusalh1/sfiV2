@@ -39,10 +39,10 @@ $(document).ready(function () {
       if ($("#name").val() === "") {
         $("#name").css("border-color", "red");
       } else {
-        $("#name").css("border-color", "hsl(33, 53%, 51%, 0.6)");
+        $("#name").css("border-color", "#ccc");
       }
     } else {
-      $("#name").css("border-color", "hsl(33, 53%, 51%, 0.6)");
+      $("#name").css("border-color", "#ccc");
       $.ajax({
         url: "../phpFile/add.php",
         data: { sqlAdd: sqlAdd },
@@ -98,10 +98,12 @@ $(document).ready(function () {
     $("#edit").show();
     $("#add").hide();
     $("#cancelEdit").toggle();
+    $("#tableDis").toggle();
     $("html, body").animate({ scrollTop: 0 }, "slow");
   });
 
   $("#cancelEdit").click(function () {
+    $("#not").text("");
     $("input").val("");
     $("#add").toggle();
     $("#edit").toggle();
