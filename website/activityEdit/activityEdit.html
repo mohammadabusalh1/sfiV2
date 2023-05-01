@@ -1,198 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> تعديل النشاط</title>
-    <link rel="stylesheet" href="actEdit.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الأنشطة</title>
+    <link rel="stylesheet" href="actEdit.css" />
     <link rel="shortcut icon" href="img/smallLogo.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="activityEditjava.js"></script>
+  </head>
 
-</head>
-
-
-<body dir="rtl">
-
+  <body dir="rtl">
     <!-- navbare start -->
     <section id="header">
+      <a href="../home/Mian.html">
+        <h4>ملتقى الطلبة</h4>
+      </a>
+      <nav class="navbare">
         <a href="../home/Mian.html">
-            <h4>ملتقى الطلبة</h4>
+          <h6>الرئيسية</h6>
         </a>
-        <nav class="navbare">
-            <a href="../home/Mian.html">
-                <h6>الرئيسية</h6>
-            </a>
-            <a href="../activity/activity.html">
-                <h6 class="active">الانشطة</h6>
-            </a>
-            <a href="../rep/report.html">
-                <h6>التقارير</h6>
-            </a>
-        </nav>
+        <a href="activity.html">
+          <h6 class="active">الانشطة</h6>
+        </a>
+        <a href="../rep/report.html">
+          <h6>التقارير</h6>
+        </a>
+      </nav>
+      <div>
+        <i id="bar" class="fas fa-bars"></i>
+        <a id="logout"> <i class="fas fa-arrow-circle-left"></i></a>
+      </div>
+    </section>
+
+    <section class="hero" id="he1">
+      <div class="inf">
         <div>
-            <i id="bar" class="fas fa-bars"></i>
-            <a id="logout"> <i class="fas fa-arrow-circle-left"></i></a>
+          <h6>إسم النشاط</h6>
+          <input type="text" id="name" />
         </div>
+        <div>
+          <h6>إسم المشروع</h6>
+          <select name="pro" id="pro"></select>
+        </div>
+        <div>
+          <h6>الهدف</h6>
+          <select name="aim" id="aim"></select>
+        </div>
+        <div>
+          <h6>البرنامج</h6>
+          <select name="prog" id="prog"></select>
+        </div>
+        <div>
+          <h6>تاريخ النشاط</h6>
+          <div id="dates">
+            <input type="date" id="start_date" />
+            <h6>إلى</h6>
+            <input type="date" id="end_date" />
+          </div>
+        </div>
+        <div>
+          <h6>مدة النشاط</h6>
+          <input type="number" id="activity_period" />
+        </div>
+        <div>
+          <h6>المحافظة</h6>
+          <select name="gov" id="gov"></select>
+        </div>
+        <div>
+          <h6>المنطقة</h6>
+          <input type="text" id="area" />
+        </div>
+        <div>
+          <h6>نوع النشاط</h6>
+          <select name="type" id="type"></select>
+        </div>
+        <div>
+          <h6>تفاصيل النشاط</h6>
+          <textarea name="det" id="det" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+          <button id="next" class="butt">التالي</button>
+          <button id="close1" class="close butt" style="display: none;">الغاء</button>
+          <p id="not" class="not"></p>
+        </div>
+      </div>
     </section>
 
-    <section class="hero" id="hero1">
-        <div class="inf">
-            <h6>إسم النشاط</h6>
-            <input type="text" id="name">
-            <h6>إسم المشروع</h6>
-            <select name="pro" id="pro"></select>
-            <h6> البرنامج</h6>
-            <select name="prog" id="prog"></select>
-            <h6>تاريخ النشاط</h6>
-            <input type="date" id="date">
-            <h6> المحافظة</h6>
-            <input type="text" id="gov">
-            <h6> المنطقة</h6>
-            <input type="text" id="area">
-            <h6>نوع النشاط</h6>
-            <input type="text" id="type">
-            <h6>تفاصيل النشاط</h6>
-            <input type="text" id="det">
+    <section class="hero" id="he2">
+      <div id="flex">
+        <div id="nicknames">
+          <h6>المسمى</h6>
+          <select name="nickname" id="nickname"></select>
+          <button id="addNickNameForAdmin">اضف لقب للمسؤول</button>
+          <div id="AdminNickname" class="inserted"></div>
+          <p id="not2"></p>
         </div>
-        <button id="next">التالي</button>
-        <button class="next6">إنهاء</button>
+        <div id="admin">
+          <h6>إسم المسؤول</h6>
+          <select name="partName" id="partName"></select>
+          <button id="bt_parti" class="add2">اضف</button>
+          <div id="adimnCont" class="inserted"></div>
+        </div>
+      </div>
+      <div id="he2Buttons">
+        <button id="next2" class="butt adminButt">التالي</button>
+        <button id="prev1" class="butt adminButt">السابق</button>
+        <button class="close butt adminButt">الغاء</button>
+      </div>
     </section>
 
-    <section class="hero" id="hero2" style=" display: none;">
-        <div class="inf">
-            <h6> إسم المشارك</h6>
-            <select name="partName" id="partName"></select>
+    <section class="hero" id="he3">
+      <div class="inf">
+        <div id="emp">
+          <h6>إسم الموظف</h6>
+          <select name="empName" id="empName"></select>
+          <div id="EmpCont" class="inserted"></div>
+          <button id="bt_empname" class="add2">اضف موظف</button>
         </div>
-        <button id="bt_parti" class="add2">اضف</button>
+        <div id="bene">
+          <h4>المستفيدين</h4>
+          <div id="beneDiv">
+            <h6>عدد ذكور</h6>
+            <input type="number" name="male" id="male" />
+            <h6>عدد الاناث</h6>
+            <input type="number" name="female" id="female" />
+            <h6>اقل من 18</h6>
+            <input type="number" name="age_18" id="age_18" />
+            <h6>من 18 إلى 30</h6>
+            <input type="number" name="age_18_30" id="age_18_30" />
+          </div>
+        </div>
 
-        <table id="partTable">
-        </table>
-
-        <button id="next2">التالي</button>
-        <button id="prev1">السابق</button>
-        <button class="next6">إنهاء</button>
+        <div id="he3Buttons">
+          <button id="next3" class="butt">التالي</button>
+          <button id="prev2" class="butt">السابق</button>
+          <button class="close butt">الغاء</button>
+        </div>
+        <p id="not3"></p>
+      </div>
     </section>
 
-    <section class="hero" id="hero3" style=" display: none;">
-        <div class="inf">
-            <h6> إسم الموظف</h6>
-            <input type="text" name="empName" id="empName">
-            <button id="bt_empname" class="add2">اضف</button>
-            <table id="empTable">
-
-            </table>
+    <section class="hero" id="he4">
+      <div class="inf">
+        <div>
+          <h6>روابط</h6>
+          <input type="text" name="links" id="links" />
+          <button id="bt_link" class="add2">اضف</button>
+          <div id="linkCont" class="inserted"></div>
         </div>
-        <button id="next3">التالي</button>
-        <button id="prev2">السابق</button>
-        <button class="next6">إنهاء</button>
-    </section>
-
-    <section class="hero" id="hero4" style=" display: none;">
-        <div class="inf">
-
-            <h6> إسم المستفيد</h6>
-            <input type="text" name="bini" id="bini">
-            <h6> عمر المستفيد</h6>
-            <input type="number" name="biniAge" id="biniAge">
-            <h6> جنس المستفيد</h6>
-            <select name="biniSex" id="biniSex">
-                <option value="ذكر">ذكر</option>
-                <option value="انثى">انثى</option>
-            </select>
-            <button id="bt_bbniName" class="add2">اضف</button>
-            <button id="bt_bbniNameEdit" class="add2" style="display: none;">تعديل</button>
-
-            <table id="biniTable">
-
-            </table>
+        <div>
+          <h6>مرفق</h6>
+          <input id="file" type="file" />
+          <button id="bt_att" class="add2">اضف</button>
+          <div id="attachCont" class="inserted"></div>
         </div>
-        <button id="next4">التالي</button>
-        <button id="prev3">السابق</button>
-        <button class="next6">إنهاء</button>
-    </section>
-
-    <section class="hero" id="hero5" style=" display: none;">
-        <div class="inf">
-            <h6>روابط</h6>
-            <input type="text" name="links" id="links">
-            <button id="bt_link" class="add2">اضف</button>
-
-            <table id="linkTable">
-
-            </table>
-
-            <h6>التحديات</h6>
-            <textarea name="chall" id="chall" rows="3"></textarea>
-            <button id="bt_chall" class="add2">اضف</button>
-
-
-            <table id="challTable">
-
-            </table>
-
+        <div>
+          <h6>التحديات</h6>
+          <input type="text" name="chall" id="chall" />
+          <button id="bt_chall" class="add2">اضف</button>
+          <div id="challCont" class="inserted"></div>
         </div>
-        <button id="next5">التالي</button>
-        <button id="prev4">السابق</button>
-        <button class="next6">إنهاء</button>
-    </section>
-
-    <section  class="hero" id="hero6" style=" display: none;">
-        <h6>مرفق</h6>
-        <input id="file" type="file">
-        <button id="bt_att" class="add2">اضف</button>
-
-        <div id="tab">
-
+        <div>
+          <button id="next4" class="butt">إنهاء</button>
+          <button id="prev3" class="butt">السابق</button>
+          <button class="close butt">الغاء</button>
         </div>
-
-        <button id="prev5">السابق</button>
-        <button class="next6">إنهاء</button>
+      </div>
+      <p id="not4"></p>
     </section>
 
     <!-- start footer -->
     <footer>
-        <div id="box_cont">
-            <div class="box">
-                <h4>روابط سريعة</h4>
-                <a href="../home/Mian.html"><i class="fa fa-angle-left" aria-hidden="true"></i>
-                    <h6> الرئيسية </h6>
-                </a>
-                <a href="../activity/activity.html"><i class="fa fa-angle-left" aria-hidden="true"></i>
-                    <h6> الأنشطة </h6>
-                </a>
-                <a href="../rep/report.html"><i class="fa fa-angle-left" aria-hidden="true"></i>
-                    <h6> التقارير </h6>
-                </a>
-            </div>
-
-            <div class="box">
-                <h4>تواصل معنا</h4>
-                <a href="#"><i class="fa fa-phone" aria-hidden="true"></i>
-                    <h6> 97022751882+ </h6>
-                </a>
-                <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
-                    <h6> info@ysfi.ps </h6>
-                </a>
-            </div>
-
-            <div class="box">
-                <h4>تابعنا</h4>
-                <a target="_blank" href="https://www.facebook.com/SFI.Palestine"><i class="fab fa-facebook-f"></i>
-                    <h6> فيسبوك </h6>
-                </a>
-                <a href="../home/Mian.html"><i class="fab fa-instagram" aria-hidden="true"></i>
-                    <h6> انستاجرام </h6>
-                </a>
-            </div>
+      <div id="box_cont">
+        <div class="box">
+          <h4>روابط سريعة</h4>
+          <a href="../home/Mian.html"
+            ><i class="fa fa-angle-left" aria-hidden="true"></i>
+            <h6>الرئيسية</h6>
+          </a>
+          <a href="activity.html"
+            ><i class="fa fa-angle-left" aria-hidden="true"></i>
+            <h6>الأنشطة</h6>
+          </a>
+          <a href="../rep/report.html"
+            ><i class="fa fa-angle-left" aria-hidden="true"></i>
+            <h6>التقارير</h6>
+          </a>
         </div>
+
+        <div class="box">
+          <h4>تواصل معنا</h4>
+          <a href="#"
+            ><i class="fa fa-phone" aria-hidden="true"></i>
+            <h6>97022751882+</h6>
+          </a>
+          <a href="#"
+            ><i class="fa fa-envelope" aria-hidden="true"></i>
+            <h6>info@ysfi.ps</h6>
+          </a>
+        </div>
+
+        <div class="box">
+          <h4>تابعنا</h4>
+          <a target="_blank" href="https://www.facebook.com/SFI.Palestine"
+            ><i class="fab fa-facebook-f"></i>
+            <h6>فيسبوك</h6>
+          </a>
+          <a href="../home/Mian.html"
+            ><i class="fab fa-instagram" aria-hidden="true"></i>
+            <h6>انستاجرام</h6>
+          </a>
+        </div>
+      </div>
     </footer>
-
-</body>
-
+  </body>
 </html>

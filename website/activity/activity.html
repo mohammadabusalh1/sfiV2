@@ -45,77 +45,138 @@
 
     <section class="hero" id="he1">
       <div class="inf">
-        <h6>إسم النشاط</h6>
-        <input type="text" id="name" />
-        <h6>إسم المشروع</h6>
-        <select name="pro" id="pro"></select>
-        <h6>البرنامج</h6>
-        <select name="prog" id="prog"></select>
-        <h6>تاريخ النشاط</h6>
-        <div id="dates">
-          <input type="date" id="start_date" />
-          <h6>إلى</h6>
-          <input type="date" id="end_date" />
+        <div>
+          <h6>إسم النشاط</h6>
+          <input type="text" id="name" />
         </div>
-        <h6>مدة النشاط</h6>
-        <input type="number" id="activity_period" />
-        <h6>المحافظة</h6>
-        <select name="gov" id="gov"></select>
-        <h6>المنطقة</h6>
-        <input type="text" id="area" />
-        <h6>نوع النشاط</h6>
-        <select name="type" id="type"></select>
-        <h6>تفاصيل النشاط</h6>
-        <textarea name="det" id="det" cols="30" rows="10"></textarea>
-        <button id="next" class="butt">التالي</button>
-        <p id="not"></p>
+        <div>
+          <h6>إسم المشروع</h6>
+          <select name="pro" id="pro"></select>
+        </div>
+        <div>
+          <h6>الهدف</h6>
+          <select name="aim" id="aim"></select>
+        </div>
+        <div>
+          <h6>البرنامج</h6>
+          <select name="prog" id="prog"></select>
+        </div>
+        <div>
+          <h6>تاريخ النشاط</h6>
+          <div id="dates">
+            <input type="date" id="start_date" />
+            <h6>إلى</h6>
+            <input type="date" id="end_date" />
+          </div>
+        </div>
+        <div>
+          <h6>مدة النشاط</h6>
+          <input type="number" id="activity_period" />
+        </div>
+        <div>
+          <h6>المحافظة</h6>
+          <select name="gov" id="gov"></select>
+        </div>
+        <div>
+          <h6>المنطقة</h6>
+          <input type="text" id="area" />
+        </div>
+        <div>
+          <h6>نوع النشاط</h6>
+          <select name="type" id="type"></select>
+        </div>
+        <div>
+          <h6>تفاصيل النشاط</h6>
+          <textarea name="det" id="det" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+          <button id="next" class="butt">التالي</button>
+          <button id="close1" class="close butt" style="display: none;">الغاء</button>
+          <p id="not" class="not"></p>
+        </div>
       </div>
     </section>
 
-    <section class="hero" id="he2" style="display: none">
-      <div class="inf">
-        <h6>إسم المسؤول</h6>
-        <select name="partName" id="partName"></select>
-        <button id="bt_parti" class="add2">اضف</button>
-        <button id="next2" class="butt">التالي</button>
-        <button id="prev1" class="butt">السابق</button>
+    <section class="hero" id="he2">
+      <div id="flex">
+        <div id="nicknames">
+          <h6>المسمى</h6>
+          <select name="nickname" id="nickname"></select>
+          <button id="addNickNameForAdmin">اضف لقب للمسؤول</button>
+          <div id="AdminNickname" class="inserted"></div>
+          <p id="not2"></p>
+        </div>
+        <div id="admin">
+          <h6>إسم المسؤول</h6>
+          <select name="partName" id="partName"></select>
+          <button id="bt_parti" class="add2">اضف</button>
+          <div id="adimnCont" class="inserted"></div>
+        </div>
+      </div>
+      <div id="he2Buttons">
+        <button id="next2" class="butt adminButt">التالي</button>
+        <button id="prev1" class="butt adminButt">السابق</button>
+        <button class="close butt adminButt">الغاء</button>
       </div>
     </section>
 
     <section class="hero" id="he3">
       <div class="inf">
-        <h6>إسم الموظف</h6>
-        <input type="text" name="empName" id="empName" />
-        <button id="bt_empname" class="add2">اضف</button>
-        <h6>إسم المستفيد</h6>
-        <input type="text" name="bini" id="bini" />
-        <h6>عمر المستفيد</h6>
-        <input type="number" name="biniAge" id="biniAge" />
-        <h6>جنس المستفيد</h6>
-        <select name="biniSex" id="biniSex">
-          <option value="ذكر">ذكر</option>
-          <option value="انثى">انثى</option>
-        </select>
-        <button id="bt_bbniName" class="add2">اضف</button>
+        <div id="emp">
+          <h6>إسم الموظف</h6>
+          <select name="empName" id="empName"></select>
+          <div id="EmpCont" class="inserted"></div>
+          <button id="bt_empname" class="add2">اضف موظف</button>
+        </div>
+        <div id="bene">
+          <h4>المستفيدين</h4>
+          <div id="beneDiv">
+            <h6>عدد ذكور</h6>
+            <input type="number" name="male" id="male" />
+            <h6>عدد الاناث</h6>
+            <input type="number" name="female" id="female" />
+            <h6>اقل من 18</h6>
+            <input type="number" name="age_18" id="age_18" />
+            <h6>من 18 إلى 30</h6>
+            <input type="number" name="age_18_30" id="age_18_30" />
+          </div>
+        </div>
+        <p id="not3" class="not"></p>
+        <div id="he3Buttons">
+          <button id="next3" class="butt">التالي</button>
+          <button id="prev2" class="butt">السابق</button>
+          <button class="close butt">الغاء</button>
+        </div>
       </div>
-      <button id="next3" class="butt">التالي</button>
-      <button id="prev2" class="butt">السابق</button>
     </section>
 
     <section class="hero" id="he4">
       <div class="inf">
-        <h6>روابط</h6>
-        <input type="text" name="links" id="links" />
-        <button id="bt_link" class="add2">اضف</button>
-        <h6>مرفق</h6>
-        <input id="file" type="file" />
-        <button id="bt_att" class="add2">اضف</button>
-        <h6>التحديات</h6>
-        <input type="text" name="chall" id="chall" />
-        <button id="bt_chall" class="add2">اضف</button>
+        <div>
+          <h6>روابط</h6>
+          <input type="text" name="links" id="links" />
+          <button id="bt_link" class="add2">اضف</button>
+          <div id="linkCont" class="inserted"></div>
+        </div>
+        <div>
+          <h6>مرفق</h6>
+          <input id="file" type="file" />
+          <button id="bt_att" class="add2">اضف</button>
+          <div id="attachCont" class="inserted"></div>
+        </div>
+        <div>
+          <h6>التحديات</h6>
+          <input type="text" name="chall" id="chall" />
+          <button id="bt_chall" class="add2">اضف</button>
+          <div id="challCont" class="inserted"></div>
+        </div>
+        <div>
+          <button id="next4" class="butt">إنهاء</button>
+          <button id="prev3" class="butt">السابق</button>
+          <button class="close butt">الغاء</button>
+        </div>
       </div>
-      <button id="prev3" class="butt">السابق</button>
-      <button id="next4" class="butt">إنهاء</button>
+      <p id="not4" class="not"></p>
     </section>
 
     <section id="tableShow">

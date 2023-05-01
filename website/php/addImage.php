@@ -1,46 +1,38 @@
 <?php
-if (isset($_FILES['file'])) {
-    $file = $_FILES['file'];
-    $activityName = $_POST['activityName'];
-    $fileName = $file['name'];
-    $fileTmpName = $file['tmp_name'];
-    $fileSize = $file['size'];
-    $fileError = $file['error'];
-    $fileType = $file['type'];
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sfi";
 
-    $fileExt = explode('.', $fileName);
-    $fileActualExt = strtolower(end($fileExt));
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    $allowed = array('jpg', 'jpeg', 'png', 'pdf');
-
-    if (in_array($fileActualExt, $allowed)) {
-        if ($fileError === 0) {
-            if ($fileSize < 9999999999) {
-                $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-                $fileDestination = '../img/images/' . $fileNameNew;
-                move_uploaded_file($fileTmpName, $fileDestination);
-                $con = mysqli_connect("localhost", "root", "", "sfi");
-                $con->set_charset("utf8");
-                if (!$con) {
-                    die("Error connecting to database: " . mysqli_connect_error());
-                }
-                $sql = "INSERT INTO `attachments` (`attachment`, `activity_name`) VALUES ('$fileNameNew', '$activityName')";
-                $result = mysqli_query($con, $sql);
-                if ($result) {
-                    echo "Image added successfully";
-                } else {
-                    echo "Error adding image: " . mysqli_error($con);
-                }
-                mysqli_close($con);
-            } else {
-                echo "الملف حجمه كبير";
-            }
-        } else {
-            echo "يوجد مشكلة في تحميل الملف";
-        }
-    } else {
-        echo "لا يمكن تحميل هذا النوع من الملفات";
-    }
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
+// Get file data
+$file = $_FILES['file']['tmp_name'];
+$file_name = $_FILES['file']['name'];
+$activity = $_POST['activityName'];
+
+// Read file contents
+$handle = fopen($file, "r");
+$contents = fread($handle, filesize($file));
+fclose($handle);
+
+// Escape special characters
+$contents = mysqli_real_escape_string($conn, $contents);
+
+// Insert file data into database
+$sql = "INSERT INTO `attachments`(`file_name`, `file_contents`, `activity_name`) VALUES ('$file_name', '$contents', '$activity')";
+if ($conn->query($sql) === TRUE) {
+    echo "File uploaded successfully!";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Close connection
+$conn->close();
 ?>

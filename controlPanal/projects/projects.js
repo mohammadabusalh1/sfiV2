@@ -377,8 +377,6 @@ $(document).ready(function () {
       } else {
         $("#idea").css("border-color", "#ccc");
       }
-
-      console.log($("#startDate").val());
       if ($("#startDate").val() === "") {
         $("#startDate").css("border-color", "red");
       } else {
