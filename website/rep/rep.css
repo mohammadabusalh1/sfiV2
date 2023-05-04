@@ -245,6 +245,10 @@ display: none;
     box-sizing: border-box;
 }
 
+#not{
+    color: red;
+}
+
 
 @media screen and (max-width:992px) {
     #bar {

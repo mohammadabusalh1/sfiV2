@@ -1,49 +1,10 @@
 $(document).ready(function () {
-  function reload(sql) {
-    $.ajax({
-      url: "../controlPanal/phpFile/show.php",
-      data: { sql: sql },
-      dataType: "json",
-      type: "post",
-      success: function (data) {
-        ht =
-          "<tr> <th>إسم النشاط</th> <th> تاريخ النشاط</th> <th>المحافظة</th> <th>المنطقة</th>  <th>النوع</th> <th>التفاصيل</th> <th>البرنامج</th> <th>المشروع</th> <th>إختر</th></tr>";
-        for (i = 0; i < data.length; i++) {
-          ht +=
-            "<tr><td>" +
-            data[i].activity_name +
-            "</td><td>" +
-            data[i].activity_date +
-            "</td><td>" +
-            data[i].activity_Governorate +
-            "</td><td>" +
-            data[i].activity_area +
-            "</td><td>" +
-            data[i].activity_type +
-            "</td><td>" +
-            data[i].activity_details +
-            "</td><td>" +
-            data[i].program_name +
-            "</td><td>" +
-            data[i].project_name +
-            "</td>" +
-            "<td><button data-id=" +
-            data[i].activity_name +
-            ' class="click_btn">إختر</button></td></tr>';
-        }
-        $(".table").html(ht);
-      },
-    });
-  }
-
   if (
     localStorage.getItem("login") == 0 ||
     localStorage.getItem("login") == null
   ) {
-    window.location.replace("../login.html");
+    window.location.replace("../../login.html");
   }
-
-  reload("SELECT * FROM `activities`");
 
   $("#bar").click(function () {
     $(".navbare").toggleClass("active");
@@ -104,7 +65,7 @@ $(document).ready(function () {
     dataType: "json",
     type: "post",
     success: function (data) {
-      let options = "<option value='all'>جميع المحافظات</option>";
+      let options = "<option value='all'>جميع البرامج</option>";
       for (i = 0; i < data.length; i++) {
         options +=
           '<option value="' +
@@ -309,19 +270,190 @@ $(document).ready(function () {
     $("#attribute").show();
     $("#activityReport").hide();
 
-    var nameValue = $("#names").val();
-    var dateValue = $("#date").val();
-    var dateValue1 = $("#date1").val();
-    var govValue = $("#govs").val();
-    var areaValue = $("#areas").val();
-    var typeValue = $("#types").val();
-    var aim = $("#aim2").val();
-    var period = $("#period").val();
-    var programValue = $("#programs").val();
-    var projectValue = $("#projects").val();
+    $("#show_report").click(function () {
+      if (!$(".chick").is(":checked")) {
+        $("#not").text("لم تقم بالأختيار!");
+      } else {
+        $("#not").text("");
+        var sql =
+          "SELECT " +
+          ($("#ch_activityName").is(":checked") ? "`activity_name`, " : "") +
+          ($("#ch_date").is(":checked")
+            ? "`activity_start_date`, `activity_end_date`, "
+            : "") +
+          ($("#ch_gov").is(":checked") ? "`governorate`, " : "") +
+          ($("#ch_area").is(":checked") ? "`activity_area`, " : "") +
+          ($("#ch_det").is(":checked") ? "`activity_details`, " : "") +
+          ($("#ch_aim").is(":checked") ? "`activity_aim`, " : "") +
+          ($("#ch_project").is(":checked") ? "`project_name`, " : "") +
+          ($("#ch_program").is(":checked") ? "`program_name`, " : "") +
+          ($("#ch_activityType").is(":checked") ? "`activity_type`, " : "") +
+          ($("#ch_period").is(":checked")
+            ? "`activity_period` FROM `activities` WHERE "
+            : "");
 
-    $("#show_report").click(function () {});
+        if (sql.substr(-2) === ", ") {
+          sql = sql.substr(0, sql.length - 2) + " FROM `activities` WHERE ";
+        }
+
+        let name =
+          $("#names").val() == "all"
+            ? "1 && "
+            : "activity_name = '" + $("#names").val() + "' &&";
+        sql += name;
+        let date =
+          $("#date").val() == "" || $("#date1").val() == ""
+            ? "1 && "
+            : "`activity_start_date` > " +
+              $("#date").val() +
+              " && `activity_end_date`< " +
+              $("#date1").val() +
+              " && ";
+        sql += date;
+        let aim =
+          $("#aim2").val() == "all"
+            ? "1 && "
+            : "activity_aim = '" + $("#aim2").val() + "' && ";
+        sql += aim;
+        let type =
+          $("#types2").val() == "all"
+            ? "1 && "
+            : "activity_type = '" + $("#types2").val() + "' && ";
+        sql += type;
+        let program =
+          $("#programs").val() == "all"
+            ? "1 && "
+            : "program_name = '" + $("#programs").val() + "' && ";
+        sql += program;
+        let project =
+          $("#projects").val() == "all"
+            ? "1 && "
+            : "project_name = '" + $("#projects").val() + "' && ";
+        sql += project;
+        let gov =
+          $("#govs").val() == "all"
+            ? "1 && "
+            : "governorate = '" + $("#govs").val() + "' && ";
+        sql += gov;
+        let area =
+          $("#areas").val() == ""
+            ? "1 && "
+            : "activity_area = '" + $("#areas").val() + "' && ";
+        sql += area;
+        let period =
+          $("#period").val() == ""
+            ? "1 && "
+            : "activity_period = '" + $("#period").val() + "' && ";
+        sql += period;
+
+        if (sql.substr(-2) === "& ") {
+          sql = sql.substr(0, sql.length - 2) + "";
+          sql = sql.substr(0, sql.length - 2) + "";
+        }
+      }
+
+      $.ajax({
+        url: "../../controlPanal/phpFile/show.php",
+        data: { sql: sql },
+        dataType: "json",
+        type: "post",
+        success: function (data) {
+          $("#attribute").hide();
+          var table = $("<table id='report_table'></table>");
+          var headerRow = $("<tr></tr>");
+          // Assuming data is an array of objects with keys as column names
+          Object.keys(data[0]).forEach(function (key) {
+            headerRow.append("<th>" + getArabicColumnName(key) + "</th>");
+          });
+
+          if ($("#ch_admins").is(":checked")) {
+            headerRow.append("<th>المسؤولين</th>");
+          }
+          table.append(headerRow);
+
+          // Create an object to store admin names and titles
+          var adminNamesObj = {};
+
+          data.forEach(function (row) {
+            let activityName = row.activity_name;
+            var dataRow = $("<tr></tr>");
+            Object.keys(row).forEach(function (key) {
+              dataRow.append("<td>" + row[key] + "</td>");
+            });
+
+            if ($("#ch_admins").is(":checked")) {
+              let sql =
+                "SELECT administrator_name, nickname FROM act_adm_nick WHERE activity_name = '" +
+                activityName +
+                "'";
+              console.log(sql);
+              $.ajax({
+                url: "../../controlPanal/phpFile/show.php",
+                data: { sql: sql },
+                dataType: "json",
+                type: "post",
+                success: function (data1) {
+                  data1.forEach(function (admin) {
+                    if (
+                      adminNamesObj.hasOwnProperty(admin.administrator_name)
+                    ) {
+                      adminNamesObj[admin.administrator_name].push(
+                        admin.nickname
+                      );
+                    } else {
+                      adminNamesObj[admin.administrator_name] = [
+                        admin.nickname,
+                      ];
+                    }
+                  });
+
+                  // Create the adminNames string by iterating over the object
+                  var adminNames = "";
+                  Object.keys(adminNamesObj).forEach(function (adminName) {
+                    var titles = adminNamesObj[adminName].join(", ");
+                    adminNames += adminName + " (" + titles + "), ";
+                  });
+                  adminNames = adminNames.slice(0, -2); // remove the last comma
+
+                  var adminCell = $("<td>" + adminNames + "</td>");
+                  dataRow.append(adminCell);
+                  table.append(dataRow);
+                },
+              });
+            } else {
+              table.append(dataRow);
+            }
+
+            
+          });
+          $("#report_table").replaceWith(table);
+        },
+        error: function (xhr, status, error) {
+          console.log("Error: " + error);
+        },
+      });
+    });
   });
+
+  function getArabicColumnName(columnName) {
+    // This is just an example, you would need to replace these with your own Arabic column names
+    var arabicColumnNames = {
+      activity_name: "الاسم",
+      activity_start_date: "تاريخ البدء",
+      activity_end_date: "تاريخ الأنتهاء",
+      governorate: "المحافظة",
+      activity_area: "المنطقة",
+      activity_details: "التفاصيل",
+      activity_aim: "الهدف",
+      project_name: "المشروع",
+      program_name: "البرنامج",
+      activity_type: "نوع النشاط",
+      activity_period: "المدة",
+      // add more here
+    };
+
+    return arabicColumnNames[columnName];
+  }
 
   $("#logout").click(function () {
     localStorage.setItem("login", 0);
