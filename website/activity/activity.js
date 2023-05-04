@@ -294,7 +294,7 @@ $(document).ready(function () {
       if ($("#end_date").val() < $("#start_date").val()) {
         $("#end_date").css("border-color", "red");
         $("#start_date").css("border-color", "red");
-        $("#not").text("يرجى التأكد من التاريخ !");
+        $("#DateNot").text("يرجى التأكد من التاريخ !");
       }
 
       $("html, body").animate({ scrollTop: 0 }, 800);
@@ -655,52 +655,53 @@ $(document).ready(function () {
     }
   });
 
-  let filesArray = [];
-  const attachCont = $("#attachCont");
+  let imageArr = [];
   $("#bt_att").click(function () {
-    if ($("#file").val() != "") {
-      const fileInput = $("#file")[0];
-      const fileName = fileInput.files[0].name;
-      var file_data = $("#file").prop("files")[0];
+    var formData = new FormData();
+    formData.append("file", $("#file")[0].files[0]);
+    formData.append("activityName", name1);
 
-      let isNotExsist = true;
-      for (let i = 0; i < filesArray.length; i++) {
-        const fileInput2 = filesArray[i].name;
-        if (fileInput2 === fileName) {
-          isNotExsist = false;
-        }
-      }
+    imageArr.push($("#file")[0].files[0].name);
 
-      if (isNotExsist && fileName !== "") {
-        filesArray.push(file_data);
-
-        const newFilesArray = filesArray.map((e) => {
-          const div = $("<div>");
-          const h6 = $("<h6>").text(e.name);
-          const button = $("<button>")
-            .text("حذف")
-            .addClass("file_remove_btn")
-            .data("id", e.name);
-          div.append(h6, button);
-          return div;
-        });
-
-        attachCont.html(newFilesArray);
-        attachCont.show();
-      }
-    }
+    $.ajax({
+      url: "../php/addImage.php",
+      data: formData,
+      type: "POST",
+      contentType: false,
+      processData: false,
+      success: function (out) {
+        relodImage();
+      },
+    });
   });
 
-  $(document).on("click", ".file_remove_btn", function () {
+  function relodImage() {
+    const newImageArr = imageArr.map((e) => {
+      return (
+        '<tr> <td><img style="width: 150px;height: 150px;" src="../img/images/' +
+        e +
+        '" alt=""></td> <td><button data-id="' +
+        e +
+        '" class="img_remove">حذف</button></td> </tr>'
+      );
+    });
+
+    $("#imageTable").html(
+      '<tr> <th width="70%">صور</th> <th width="10%">حذف</th> </tr>' +
+        newImageArr
+    );
+  }
+
+  $("#imageTable").on("click", ".img_remove", function () {
     const id = $(this).data("id");
-
-    filesArray = filesArray.filter((e) => e.name !== id);
-
-    $(this).parent().remove();
-
-    if (filesArray.length === 0) {
-      attachCont.hide();
-    }
+    imageArr = imageArr.filter((e) => e !== id);
+    $.ajax({
+      url: "../php/removeImage.php",
+      data: { name: id },
+      type: "get",
+      success: function (out) {},
+    });
+    relodImage();
   });
 
   let challArray = [];
@@ -826,145 +827,6 @@ $(document).ready(function () {
                 type: "post",
                 success: function (out) {
                   if (out == "successfully") {
-                    if (empArray.length !== 0) {
-                      let sqlArray = empArray.map((e) => {
-                        return (
-                          "INSERT INTO `act_emp`(`emp_id`, `activity_name`) VALUES ('" +
-                          e.EmpId +
-                          "', '" +
-                          name1 +
-                          "')"
-                        );
-                      });
-
-                      sqlArray.forEach((e) => {
-                        $.ajax({
-                          url: "../../controlPanal/phpFile/add.php",
-                          data: { sqlAdd: e },
-                          type: "post",
-                          success: function (out) {
-                            if (out == "successfully") {
-                            } else {
-                              $("#not4").text(
-                                "لم تتم الإضافة يرجى التأكد من معلومات الموظفين في ثالث صفحة"
-                              );
-                            }
-                          },
-                        });
-                      });
-                    }
-
-                    let male = $("#male").val();
-                    let female = $("#female").val();
-                    let age_18 = $("#age_18").val();
-                    let age_18_30 = $("#age_18_30").val();
-
-                    let sql =
-                      "INSERT INTO `beneficiaries`(`less_than_18`, `age_18_30`, `male`, `female`, `activity_name`) VALUES ('" +
-                      age_18 +
-                      "','" +
-                      age_18_30 +
-                      "','" +
-                      male +
-                      "','" +
-                      female +
-                      "','" +
-                      name1 +
-                      "')";
-
-                    $.ajax({
-                      url: "../../controlPanal/phpFile/add.php",
-                      data: { sqlAdd: sql },
-                      type: "post",
-                      success: function (out) {
-                        if (out == "successfully") {
-                          if (linksArray.length !== 0) {
-                            let sqlArray = linksArray.map((e) => {
-                              return (
-                                "INSERT INTO `links`(`link`, `activity_name`) VALUES ('" +
-                                e.links +
-                                "','" +
-                                name1 +
-                                "')"
-                              );
-                            });
-
-                            console.log(sqlArray);
-
-                            sqlArray.forEach((e) => {
-                              $.ajax({
-                                url: "../../controlPanal/phpFile/add.php",
-                                data: { sqlAdd: e },
-                                type: "post",
-                                success: function (out) {
-                                  if (out == "successfully") {
-                                  } else {
-                                    $("#not4").text(
-                                      "لم تتم الإضافة يرجى التأكد من الروابط في رابع صفحة"
-                                    );
-                                  }
-                                },
-                              });
-                            });
-                          }
-
-                          if (filesArray.length !== 0) {
-                            filesArray.forEach((e) => {
-                              var form_data = new FormData();
-                              form_data.append("file", e);
-                              form_data.append("activityName", name1);
-                              $.ajax({
-                                url: "../php/addImage.php",
-                                dataType: "text",
-                                cache: false,
-                                contentType: false,
-                                processData: false,
-                                data: form_data,
-                                type: "post",
-                                success: function (response) {},
-                                error: function () {
-                                  $("#not4").text(
-                                    "لم تتم الإضافة يرجى التأكد من المرفقات في رابع صفحة"
-                                  );
-                                },
-                              });
-                            });
-                          }
-
-                          if (challArray.length !== 0) {
-                            let sqlArray = challArray.map((e) => {
-                              return (
-                                "INSERT INTO `activ_chall`(`challenge`, `activity_name`) VALUES ('" +
-                                e.chall +
-                                "','" +
-                                name1 +
-                                "')"
-                              );
-                            });
-
-                            sqlArray.forEach((e) => {
-                              $.ajax({
-                                url: "../../controlPanal/phpFile/add.php",
-                                data: { sqlAdd: e },
-                                type: "post",
-                                success: function (out) {
-                                  if (out == "successfully") {
-                                  } else {
-                                    $("#not4").text(
-                                      "لم تتم الإضافة يرجى التأكد من التحديات في رابع صفحة"
-                                    );
-                                  }
-                                },
-                              });
-                            });
-                          }
-                        } else {
-                          $("#not4").text(
-                            "لم تتم الإضافة يرجى التأكد من معلومات المستفيدين في ثالث صفحة"
-                          );
-                        }
-                      },
-                    });
                   } else {
                     $("#not4").text(
                       "لم تتم الإضافة يرجى التأكد من معلومات المسؤولين في ثاني صفحة"
@@ -974,14 +836,160 @@ $(document).ready(function () {
               });
             });
           }
-          
-          $("#he4").css("display", "none");
-          $("#he1").css("display", "flex");
-          $("#tableShow").show();
-          $("input, textarea").css("border-color", "#ccc");
-          $("input, textarea").val("");
-          reload("SELECT * FROM `activities`");
-          $("#close1").toggle();
+
+          if (empArray.length !== 0) {
+            let sqlArray = empArray.map((e) => {
+              return (
+                "INSERT INTO `act_emp`(`emp_id`, `activity_name`) VALUES ('" +
+                e.EmpId +
+                "', '" +
+                name1 +
+                "')"
+              );
+            });
+
+            sqlArray.forEach((e) => {
+              $.ajax({
+                url: "../../controlPanal/phpFile/add.php",
+                data: { sqlAdd: e },
+                type: "post",
+                success: function (out) {
+                  if (out == "successfully") {
+                  } else {
+                    $("#not4").text(
+                      "لم تتم الإضافة يرجى التأكد من معلومات الموظفين في ثالث صفحة"
+                    );
+                  }
+                },
+              });
+            });
+          }
+
+          let male = $("#male").val();
+          let female = $("#female").val();
+          let age_18 = $("#age_18").val();
+          let age_18_30 = $("#age_18_30").val();
+
+          let sql =
+            "INSERT INTO `beneficiaries`(`less_than_18`, `age_18_30`, `male`, `female`, `activity_name`) VALUES ('" +
+            age_18 +
+            "','" +
+            age_18_30 +
+            "','" +
+            male +
+            "','" +
+            female +
+            "','" +
+            name1 +
+            "')";
+
+          $.ajax({
+            url: "../../controlPanal/phpFile/add.php",
+            data: { sqlAdd: sql },
+            type: "post",
+            success: function (out) {
+              if (out == "successfully") {
+              } else {
+                $("#not4").text(
+                  "لم تتم الإضافة يرجى التأكد من معلومات المستفيدين في ثالث صفحة"
+                );
+              }
+            },
+          });
+
+          if (linksArray.length !== 0) {
+            let sqlArray = linksArray.map((e) => {
+              return (
+                "INSERT INTO `links`(`link`, `activity_name`) VALUES ('" +
+                e.links +
+                "','" +
+                name1 +
+                "')"
+              );
+            });
+            sqlArray.forEach((e) => {
+              $.ajax({
+                url: "../../controlPanal/phpFile/add.php",
+                data: { sqlAdd: e },
+                type: "post",
+                success: function (out) {
+                  if (out == "successfully") {
+                  } else {
+                    $("#not4").text(
+                      "لم تتم الإضافة يرجى التأكد من الروابط في رابع صفحة"
+                    );
+                  }
+                },
+              });
+            });
+          }
+
+          if (imageArr.length !== 0) {
+            let sqlArray = imageArr.map((e) => {
+              return (
+                "INSERT INTO `attachments`(`attachment`, `activity_name`) VALUES ('" +
+                e +
+                "','" +
+                name1 +
+                "')"
+              );
+            });
+            sqlArray.forEach((e) => {
+              $.ajax({
+                url: "../../controlPanal/phpFile/add.php",
+                data: { sqlAdd: e },
+                type: "post",
+                success: function (out) {
+                  if (out == "successfully") {
+                  } else {
+                    $("#not4").text(
+                      "لم تتم الإضافة يرجى التأكد من الصور في رابع صفحة"
+                    );
+                  }
+                },
+              });
+            });
+          }
+
+          if (challArray.length !== 0) {
+            let sqlArray = challArray.map((e) => {
+              return (
+                "INSERT INTO `activ_chall`(`challenge`, `activity_name`) VALUES ('" +
+                e.chall +
+                "','" +
+                name1 +
+                "')"
+              );
+            });
+
+            sqlArray.forEach((e) => {
+              $.ajax({
+                url: "../../controlPanal/phpFile/add.php",
+                data: { sqlAdd: e },
+                type: "post",
+                success: function (out) {
+                  if (out == "successfully") {
+                  } else {
+                    $("#not4").text(
+                      "لم تتم الإضافة يرجى التأكد من التحديات في رابع صفحة"
+                    );
+                  }
+                },
+              });
+            });
+          }
+
+          $.when
+            .apply(
+              $,
+              $.map($(".ajax-call"), function (call) {
+                return call[0];
+              })
+            )
+            .then(function () {
+              // All AJAX requests have completed, redirect the user
+              window.location.replace("../activity/activity.html");
+            });
         } else {
           $("#not4").text(
             "لم تتم الإضافة يرجى التأكد من البيانات من معلومات النشاط في اول صفحة"
@@ -1089,17 +1097,22 @@ $(document).ready(function () {
   });
 
   $(".close").click(function () {
-    $("#he1").css("display", "flex");
-    $("#he4").css("display", "none");
-    $("#he2").css("display", "none");
-    $("#he3").css("display", "none");
-    $("input").css("color", "#ccc");
-    reload("SELECT * FROM `activities`");
-    $("#tableShow").toggle();
-    $("#not3").text("");
-    $("#not").text("");
-    $("#not2").text("");
-    $("input, textarea").val("");
+    if (confirm("هل انت متأكد من الألغاء")) {
+      if (imageArr.length > 0) {
+        for (i = 0; i < imageArr.length; i++) {
+          $.ajax({
+            url: "../php/removeImage.php",
+            data: { name: imageArr[i] },
+            type: "get",
+            success: function (out) {
+              window.location.replace("../activity/activity.html");
+            },
+          });
+        }
+      } else {
+        window.location.replace("../activity/activity.html");
+      }
+    }
   });
 
   let id;

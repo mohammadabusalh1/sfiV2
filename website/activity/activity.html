@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>الأنشطة</title>
     <link rel="stylesheet" href="activity.css" />
-    <link rel="shortcut icon" href="img/smallLogo.png" />
+    <link rel="shortcut icon" href="../img/smallLogo.png" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -68,6 +68,7 @@
             <h6>إلى</h6>
             <input type="date" id="end_date" />
           </div>
+          <p id="DateNot" class="not"></p>
         </div>
         <div>
           <h6>مدة النشاط</h6>
@@ -91,7 +92,9 @@
         </div>
         <div>
           <button id="next" class="butt">التالي</button>
-          <button id="close1" class="close butt" style="display: none;">الغاء</button>
+          <button id="close1" class="close butt" style="display: none">
+            الغاء
+          </button>
           <p id="not" class="not"></p>
         </div>
       </div>
@@ -162,7 +165,7 @@
           <h6>مرفق</h6>
           <input id="file" type="file" />
           <button id="bt_att" class="add2">اضف</button>
-          <div id="attachCont" class="inserted"></div>
+          <table id="imageTable"></table>
         </div>
         <div>
           <h6>التحديات</h6>

@@ -1,38 +1,23 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sfi";
+if (isset($_FILES['file'])) {
+    $file = $_FILES['file'];
+    $activityName = $_POST['activityName'];
+    $fileName = $file['name'];
+    $fileTmpName = $file['tmp_name'];
+    $fileSize = $file['size'];
+    $fileError = $file['error'];
+    $fileType = $file['type'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    if ($fileError === 0) {
+        if ($fileSize < 9999999999) {
+            $fileDestination = '../img/images/' . $fileName;
+            move_uploaded_file($fileTmpName, $fileDestination);
+        } else {
+            echo "الملف حجمه كبير";
+        }
+    } else {
+        echo "يوجد مشكلة في تحميل الملف";
+    }
 }
 
-// Get file data
-$file = $_FILES['file']['tmp_name'];
-$file_name = $_FILES['file']['name'];
-$activity = $_POST['activityName'];
-
-// Read file contents
-$handle = fopen($file, "r");
-$contents = fread($handle, filesize($file));
-fclose($handle);
-
-// Escape special characters
-$contents = mysqli_real_escape_string($conn, $contents);
-
-// Insert file data into database
-$sql = "INSERT INTO `attachments`(`file_name`, `file_contents`, `activity_name`) VALUES ('$file_name', '$contents', '$activity')";
-if ($conn->query($sql) === TRUE) {
-    echo "File uploaded successfully!";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-// Close connection
-$conn->close();
 ?>

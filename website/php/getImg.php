@@ -10,7 +10,6 @@ if (isset($_POST["activityName"])) {
     $sql = "SELECT * FROM `attachments` WHERE `activity_name`='" . $activityName . "'";
     $result = mysqli_query($conn, $sql);
     $ht = '
-    <table id="imageTable">  
      <tr>
       <th width="70%">صور</th>
       <th width="10%">حذف</th>
@@ -20,7 +19,7 @@ if (isset($_POST["activityName"])) {
         while($row = mysqli_fetch_assoc($result)){
             $img = $row["attachment"];
             $attachment_id  = $row["attachment_id"];
-            $ht .= "<tr> <td><img style=\"width: 150px;height: 150px;\" src=\"img/images/$img\" alt=\"\"></td> <td><button class=\"img_remove\" data-id=\"$attachment_id,$img\">حذف</button></td> </tr>";
+            $ht .= "<tr> <td><img style=\"width: 150px;height: 150px;\" src=\"../img/images/$img\" alt=\"\"></td> <td><button class=\"img_remove\" data-id=\"$attachment_id,$img\">حذف</button></td> </tr>";
         }
         echo $ht;
     } else {

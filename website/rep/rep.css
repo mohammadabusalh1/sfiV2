@@ -171,8 +171,22 @@ td {
     margin: 20px 0;
 }
 
+#activityReport{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    gap: 4rem;
+}
+
 #filter{
-    padding: var(--padding2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 1.5rem;
+    padding: 0 80px;
 }
 
 #filter h2 {
@@ -225,23 +239,12 @@ display: none;
     cursor: pointer;
 }
 
-@media screen and (max-width:5800px) {
-    #filter {
-        padding-bottom: 22vw;
-    }
+#title{
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-@media screen and (max-width:3800px) {
-    #filter {
-        padding-bottom: 14vw;
-    }
-}
-
-@media screen and (max-width:1200PX) {
-    #service #card_cont {
-        width: 60%;
-    }
-}
 
 @media screen and (max-width:992px) {
     #bar {
