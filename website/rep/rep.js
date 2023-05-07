@@ -266,18 +266,47 @@ $(document).ready(function () {
     },
   });
 
+  function addTh(headerRow) {
+    if ($("#ch_challs").is(":checked")) {
+      headerRow.append("<th>التحديات</th>");
+    }
+
+    if ($("#ch_admins").is(":checked")) {
+      headerRow.append("<th>المسؤولين</th>");
+    }
+
+    if ($("#ch_links").is(":checked")) {
+      headerRow.append("<th>الروابط</th>");
+    }
+
+    if ($("#ch_benes").is(":checked")) {
+      headerRow.append("<th>اصغر من 18</th>");
+      headerRow.append("<th>من 18 الى 30</th>");
+      headerRow.append("<th>ذكور</th>");
+      headerRow.append("<th>إناث</th>");
+    }
+
+    if ($("#ch_emps").is(":checked")) {
+      headerRow.append("<th>الموظفين</th>");
+    }
+
+    return headerRow;
+  }
+
   $("#next").click(function () {
     $("#attribute").show();
     $("#activityReport").hide();
+    $("html, body").animate({ scrollTop: 0 }, 500);
 
     $("#show_report").click(function () {
       if (!$(".chick").is(":checked")) {
         $("#not").text("لم تقم بالأختيار!");
       } else {
         $("#not").text("");
+        $("#statics").css("display", "flex");
         var sql =
           "SELECT " +
-          ($("#ch_activityName").is(":checked") ? "`activity_name`, " : "") +
+          "`activity_name`, " +
           ($("#ch_date").is(":checked")
             ? "`activity_start_date`, `activity_end_date`, "
             : "") +
@@ -288,12 +317,12 @@ $(document).ready(function () {
           ($("#ch_project").is(":checked") ? "`project_name`, " : "") +
           ($("#ch_program").is(":checked") ? "`program_name`, " : "") +
           ($("#ch_activityType").is(":checked") ? "`activity_type`, " : "") +
-          ($("#ch_period").is(":checked")
-            ? "`activity_period` FROM `activities` WHERE "
-            : "");
+          ($("#ch_period").is(":checked") ? "`activity_period` " : "");
 
         if (sql.substr(-2) === ", ") {
           sql = sql.substr(0, sql.length - 2) + " FROM `activities` WHERE ";
+        } else {
+          sql += " FROM `activities` WHERE ";
         }
 
         let name =
@@ -343,7 +372,11 @@ $(document).ready(function () {
         let period =
           $("#period").val() == ""
             ? "1 && "
-            : "activity_period = '" + $("#period").val() + "' && ";
+            : "activity_period >= '" +
+              $("#period").val() +
+              "' && activity_period <= '" +
+              $("#period2").val() +
+              "' && ";
         sql += period;
 
         if (sql.substr(-2) === "& ") {
@@ -366,9 +399,7 @@ $(document).ready(function () {
             headerRow.append("<th>" + getArabicColumnName(key) + "</th>");
           });
 
-          if ($("#ch_admins").is(":checked")) {
-            headerRow.append("<th>المسؤولين</th>");
-          }
+          headerRow = addTh(headerRow);
           table.append(headerRow);
 
           // Create an object to store admin names and titles
@@ -381,50 +412,170 @@ $(document).ready(function () {
               dataRow.append("<td>" + row[key] + "</td>");
             });
 
+            let tdAdmins = "";
+            let tdChalls;
+            let tdLinks;
+            let tdBenes;
+            let tdEmp;
+            const promises = [];
+
             if ($("#ch_admins").is(":checked")) {
               let sql =
                 "SELECT administrator_name, nickname FROM act_adm_nick WHERE activity_name = '" +
                 activityName +
                 "'";
-              console.log(sql);
-              $.ajax({
+              promises.push(
+                new Promise((resolve, reject) => {
+                  $.ajax({
+                    url: "../../controlPanal/phpFile/show.php",
+                    data: { sql: sql },
+                    dataType: "json",
+                    type: "post",
+                    success: function (data1) {
+                      data1.forEach(function (admin) {
+                        if (
+                          adminNamesObj.hasOwnProperty(admin.administrator_name)
+                        ) {
+                          adminNamesObj[admin.administrator_name].push(
+                            admin.nickname
+                          );
+                        } else {
+                          adminNamesObj[admin.administrator_name] = [
+                            admin.nickname,
+                          ];
+                        }
+                      });
+
+                      // Create the adminNames string by iterating over the object
+                      var adminNames = "";
+                      Object.keys(adminNamesObj).forEach(function (adminName) {
+                        var titles = adminNamesObj[adminName].join(", ");
+                        adminNames += adminName + " (" + titles + "), ";
+                      });
+                      adminNames = adminNames.slice(0, -2); // remove the last comma
+
+                      var adminCell = "<td>" + adminNames + "</td>";
+                      tdAdmins = adminCell;
+                      resolve();
+                    },
+                  });
+                })
+              );
+            }
+
+            if ($("#ch_challs").is(":checked")) {
+              let sql =
+                "SELECT challenge FROM activ_chall WHERE activity_name = '" +
+                activityName +
+                "'";
+              promises.push(
+                new Promise((resolve, reject) => {
+                  $.ajax({
+                    url: "../../controlPanal/phpFile/show.php",
+                    data: { sql: sql },
+                    dataType: "json",
+                    type: "post",
+                    success: function (data1) {
+                      let challenges = "";
+                      for (var i = 0; i < data1.length; i++) {
+                        challenges += data1[i].challenge + ", ";
+                      }
+                      tdChalls = "<td>" + challenges + "</td>";
+                      resolve();
+                    },
+                  });
+                })
+              );
+            }
+
+            if ($("#ch_links").is(":checked")) {
+              let sql =
+                "SELECT link FROM links WHERE activity_name = '" +
+                activityName +
+                "'";
+              promises.push(
+                new Promise((resolve, reject) => {
+                  $.ajax({
+                    url: "../../controlPanal/phpFile/show.php",
+                    data: { sql: sql },
+                    dataType: "json",
+                    type: "post",
+                    success: function (data1) {
+                      tdLinks = "<td>";
+                      for (var i = 0; i < data1.length; i++) {
+                        tdLinks +=
+                          '<a href="' +
+                          data1[i].link +
+                          '">' +
+                          data1[i].link +
+                          "</a>, ";
+                      }
+                      tdLinks += "</td>";
+                      resolve();
+                    },
+                  });
+                })
+              );
+            }
+
+            if ($("#ch_benes").is(":checked")) {
+              let sql =
+                "SELECT * FROM beneficiaries WHERE activity_name = '" +
+                activityName +
+                "'";
+              const promise = $.ajax({
                 url: "../../controlPanal/phpFile/show.php",
                 data: { sql: sql },
                 dataType: "json",
                 type: "post",
                 success: function (data1) {
-                  data1.forEach(function (admin) {
-                    if (
-                      adminNamesObj.hasOwnProperty(admin.administrator_name)
-                    ) {
-                      adminNamesObj[admin.administrator_name].push(
-                        admin.nickname
-                      );
-                    } else {
-                      adminNamesObj[admin.administrator_name] = [
-                        admin.nickname,
-                      ];
-                    }
-                  });
-
-                  // Create the adminNames string by iterating over the object
-                  var adminNames = "";
-                  Object.keys(adminNamesObj).forEach(function (adminName) {
-                    var titles = adminNamesObj[adminName].join(", ");
-                    adminNames += adminName + " (" + titles + "), ";
-                  });
-                  adminNames = adminNames.slice(0, -2); // remove the last comma
-
-                  var adminCell = $("<td>" + adminNames + "</td>");
-                  dataRow.append(adminCell);
-                  table.append(dataRow);
+                  let binis = "";
+                  for (var i = 0; i < data1.length; i++) {
+                    binis += "<td>" + data1[i].less_than_18 + "</td> ";
+                    binis += "<td>" + data1[i].age_18_30 + "</td> ";
+                    binis += "<td>" + data1[i].male + "</td> ";
+                    binis += "<td>" + data1[i].female + "</td> ";
+                  }
+                  tdBenes = binis;
                 },
               });
-            } else {
-              table.append(dataRow);
+              promises.push(promise);
             }
 
-            
+            if ($("#ch_emps").is(":checked")) {
+              let sql =
+                "SELECT * FROM `employees` WHERE `emp_id` in (SELECT `emp_id` FROM `act_emp` WHERE `activity_name` = '" +
+                activityName +
+                "')";
+              promises.push(
+                new Promise((resolve, reject) => {
+                  $.ajax({
+                    url: "../../controlPanal/phpFile/show.php",
+                    data: { sql: sql },
+                    dataType: "json",
+                    type: "post",
+                    success: function (data1) {
+                      tdEmp = "<td>";
+                      for (var i = 0; i < data1.length; i++) {
+                        tdEmp += data1[i].emp_name + ", ";
+                      }
+                      tdEmp += "</td>";
+                      resolve();
+                    },
+                  });
+                })
+              );
+            }
+
+            Promise.all(promises)
+              .then(function () {
+                // All AJAX calls have finished and their results have been assigned to the variables.
+                dataRow.append(tdChalls, tdAdmins, tdLinks, tdBenes, tdEmp);
+                table.append(dataRow);
+              })
+              .catch(function (error) {
+                // Handle the error if any of the AJAX calls fail.
+              });
           });
           $("#report_table").replaceWith(table);
         },
@@ -454,6 +605,10 @@ $(document).ready(function () {
 
     return arabicColumnNames[columnName];
   }
+
+  $("#all").click(function () {
+    $(".chick").prop("checked", $(this).prop("checked"));
+  });
 
   $("#logout").click(function () {
     localStorage.setItem("login", 0);

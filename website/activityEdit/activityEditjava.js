@@ -736,7 +736,6 @@ $(document).ready(function () {
     formData.append("file", $("#file")[0].files[0]);
     formData.append("activityName", name1);
 
-    imageArr.push($("#file")[0].files[0].name);
     $.ajax({
       url: "../php/addImage.php",
       data: formData,
@@ -744,6 +743,11 @@ $(document).ready(function () {
       contentType: false,
       processData: false,
       success: function (out) {
+        if (out != "الملف حجمه كبير" && out != "يوجد مشكلة في تحميل الملف")
+          imageArr.push(out);
+        else {
+          alert(out);
+        }
         relodImage2();
       },
     });
@@ -884,7 +888,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#next4").click(function () {
+  $(".next4").click(function () {
     name1 = $("#name").val();
     pro = $("#pro").val();
     prog = $("#prog").val();
@@ -1014,7 +1018,7 @@ $(document).ready(function () {
           let age_18 = $("#age_18").val();
           let age_18_30 = $("#age_18_30").val();
 
-          let sql =
+          let sqlBene =
             "UPDATE `beneficiaries` SET `less_than_18`='" +
             age_18 +
             "',`age_18_30`='" +
@@ -1026,10 +1030,9 @@ $(document).ready(function () {
             "' WHERE `activity_name`='" +
             activityName +
             "'";
-
           $.ajax({
             url: "../../controlPanal/phpFile/add.php",
-            data: { sqlAdd: sql },
+            data: { sqlAdd: sqlBene },
             type: "post",
             success: function (out) {
               if (out == "successfully") {
@@ -1184,43 +1187,75 @@ $(document).ready(function () {
         "SELECT * FROM `attachments` where `activity_name`='" +
         activityName +
         "'";
-      let arr = [];
-      $.ajax({
-        url: "../../controlPanal/phpFile/show.php",
-        data: { sql: sqlLinks },
-        dataType: "json",
-        type: "post",
-        success: function (data) {
-          for (let i = 0; i < data.length; i++) {
-            arr.push(data[i].attachment);
-          }
-        },
-      });
-
-      for (let i = 0; i < imageArr.length; i++) {
-        if (!arr.includes(imageArr[i])) {
+      // let arr = [];
+      const fetchLinks = () => {
+        return new Promise((resolve, reject) => {
           $.ajax({
-            url: "../php/removeImage.php",
-            data: { name: imageArr[i] },
-            type: "get",
-            success: function (out) {},
+            url: "../../controlPanal/phpFile/show.php",
+            data: { sql: sqlLinks },
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+              const arr = [];
+              for (let i = 0; i < data.length; i++) {
+                arr.push(data[i].attachment);
+                console.log(data[i].attachment);
+              }
+              resolve(arr);
+            },
+            error: function (err) {
+              reject(err);
+            },
           });
-        }
-      }
+        });
+      };
 
-      // $.when
-      //   .apply(
-      //     $,
-      //     $.map($(".ajax-call"), function (call) {
-      //       return call[0];
-      //     })
-      //   )
-      //   .then(function () {
-      //     // All AJAX requests have completed, redirect the user
-      //     window.location.replace("../activity/activity.html");
-      //   });
+      const removeImages = (arr) => {
+        const promises = [];
+        for (let i = 0; i < imageArr.length; i++) {
+          if (!arr.includes(imageArr[i])) {
+            const promise = new Promise((resolve, reject) => {
+              $.ajax({
+                url: "../php/removeImage.php",
+                data: { name: imageArr[i] },
+                type: "get",
+                success: function (out) {
+                  resolve(out);
+                },
+                error: function (err) {
+                  reject(err);
+                },
+              });
+            });
+            promises.push(promise);
+          }
+        }
+        return Promise.all(promises);
+      };
+
+      fetchLinks()
+        .then((arr) => removeImages(arr))
+        .then((results) => {
+          // handle results here
+        })
+        .catch((err) => {
+          // handle error here
+        });
+
+      $.when
+        .apply(
+          $,
+          $.map($(".ajax-call"), function (call) {
+            return call[0];
+          })
+        )
+        .then(function () {
+          // All AJAX requests have completed, redirect the user
+          window.location.replace("../activity/activity.html");
+        });
     }
   });
+
   function reload(sql) {
     $.ajax({
       url: "../../controlPanal/phpFile/show.php",

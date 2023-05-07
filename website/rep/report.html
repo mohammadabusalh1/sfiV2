@@ -128,7 +128,8 @@
           </div>
         <div class="fill">
           المدة
-          <input class="in2" type="text" name="period" id="period"></input>
+          <input class="in2" type="text" name="period" id="period" placeholder="من"></input>
+          <input class="in2" type="text" name="period2" id="period2" placeholder="إلى"></input>
         </div>
       </div>
       <button id="next" class="bt_next">التالي</button>
@@ -136,7 +137,7 @@
 
     <section id="attribute">
       <h2>إختر محتويات التقرير</h2>
-      <input type="checkbox" id="ch_activityName" class="chick" /> إسم النشاط<br />
+      <input type="checkbox" id="all" class="chick" />الكل <br />
       <input type="checkbox" id="ch_date" class="chick" />التاريخ <br />
       <input type="checkbox" id="ch_gov" class="chick" />المحافظة<br />
       <input type="checkbox" id="ch_area" class="chick" /> المنطقة<br />
@@ -151,6 +152,7 @@
       <input type="checkbox" id="ch_links" class="chick" />الروابط<br />
       <input type="checkbox" id="ch_benes" class="chick" />معلومات المستفيدين<br />
       <input type="checkbox" id="ch_admins" class="chick" />المسؤولين<br />
+      <input type="checkbox" id="ch_emps" class="chick" />الموظفين<br />
       <p id="not"></p>
       <button id="show_report" class="bt_next">أظهر النشاطات</button>
     </section>
@@ -159,6 +161,25 @@
         <table id="report_table">
 
         </table>
+    </section>
+
+    <section id="statics">
+
+        <div>
+          <h6>مجموع المدة</h6>
+          <h6 id="totalTime"></h6>
+        </div>
+
+        <div>
+          <h6>عدد المسؤولين</h6>
+          <h6 id="totalAdminNum"></h6>
+        </div>
+
+        <div>
+          <h6>عدد المستفيدين</h6>
+          <h6 id="totalBeneNum"></h6>
+        </div>
+
     </section>
 
     <!-- start footer -->

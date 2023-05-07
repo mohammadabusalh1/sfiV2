@@ -8,10 +8,15 @@ if (isset($_FILES['file'])) {
     $fileError = $file['error'];
     $fileType = $file['type'];
 
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+
     if ($fileError === 0) {
         if ($fileSize < 9999999999) {
-            $fileDestination = '../img/images/' . $fileName;
+            $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+            $fileDestination = '../img/images/' . $fileNameNew;
             move_uploaded_file($fileTmpName, $fileDestination);
+            echo $fileNameNew;
         } else {
             echo "الملف حجمه كبير";
         }

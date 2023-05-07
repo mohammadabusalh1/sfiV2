@@ -355,10 +355,14 @@ $(document).ready(function () {
       $("#idea").val() === "" ||
       $("#startDate").val() === "" ||
       $("#endDate").val() === "" ||
-      $("#endDate").val() < $("#startDate").val()
+      $("#endDate").val() < $("#startDate").val() ||
+      goalsArray.length === 0
     ) {
       $("#alert").text("يرجى ملء جميع الحقول بالشكل الصحيح !");
 
+      if(goalsArray.length === 0){
+        $("#alert").text("يرجى إضافة هدف واحد على الاقل !");
+      }
       // Check if any of the input values are empty
       if ($("#name").val() === "") {
         $("#name").css("border-color", "red");

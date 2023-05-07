@@ -661,8 +661,6 @@ $(document).ready(function () {
     formData.append("file", $("#file")[0].files[0]);
     formData.append("activityName", name1);
 
-    imageArr.push($("#file")[0].files[0].name);
-
     $.ajax({
       url: "../php/addImage.php",
       data: formData,
@@ -670,6 +668,11 @@ $(document).ready(function () {
       contentType: false,
       processData: false,
       success: function (out) {
+        if (out != "الملف حجمه كبير" && out != "يوجد مشكلة في تحميل الملف")
+          imageArr.push(out);
+        else {
+          alert(out);
+        }
         relodImage();
       },
     });
@@ -1093,6 +1096,14 @@ $(document).ready(function () {
         type: "post",
         success: function (out) {},
       });
+
+      sql = "DELETE FROM `beneficiaries` WHERE `activity_name`='" + id + "'";
+      $.ajax({
+        url: "../../controlPanal/phpFile/remove.php",
+        data: { sql: sql },
+        type: "post",
+        success: function (out) {},
+      });
     }
   });
 
@@ -1119,5 +1130,10 @@ $(document).ready(function () {
   $(document).on("click", ".edit-btn", function () {
     id = $(this).data("id");
     window.location.replace("../activityEdit/activityEdit.html?name=" + id);
+  });
+
+  $("#bar").click(function () {
+    $(".navbare").toggleClass("active");
+    $(this).toggleClass("fa-times");
   });
 });

@@ -6,8 +6,13 @@ $(document).ready(function () {
     window.location.replace("../../login.html");
   }
 
-  $("#logout").click(function(){
+  $("#logout").click(function () {
     localStorage.setItem("login", 0);
     window.location.replace("../../login.html");
+  });
+
+  $("#bar").click(function () {
+    $(".navbare").toggleClass("active");
+    $(this).toggleClass("fa-times");
   });
 });

@@ -168,11 +168,14 @@ footer #box_cont .box h4 {
   width: 100%;
   margin: 8px 0;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .adminButt {
   width: 32%;
-  display: block;
 }
 
 #flex #admin > button,
@@ -201,6 +204,9 @@ textarea {
 
 .hero .inf h6 {
   padding-bottom: 4px;
+  box-sizing: border-box;
+  white-space: normal;
+  width:fit-content;
 }
 
 #he2,
@@ -350,6 +356,23 @@ th {
 
 #addNickNameForAdmin {
   display: block;
+}
+
+.next4{
+  background-color:#5D9C59 ;
+  color: #DDF7E3;
+  border: none;
+}
+
+.fa-solid, .fas{
+  color: #DDF7E3; 
+}
+
+
+.close{
+  background-color:#DF2E38 ;
+  color: #DDF7E3;
+  border: none;
 }
 
 @media screen and (min-width: 3350px) {
