@@ -43,17 +43,6 @@
       </div>
     </section>
 
-    <!-- <section id="tableShow">
-        <h2>إختر نشاط</h2>
-
-        <input type="text" name="search" id="search" placeholder="# البحث">
-
-        <table class="table" id="table">
-
-        </table>
-
-    </section> -->
-
     <section id="activityReport">
       <h2 id="title">تقرير النشاط</h2>
       <div id="filter">
@@ -137,22 +126,24 @@
 
     <section id="attribute">
       <h2>إختر محتويات التقرير</h2>
-      <input type="checkbox" id="all" class="chick" />الكل <br />
-      <input type="checkbox" id="ch_date" class="chick" />التاريخ <br />
-      <input type="checkbox" id="ch_gov" class="chick" />المحافظة<br />
-      <input type="checkbox" id="ch_area" class="chick" /> المنطقة<br />
-      <input type="checkbox" id="ch_det" class="chick" />التفاصيل
-      <br />
-      <input type="checkbox" id="ch_aim" class="chick" />الهدف<br />
-      <input type="checkbox" id="ch_project" class="chick" />المشروع<br />
-      <input type="checkbox" id="ch_program" class="chick" />البرنامج<br />
-      <input type="checkbox" id="ch_activityType" class="chick" />نوع النشاط<br />
-      <input type="checkbox" id="ch_period" class="chick" />المدة<br />
-      <input type="checkbox" id="ch_challs" class="chick" />التحديات<br />
-      <input type="checkbox" id="ch_links" class="chick" />الروابط<br />
-      <input type="checkbox" id="ch_benes" class="chick" />معلومات المستفيدين<br />
-      <input type="checkbox" id="ch_admins" class="chick" />المسؤولين<br />
-      <input type="checkbox" id="ch_emps" class="chick" />الموظفين<br />
+     <div id="checks">
+      <div><input type="checkbox" id="all" class="chick" /> <h6>الكل</h6> </div>
+      <div><input type="checkbox" id="ch_date" class="chick" /><h6>التاريخ</h6></div>
+      <div><input type="checkbox" id="ch_gov" class="chick" /><h6>المحافظة</h6></div>
+      <div><input type="checkbox" id="ch_area" class="chick" /><h6>المنطقة</h6></div>
+      <div><input type="checkbox" id="ch_det" class="chick" /><h6>التفاصيل</h6></div>
+      <div><input type="checkbox" id="ch_aim" class="chick" /><h6>الهدف</h6></div>
+      <div><input type="checkbox" id="ch_project" class="chick" /><h6>المشروع</h6></div>
+      <div><input type="checkbox" id="ch_program" class="chick" /><h6>البرنامج</h6></div>
+      <div><input type="checkbox" id="ch_activityType" class="chick" /><h6>نوع النشاط</h6></div>
+      <div><input type="checkbox" id="ch_period" class="chick" /><h6>المدة</h6></div>
+      <div><input type="checkbox" id="ch_challs" class="chick" /><h6>التحديات</h6></div>
+      <div><input type="checkbox" id="ch_links" class="chick" /><h6>الروابط</h6></div>
+      <div><input type="checkbox" id="ch_benes" class="chick" /><h6>معلومات المستفيدين</h6></div>
+      <div><input type="checkbox" id="ch_admins" class="chick" /><h6>المسؤولين</h6></div>
+      <div><input type="checkbox" id="ch_emps" class="chick" /><h6>الموظفين</h6></div>
+
+     </div>
       <p id="not"></p>
       <button id="show_report" class="bt_next">أظهر النشاطات</button>
     </section>
@@ -166,17 +157,27 @@
     <section id="statics">
 
         <div>
-          <h6>مجموع المدة</h6>
+          <h6>مجموع الساعات لكل الأنشطة</h6>
           <h6 id="totalTime"></h6>
         </div>
 
         <div>
-          <h6>عدد المسؤولين</h6>
+          <h6>عدد المسؤولين لكل الأنشطة</h6>
           <h6 id="totalAdminNum"></h6>
         </div>
 
         <div>
-          <h6>عدد المستفيدين</h6>
+          <h6>عدد المستفيدين الذكور</h6>
+          <h6 id="totalMaleBeneNum"></h6>
+        </div>
+
+        <div>
+          <h6>عدد المستفيدين الإناث</h6>
+          <h6 id="totalFemaleBeneNum"></h6>
+        </div>
+
+        <div>
+          <h6>عدد المستفيدين الكلي</h6>
           <h6 id="totalBeneNum"></h6>
         </div>
 

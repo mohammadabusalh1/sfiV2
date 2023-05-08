@@ -40,6 +40,14 @@ h6 {
   font-size: 18px;
 }
 
+body {
+  direction: rtl;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
 a:nth-child(odd) {
   color: blue;
   text-decoration: solid;
@@ -170,7 +178,6 @@ table:hover::-webkit-scrollbar {
   display: block;
 }
 
-
 table,
 th,
 td {
@@ -263,6 +270,23 @@ td {
   display: none;
 }
 
+#attribute div{
+  width: fit-content;
+}
+
+#attribute input {
+  cursor: pointer;
+  padding-bottom: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+#attribute h6{
+  display: inline-block;
+  font-weight: 400;
+  font-size: 20px;
+}
+
 #attribute h2 {
   padding-bottom: 40px;
 }
@@ -290,18 +314,30 @@ td {
   justify-content: center;
   align-items: center;
   padding: var(--padding);
+  padding-bottom: 0;
 }
 
-#statics{
+#statics {
   display: none;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 2rem;
   padding: var(--padding);
+  padding-top: 0;
 }
 
-@media screen and (min-width: 1800px) {
+#statics div h6 {
+  text-align: center;
+}
+
+#checks{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media screen and (min-width: 500px) {
   html,
   body {
     height: 100%;
@@ -485,5 +521,10 @@ td {
 
   i {
     font-size: 16px;
+  }
+
+  #report,
+  #statics {
+    padding: 24px;
   }
 }

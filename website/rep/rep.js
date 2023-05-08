@@ -403,12 +403,20 @@ $(document).ready(function () {
           table.append(headerRow);
 
           // Create an object to store admin names and titles
-          var adminNamesObj = {};
+          let period = 0;
+          let adminsNum = 0;
+          let male = 0;
+          let female = 0;
+          let totalbene = 0;
 
           data.forEach(function (row) {
             let activityName = row.activity_name;
+            var adminNamesObj = {};
             var dataRow = $("<tr></tr>");
             Object.keys(row).forEach(function (key) {
+              if (key == "activity_period") {
+                period += parseInt(row[key]);
+              }
               dataRow.append("<td>" + row[key] + "</td>");
             });
 
@@ -418,7 +426,6 @@ $(document).ready(function () {
             let tdBenes;
             let tdEmp;
             const promises = [];
-
             if ($("#ch_admins").is(":checked")) {
               let sql =
                 "SELECT administrator_name, nickname FROM act_adm_nick WHERE activity_name = '" +
@@ -440,6 +447,7 @@ $(document).ready(function () {
                             admin.nickname
                           );
                         } else {
+                          adminsNum++;
                           adminNamesObj[admin.administrator_name] = [
                             admin.nickname,
                           ];
@@ -530,6 +538,10 @@ $(document).ready(function () {
                 type: "post",
                 success: function (data1) {
                   let binis = "";
+                  male += parseInt(data1[0].male);
+                  female += parseInt(data1[0].female);
+                  totalbene +=
+                    parseInt(data1[0].male) + parseInt(data1[0].female);
                   for (var i = 0; i < data1.length; i++) {
                     binis += "<td>" + data1[i].less_than_18 + "</td> ";
                     binis += "<td>" + data1[i].age_18_30 + "</td> ";
@@ -572,12 +584,25 @@ $(document).ready(function () {
                 // All AJAX calls have finished and their results have been assigned to the variables.
                 dataRow.append(tdChalls, tdAdmins, tdLinks, tdBenes, tdEmp);
                 table.append(dataRow);
+                if ($("#ch_admins").is(":checked"))
+                  $("#totalAdminNum").text(adminsNum);
+                else $("#totalAdminNum").text(0);
+                if ($("#ch_benes").is(":checked")) {
+                  $("#totalMaleBeneNum").text(male);
+                  $("#totalFemaleBeneNum").text(female);
+                  $("#totalBeneNum").text(totalbene);
+                } else {
+                  $("#totalMaleBeneNum").text(0);
+                  $("#totalFemaleBeneNum").text(0);
+                  $("#totalBeneNum").text(0);
+                }
               })
               .catch(function (error) {
                 // Handle the error if any of the AJAX calls fail.
               });
           });
           $("#report_table").replaceWith(table);
+          $("#totalTime").text(period);
         },
         error: function (xhr, status, error) {
           console.log("Error: " + error);
