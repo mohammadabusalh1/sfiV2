@@ -62,7 +62,6 @@ a {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  display: none;
   position: absolute;
   top: 70%;
   background-color: #f1f1f1;
@@ -71,6 +70,10 @@ a {
   z-index: 10;
   border-radius: 4px;
   padding: 8px;
+}
+
+.hideDropDown {
+  display: none;
 }
 
 /* Links inside the dropdown */
@@ -314,7 +317,8 @@ footer #pages a h6:hover {
 
 @media screen and (max-width: 992px) {
   #links a,
-  #links div,#nav button span {
+  #links div,
+  #nav button span {
     display: none;
   }
 
@@ -377,7 +381,7 @@ footer #pages a h6:hover {
     width: 60%;
   }
 
-  #nav i{
+  #nav i {
     font-size: 20px;
   }
 }

@@ -61,7 +61,6 @@ button {
 }
 
 .dropdown-content {
-  display: none;
   position: absolute;
   top: 70%;
   background-color: #f1f1f1;
@@ -70,6 +69,10 @@ button {
   z-index: 10;
   border-radius: 4px;
   padding: 8px;
+}
+
+.hideDropDown {
+  display: none;
 }
 
 .dropdown-content a {
@@ -461,13 +464,13 @@ td {
   transition: 0.2s;
 }
 
-#reloadIcons{
+#reloadIcons {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-.relode{
+.relode {
   padding: 12px;
   margin-bottom: 24px;
   background-color: #c58940;
@@ -476,7 +479,7 @@ td {
   cursor: pointer;
 }
 
-.relode:hover{
+.relode:hover {
   opacity: 0.8;
 }
 
@@ -495,7 +498,9 @@ td {
 
 @media screen and (max-width: 992px) {
   #links a,
-  #links div h6,#nav button span, #nav button {
+  #links div h6,
+  #nav button span,
+  #nav button {
     display: none;
   }
 

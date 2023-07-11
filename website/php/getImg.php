@@ -2,7 +2,13 @@
 
 if (isset($_POST["activityName"])) {
     $activityName = $_POST["activityName"];
-    $conn = mysqli_connect("localhost", "root", "", "sfi");
+    $servername = "localhost";
+    $username = "anascosf_sfi";
+    $password = "SfiA!cxpw2Y";
+    $dbname = "anascosf_sfi";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
     $conn->set_charset("utf8");
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -16,9 +22,9 @@ if (isset($_POST["activityName"])) {
      </tr>
    ';
     if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)){
+        while ($row = mysqli_fetch_assoc($result)) {
             $img = $row["attachment"];
-            $attachment_id  = $row["attachment_id"];
+            $attachment_id = $row["attachment_id"];
             $ht .= "<tr> <td><img style=\"width: 150px;height: 150px;\" src=\"../img/images/$img\" alt=\"\"></td> <td><button class=\"img_remove\" data-id=\"$attachment_id,$img\">حذف</button></td> </tr>";
         }
         echo $ht;

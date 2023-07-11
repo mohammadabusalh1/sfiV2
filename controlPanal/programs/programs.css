@@ -89,7 +89,6 @@ button:hover {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  display: none;
   position: absolute;
   top: 70%;
   background-color: #f1f1f1;
@@ -98,6 +97,10 @@ button:hover {
   z-index: 10;
   border-radius: 4px;
   padding: 8px;
+}
+
+.hideDropDown {
+  display: none;
 }
 
 /* Links inside the dropdown */
@@ -400,7 +403,9 @@ td {
 
 @media screen and (max-width: 992px) {
   #links a,
-  #links div h6,#nav button span,#nav button {
+  #links div h6,
+  #nav button span,
+  #nav button {
     display: none;
   }
 
@@ -506,15 +511,15 @@ td {
     padding: 8px 54px;
   }
 
-  #logo img{
+  #logo img {
     width: 24vh;
   }
 
-  #nav{
+  #nav {
     padding: 8px;
   }
 
-  #nav i{
+  #nav i {
     font-size: 20px;
   }
 }

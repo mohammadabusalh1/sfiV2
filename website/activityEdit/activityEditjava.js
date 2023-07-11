@@ -934,234 +934,258 @@ $(document).ready(function () {
       type: "post",
       success: function (out) {
         if (out == "successfully") {
-          let adminRemoveSql =
-            "DELETE FROM `act_adm_nick` WHERE `activity_name`='" +
-            activityName +
-            "'";
-          $.ajax({
-            url: "../../controlPanal/phpFile/remove.php",
-            data: { sql: adminRemoveSql },
-            type: "post",
-            success: function (out) {
-              if (AdminArray.length !== 0) {
-                let sqlArray = AdminArray.flatMap((e) => {
-                  let objArray = e.AdminNicknameArray.map((f) => {
-                    return (
-                      "INSERT INTO `act_adm_nick`(`activity_name`, `administrator_name`, `nickname`) VALUES ('" +
-                      name1 +
-                      "', '" +
-                      e.AdminName +
-                      "', '" +
-                      f +
-                      "')"
-                    );
-                  });
-                  return objArray;
-                });
-
-                sqlArray.forEach((e) => {
-                  $.ajax({
-                    url: "../../controlPanal/phpFile/add.php",
-                    data: { sqlAdd: e },
-                    type: "post",
-                    success: function (out) {
-                      if (out == "successfully") {
-                      } else {
-                        $("#not2").text("لم تتم الإضافة: " + out);
-                      }
-                    },
-                  });
-                });
-              }
-            },
-          });
-
-          let empRemoveSql =
-            "DELETE FROM `act_emp` WHERE `activity_name`='" +
-            activityName +
-            "'";
-          $.ajax({
-            url: "../../controlPanal/phpFile/remove.php",
-            data: { sql: empRemoveSql },
-            type: "post",
-            success: function (out) {
-              if (empArray.length !== 0) {
-                let sqlArray = empArray.map((e) => {
-                  return (
-                    "INSERT INTO `act_emp`(`emp_id`, `activity_name`) VALUES ('" +
-                    e.EmpId +
-                    "', '" +
-                    name1 +
-                    "')"
-                  );
-                });
-
-                sqlArray.forEach((e) => {
-                  $.ajax({
-                    url: "../../controlPanal/phpFile/add.php",
-                    data: { sqlAdd: e },
-                    type: "post",
-                    success: function (out) {
-                      if (out == "successfully") {
-                      } else {
-                        $("#not3").text("لم تتم الإضافة: " + out);
-                      }
-                    },
-                  });
-                });
-              }
-            },
-          });
-
-          let male = $("#male").val();
-          let female = $("#female").val();
-          let age_18 = $("#age_18").val();
-          let age_18_30 = $("#age_18_30").val();
-
-          let sqlBene =
-            "UPDATE `beneficiaries` SET `less_than_18`='" +
-            age_18 +
-            "',`age_18_30`='" +
-            age_18_30 +
-            "',`male`='" +
-            male +
-            "',`female`='" +
-            female +
-            "' WHERE `activity_name`='" +
-            activityName +
-            "'";
-          $.ajax({
-            url: "../../controlPanal/phpFile/add.php",
-            data: { sqlAdd: sqlBene },
-            type: "post",
-            success: function (out) {
-              if (out == "successfully") {
-              } else {
-                $("#not3").text("لم تتم الإضافة: " + out);
-              }
-            },
-          });
-          //next3 ========================
-
-          let LinksRemoveSql =
-            "DELETE FROM `links` WHERE `activity_name`='" + activityName + "'";
-          $.ajax({
-            url: "../../controlPanal/phpFile/remove.php",
-            data: { sql: LinksRemoveSql },
-            type: "post",
-            success: function (out) {
-              if (linksArray.length !== 0) {
-                let sqlArray = linksArray.map((e) => {
-                  return (
-                    "INSERT INTO `links`(`link`, `activity_name`) VALUES ('" +
-                    e.links +
-                    "','" +
-                    name1 +
-                    "')"
-                  );
-                });
-
-                sqlArray.forEach((e) => {
-                  $.ajax({
-                    url: "../../controlPanal/phpFile/add.php",
-                    data: { sqlAdd: e },
-                    type: "post",
-                    success: function (out) {
-                      if (out == "successfully") {
-                      } else {
-                      }
-                    },
-                  });
-                });
-              }
-            },
-          });
-
-          let filesRemoveSql =
-            "DELETE FROM `attachments` WHERE `activity_name`='" +
-            activityName +
-            "'";
-          $.ajax({
-            url: "../../controlPanal/phpFile/remove.php",
-            data: { sql: filesRemoveSql },
-            type: "post",
-            success: function (out) {
-              if (imageArr.length !== 0) {
-                let sqlArray = imageArr.map((e) => {
-                  return (
-                    "INSERT INTO `attachments`(`attachment`, `activity_name`) VALUES ('" +
-                    e +
-                    "','" +
-                    name1 +
-                    "')"
-                  );
-                });
-                sqlArray.forEach((e) => {
-                  $.ajax({
-                    url: "../../controlPanal/phpFile/add.php",
-                    data: { sqlAdd: e },
-                    type: "post",
-                    success: function (out) {
-                      if (out == "successfully") {
-                      } else {
-                        $("#not4").text(
-                          "لم تتم الإضافة يرجى التأكد من الصور في رابع صفحة"
+          Promise.all([
+            new Promise((resolve, reject) => {
+              let adminRemoveSql =
+                "DELETE FROM `act_adm_nick` WHERE `activity_name`='" +
+                activityName +
+                "'";
+              $.ajax({
+                url: "../../controlPanal/phpFile/remove.php",
+                data: { sql: adminRemoveSql },
+                type: "post",
+                success: function (out) {
+                  if (AdminArray.length !== 0) {
+                    let sqlArray = AdminArray.flatMap((e) => {
+                      let objArray = e.AdminNicknameArray.map((f) => {
+                        return (
+                          "INSERT INTO `act_adm_nick`(`activity_name`, `administrator_name`, `nickname`) VALUES ('" +
+                          name1 +
+                          "', '" +
+                          e.AdminName +
+                          "', '" +
+                          f +
+                          "')"
                         );
-                      }
-                    },
-                  });
-                });
-              }
-            },
+                      });
+                      return objArray;
+                    });
+
+                    sqlArray.forEach((e) => {
+                      $.ajax({
+                        url: "../../controlPanal/phpFile/add.php",
+                        data: { sqlAdd: e },
+                        type: "post",
+                        success: function (out) {
+                          if (out == "successfully") {
+                            resolve();
+                          } else {
+                            $("#not2").text("لم تتم الإضافة: " + out);
+                            reject(
+                              "Failed to add administrators. Please check the information provided on the second page."
+                            );
+                          }
+                        },
+                      });
+                    });
+                  }
+                },
+              });
+            }),
+            new Promise((resolve, reject) => {
+              let empRemoveSql =
+                "DELETE FROM `act_emp` WHERE `activity_name`='" +
+                activityName +
+                "'";
+              $.ajax({
+                url: "../../controlPanal/phpFile/remove.php",
+                data: { sql: empRemoveSql },
+                type: "post",
+                success: function (out) {
+                  if (empArray.length !== 0) {
+                    let sqlArray = empArray.map((e) => {
+                      return (
+                        "INSERT INTO `act_emp`(`emp_id`, `activity_name`) VALUES ('" +
+                        e.EmpId +
+                        "', '" +
+                        name1 +
+                        "')"
+                      );
+                    });
+
+                    sqlArray.forEach((e) => {
+                      $.ajax({
+                        url: "../../controlPanal/phpFile/add.php",
+                        data: { sqlAdd: e },
+                        type: "post",
+                        success: function (out) {
+                          if (out == "successfully") {
+                            resolve();
+                          } else {
+                            $("#not3").text("لم تتم الإضافة: " + out);
+                            reject(
+                              "Failed to add administrators. Please check the information provided on the second page."
+                            );
+                          }
+                        },
+                      });
+                    });
+                  }
+                },
+              });
+            }),
+            new Promise((resolve, reject) => {
+              let male = $("#male").val();
+              let female = $("#female").val();
+              let age_18 = $("#age_18").val();
+              let age_18_30 = $("#age_18_30").val();
+
+              let sqlBene =
+                "UPDATE `beneficiaries` SET `less_than_18`='" +
+                age_18 +
+                "',`age_18_30`='" +
+                age_18_30 +
+                "',`male`='" +
+                male +
+                "',`female`='" +
+                female +
+                "' WHERE `activity_name`='" +
+                activityName +
+                "'";
+              $.ajax({
+                url: "../../controlPanal/phpFile/add.php",
+                data: { sqlAdd: sqlBene },
+                type: "post",
+                success: function (out) {
+                  if (out == "successfully") {
+                    resolve();
+                  } else {
+                    $("#not3").text("لم تتم الإضافة: " + out);
+                    reject(
+                      "Failed to add administrators. Please check the information provided on the second page."
+                    );
+                  }
+                },
+              });
+            }),
+            new Promise((resolve, reject) => {
+              let LinksRemoveSql =
+                "DELETE FROM `links` WHERE `activity_name`='" +
+                activityName +
+                "'";
+              $.ajax({
+                url: "../../controlPanal/phpFile/remove.php",
+                data: { sql: LinksRemoveSql },
+                type: "post",
+                success: function (out) {
+                  if (linksArray.length !== 0) {
+                    let sqlArray = linksArray.map((e) => {
+                      return (
+                        "INSERT INTO `links`(`link`, `activity_name`) VALUES ('" +
+                        e.links +
+                        "','" +
+                        name1 +
+                        "')"
+                      );
+                    });
+
+                    sqlArray.forEach((e) => {
+                      $.ajax({
+                        url: "../../controlPanal/phpFile/add.php",
+                        data: { sqlAdd: e },
+                        type: "post",
+                        success: function (out) {
+                          if (out == "successfully") {
+                            resolve();
+                          } else {
+                            reject(
+                              "Failed to add administrators. Please check the information provided on the second page."
+                            );
+                          }
+                        },
+                      });
+                    });
+                  }
+                },
+              });
+            }),
+            new Promise((resolve, reject) => {
+              let filesRemoveSql =
+                "DELETE FROM `attachments` WHERE `activity_name`='" +
+                activityName +
+                "'";
+              $.ajax({
+                url: "../../controlPanal/phpFile/remove.php",
+                data: { sql: filesRemoveSql },
+                type: "post",
+                success: function (out) {
+                  if (imageArr.length !== 0) {
+                    let sqlArray = imageArr.map((e) => {
+                      return (
+                        "INSERT INTO `attachments`(`attachment`, `activity_name`) VALUES ('" +
+                        e +
+                        "','" +
+                        name1 +
+                        "')"
+                      );
+                    });
+                    sqlArray.forEach((e) => {
+                      $.ajax({
+                        url: "../../controlPanal/phpFile/add.php",
+                        data: { sqlAdd: e },
+                        type: "post",
+                        success: function (out) {
+                          if (out == "successfully") {
+                            resolve();
+                          } else {
+                            $("#not4").text(
+                              "لم تتم الإضافة يرجى التأكد من الصور في رابع صفحة"
+                            );
+                            reject(
+                              "Failed to add administrators. Please check the information provided on the second page."
+                            );
+                          }
+                        },
+                      });
+                    });
+                  }
+                },
+              });
+            }),
+            new Promise((resolve, reject) => {
+              let challRemoveSql =
+                "DELETE FROM `activ_chall` WHERE `activity_name`='" +
+                activityName +
+                "'";
+              $.ajax({
+                url: "../../controlPanal/phpFile/remove.php",
+                data: { sql: challRemoveSql },
+                type: "post",
+                success: function (out) {
+                  if (challArray.length !== 0) {
+                    let sqlArray = challArray.map((e) => {
+                      return (
+                        "INSERT INTO `activ_chall`(`challenge`, `activity_name`) VALUES ('" +
+                        e.chall +
+                        "','" +
+                        name1 +
+                        "')"
+                      );
+                    });
+
+                    sqlArray.forEach((e) => {
+                      $.ajax({
+                        url: "../../controlPanal/phpFile/add.php",
+                        data: { sqlAdd: e },
+                        type: "post",
+                        success: function (out) {
+                          if (out == "successfully") {
+                            resolve();
+                          } else {
+                            reject(
+                              "Failed to add administrators. Please check the information provided on the second page."
+                            );
+                          }
+                        },
+                      });
+                    });
+                  }
+                },
+              });
+            }),
+          ]).then(() => {
+            window.location.replace("../activity/activity.html");
           });
-
-          let challRemoveSql =
-            "DELETE FROM `activ_chall` WHERE `activity_name`='" +
-            activityName +
-            "'";
-          $.ajax({
-            url: "../../controlPanal/phpFile/remove.php",
-            data: { sql: challRemoveSql },
-            type: "post",
-            success: function (out) {
-              if (challArray.length !== 0) {
-                let sqlArray = challArray.map((e) => {
-                  return (
-                    "INSERT INTO `activ_chall`(`challenge`, `activity_name`) VALUES ('" +
-                    e.chall +
-                    "','" +
-                    name1 +
-                    "')"
-                  );
-                });
-
-                sqlArray.forEach((e) => {
-                  $.ajax({
-                    url: "../../controlPanal/phpFile/add.php",
-                    data: { sqlAdd: e },
-                    type: "post",
-                    success: function (out) {
-                      if (out == "successfully") {
-                      } else {
-                      }
-                    },
-                  });
-                });
-              }
-            },
-          });
-
-          $.when
-            .apply(
-              $,
-              $.map($(".ajax-call"), function (call) {
-                return call[0];
-              })
-            )
-            .then(function () {
-              // All AJAX requests have completed, redirect the user
-              window.location.replace("../activity/activity.html");
-            });
         } else {
         }
       },

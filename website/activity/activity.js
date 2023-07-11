@@ -805,194 +805,229 @@ $(document).ready(function () {
       type: "post",
       success: function (out) {
         if (out == "successfully") {
-          if (AdminArray.length !== 0) {
-            let sqlArray = AdminArray.flatMap((e) => {
-              let objArray = e.AdminNicknameArray.map((f) => {
-                return (
-                  "INSERT INTO `act_adm_nick`(`activity_name`, `administrator_name`, `nickname`, `admin_email`) VALUES ('" +
-                  name1 +
-                  "', '" +
-                  e.AdminName +
-                  "', '" +
-                  f +
-                  "', '" +
-                  e.AdminEmail +
-                  "')"
-                );
-              });
-              return objArray;
-            });
-
-            sqlArray.forEach((e) => {
-              $.ajax({
-                url: "../../controlPanal/phpFile/add.php",
-                data: { sqlAdd: e },
-                type: "post",
-                success: function (out) {
-                  if (out == "successfully") {
-                  } else {
-                    $("#not4").text(
-                      "لم تتم الإضافة يرجى التأكد من معلومات المسؤولين في ثاني صفحة"
+          Promise.all([
+            new Promise((resolve, reject) => {
+              if (AdminArray.length !== 0) {
+                let sqlArray = AdminArray.flatMap((e) => {
+                  let objArray = e.AdminNicknameArray.map((f) => {
+                    return (
+                      "INSERT INTO act_adm_nick(activity_name, administrator_name, nickname, admin_email) VALUES ('" +
+                      name1 +
+                      "', '" +
+                      e.AdminName +
+                      "', '" +
+                      f +
+                      "', '" +
+                      e.AdminEmail +
+                      "')"
                     );
-                  }
-                },
-              });
-            });
-          }
+                  });
+                  return objArray;
+                });
 
-          if (empArray.length !== 0) {
-            let sqlArray = empArray.map((e) => {
-              return (
-                "INSERT INTO `act_emp`(`emp_id`, `activity_name`) VALUES ('" +
-                e.EmpId +
-                "', '" +
-                name1 +
-                "')"
-              );
-            });
+                let promises = sqlArray.map((e) => {
+                  return new Promise((resolve, reject) => {
+                    $.ajax({
+                      url: "../../controlPanal/phpFile/add.php",
+                      data: { sqlAdd: e },
+                      type: "post",
+                      success: function (out) {
+                        if (out == "successfully") {
+                          resolve();
+                        } else {
+                          reject(
+                            "Failed to add administrators. Please check the information provided on the second page."
+                          );
+                        }
+                      },
+                    });
+                  });
+                });
 
-            sqlArray.forEach((e) => {
-              $.ajax({
-                url: "../../controlPanal/phpFile/add.php",
-                data: { sqlAdd: e },
-                type: "post",
-                success: function (out) {
-                  if (out == "successfully") {
-                  } else {
-                    $("#not4").text(
-                      "لم تتم الإضافة يرجى التأكد من معلومات الموظفين في ثالث صفحة"
-                    );
-                  }
-                },
-              });
-            });
-          }
-
-          let male = $("#male").val();
-          let female = $("#female").val();
-          let age_18 = $("#age_18").val();
-          let age_18_30 = $("#age_18_30").val();
-
-          let sql =
-            "INSERT INTO `beneficiaries`(`less_than_18`, `age_18_30`, `male`, `female`, `activity_name`) VALUES ('" +
-            age_18 +
-            "','" +
-            age_18_30 +
-            "','" +
-            male +
-            "','" +
-            female +
-            "','" +
-            name1 +
-            "')";
-
-          $.ajax({
-            url: "../../controlPanal/phpFile/add.php",
-            data: { sqlAdd: sql },
-            type: "post",
-            success: function (out) {
-              if (out == "successfully") {
+                Promise.all(promises)
+                  .then(() => resolve())
+                  .catch((err) => reject(err));
               } else {
-                $("#not4").text(
-                  "لم تتم الإضافة يرجى التأكد من معلومات المستفيدين في ثالث صفحة"
-                );
+                resolve();
               }
-            },
+            }),
+
+            new Promise((resolve, reject) => {
+              if (empArray.length !== 0) {
+                let sqlArray = empArray.map((e) => {
+                  return (
+                    "INSERT INTO act_emp(emp_id, activity_name) VALUES ('" +
+                    e.EmpId +
+                    "', '" +
+                    name1 +
+                    "')"
+                  );
+                });
+
+                let promises = sqlArray.map((e) => {
+                  return new Promise((resolve, reject) => {
+                    $.ajax({
+                      url: "../../controlPanal/phpFile/add.php",
+                      data: { sqlAdd: e },
+                      type: "post",
+                      success: function (out) {
+                        if (out == "successfully") {
+                          resolve();
+                        } else {
+                          reject(
+                            "Failed to add employees. Please check the information provided on the third page."
+                          );
+                        }
+                      },
+                    });
+                  });
+                });
+
+                Promise.all(promises)
+                  .then(() => resolve())
+                  .catch((err) => reject(err));
+              } else {
+                resolve();
+              }
+            }),
+
+            new Promise((resolve, reject) => {
+              let male = $("#male").val();
+              let female = $("#female").val();
+              let age_18 = $("#age_18").val();
+              let age_18_30 = $("#age_18_30").val();
+
+              let sql =
+                "INSERT INTO `beneficiaries`(`less_than_18`, `age_18_30`, `male`, `female`, `activity_name`) VALUES ('" +
+                age_18 +
+                "','" +
+                age_18_30 +
+                "','" +
+                male +
+                "','" +
+                female +
+                "','" +
+                name1 +
+                "')";
+
+              $.ajax({
+                url: "../../controlPanal/phpFile/add.php",
+                data: { sqlAdd: sql },
+                type: "post",
+                success: function (out) {
+                  if (out == "successfully") {
+                    resolve();
+                  } else {
+                    reject(
+                      "Failed to add beneficiaries. Please check the information provided on the third page."
+                    );
+                  }
+                },
+              });
+            }),
+
+            new Promise((resolve, reject) => {
+              if (linksArray.length !== 0) {
+                let sqlArray = linksArray.map((e) => {
+                  return (
+                    "INSERT INTO `links`(`link`, `activity_name`) VALUES ('" +
+                    e.links +
+                    "','" +
+                    name1 +
+                    "')"
+                  );
+                });
+                sqlArray.forEach((e) => {
+                  $.ajax({
+                    url: "../../controlPanal/phpFile/add.php",
+                    data: { sqlAdd: e },
+                    type: "post",
+                    success: function (out) {
+                      if (out == "successfully") {
+                        resolve();
+                      } else {
+                        $("#not4").text(
+                          "لم تتم الإضافة يرجى التأكد من الروابط في رابع صفحة"
+                        );
+                        reject(
+                          "Failed to add beneficiaries. Please check the information provided on the third page."
+                        );
+                      }
+                    },
+                  });
+                });
+              }
+            }),
+
+            new Promise((resolve, reject) => {
+              if (imageArr.length !== 0) {
+                let sqlArray = imageArr.map((e) => {
+                  return (
+                    "INSERT INTO `attachments`(`attachment`, `activity_name`) VALUES ('" +
+                    e +
+                    "','" +
+                    name1 +
+                    "')"
+                  );
+                });
+                sqlArray.forEach((e) => {
+                  $.ajax({
+                    url: "../../controlPanal/phpFile/add.php",
+                    data: { sqlAdd: e },
+                    type: "post",
+                    success: function (out) {
+                      if (out == "successfully") {
+                        resolve();
+                      } else {
+                        $("#not4").text(
+                          "لم تتم الإضافة يرجى التأكد من الصور في رابع صفحة"
+                        );
+                        reject(
+                          "Failed to add beneficiaries. Please check the information provided on the third page."
+                        );
+                      }
+                    },
+                  });
+                });
+              }
+            }),
+
+            new Promise((resolve, reject) => {
+              if (challArray.length !== 0) {
+                let sqlArray = challArray.map((e) => {
+                  return (
+                    "INSERT INTO `activ_chall`(`challenge`, `activity_name`) VALUES ('" +
+                    e.chall +
+                    "','" +
+                    name1 +
+                    "')"
+                  );
+                });
+
+                sqlArray.forEach((e) => {
+                  $.ajax({
+                    url: "../../controlPanal/phpFile/add.php",
+                    data: { sqlAdd: e },
+                    type: "post",
+                    success: function (out) {
+                      if (out == "successfully") {
+                        resolve();
+                      } else {
+                        $("#not4").text(
+                          "لم تتم الإضافة يرجى التأكد من التحديات في رابع صفحة"
+                        );
+                        reject(
+                          "Failed to add beneficiaries. Please check the information provided on the third page."
+                        );
+                      }
+                    },
+                  });
+                });
+              }
+            }),
+          ]).then(() => {
+            window.location.replace("../activity/activity.html");
           });
-
-          if (linksArray.length !== 0) {
-            let sqlArray = linksArray.map((e) => {
-              return (
-                "INSERT INTO `links`(`link`, `activity_name`) VALUES ('" +
-                e.links +
-                "','" +
-                name1 +
-                "')"
-              );
-            });
-            sqlArray.forEach((e) => {
-              $.ajax({
-                url: "../../controlPanal/phpFile/add.php",
-                data: { sqlAdd: e },
-                type: "post",
-                success: function (out) {
-                  if (out == "successfully") {
-                  } else {
-                    $("#not4").text(
-                      "لم تتم الإضافة يرجى التأكد من الروابط في رابع صفحة"
-                    );
-                  }
-                },
-              });
-            });
-          }
-
-          if (imageArr.length !== 0) {
-            let sqlArray = imageArr.map((e) => {
-              return (
-                "INSERT INTO `attachments`(`attachment`, `activity_name`) VALUES ('" +
-                e +
-                "','" +
-                name1 +
-                "')"
-              );
-            });
-            sqlArray.forEach((e) => {
-              $.ajax({
-                url: "../../controlPanal/phpFile/add.php",
-                data: { sqlAdd: e },
-                type: "post",
-                success: function (out) {
-                  if (out == "successfully") {
-                  } else {
-                    $("#not4").text(
-                      "لم تتم الإضافة يرجى التأكد من الصور في رابع صفحة"
-                    );
-                  }
-                },
-              });
-            });
-          }
-
-          if (challArray.length !== 0) {
-            let sqlArray = challArray.map((e) => {
-              return (
-                "INSERT INTO `activ_chall`(`challenge`, `activity_name`) VALUES ('" +
-                e.chall +
-                "','" +
-                name1 +
-                "')"
-              );
-            });
-
-            sqlArray.forEach((e) => {
-              $.ajax({
-                url: "../../controlPanal/phpFile/add.php",
-                data: { sqlAdd: e },
-                type: "post",
-                success: function (out) {
-                  if (out == "successfully") {
-                  } else {
-                    $("#not4").text(
-                      "لم تتم الإضافة يرجى التأكد من التحديات في رابع صفحة"
-                    );
-                  }
-                },
-              });
-            });
-          }
-
-          $.when
-            .apply(
-              $,
-              $.map($(".ajax-call"), function (call) {
-                return call[0];
-              })
-            )
-            .then(function () {
-              // All AJAX requests have completed, redirect the user
-              window.location.replace("../activity/activity.html");
-            });
         } else {
           $("#not4").text(
             "لم تتم الإضافة يرجى التأكد من البيانات من معلومات النشاط في اول صفحة"

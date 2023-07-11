@@ -9,6 +9,29 @@ $(document).ready(function () {
     $("#smallList").toggle(100);
   });
 
+  $(document).on("click", function (event) {
+    // Get the target element that was clicked
+    const clickedElement = event.target;
+
+    // Get the dropdown element you want to exclude
+    const dropdownElement = $("#myDropdown");
+
+    const h = $("#myDropdownText");
+    const icon = $("#myDropdownIcon");
+
+    // Check if the clicked element is the dropdown or its child elements
+    if (
+      dropdownElement.has(clickedElement).length > 0 ||
+      h.is(clickedElement) ||
+      icon.is(clickedElement)
+    ) {
+      return; // Do nothing if the clicked element is inside the dropdown
+    }
+
+    // Add the hideDropDown class to the dropdown
+    dropdownElement.addClass("hideDropDown");
+  });
+
   $("#links img").click(function () {
     window.location.replace("Home.html");
   });
@@ -52,7 +75,7 @@ $(document).ready(function () {
     window.location.replace("../otherPages/nickname/nickname.html");
   });
 
-  $("#other").click(function(){
-    $(".dropdown-content").toggle();
+  $("#other").click(function () {
+    $(".dropdown-content").toggleClass("hideDropDown");
   });
 });

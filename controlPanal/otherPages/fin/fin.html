@@ -43,19 +43,19 @@
         </a>
 
         <div id="other">
-          <h6>
+          <h6 id="myDropdownText">
             المزيد
-            <span class="material-symbols-outlined"> arrow_drop_down </span>
+            <span id="myDropdownIcon" class="material-symbols-outlined"> arrow_drop_down </span>
           </h6>
-          <div id="myDropdown" class="dropdown-content">
+          <div id="myDropdown" class="dropdown-content hideDropDown">
             <a href="../aim/aim.html">إضافة أهداف</a>
-            <a href="../activityType/activityType.html"
-              >إضافة أنواع للنشاط</a
-            >
+            <a href="../activityType/activityType.html">إضافة أنواع للنشاط</a>
             <a href="../area/area.html">إضافة محافظات</a>
             <a href="../fin/fin.html">إضافة ممولين</a>
             <a href="../target/target.html">إضافة فئات عمرية</a>
-            <a href="../../otherPages/nickname/nickname.html"><h6>إضافة مسميات</h6></a>
+            <a href="../../otherPages/nickname/nickname.html"
+              ><h6>إضافة مسميات</h6></a
+            >
           </div>
         </div>
       </div>
@@ -107,14 +107,25 @@
         <input type="text" id="name" />
       </div>
       <div>
-        <h6>المحافظة</h6>
-        <select name="gov" id="gov"></select>
+        <h6>الخلفية والرسالة</h6>
+        <input type="text" id="backgound" />
       </div>
       <div>
-        <h6>المنطقة</h6>
-        <input type="text" id="area" />
+        <h6>الدولة</h6>
+        <input type="text" id="country" />
       </div>
-      <button id="add" class="Darkbutton">أضف</button>
+      <div>
+        <h6>معلومات الاتصال</h6>
+        <div class="center_flex">
+          <input type="text" id="contact_information" />
+          <button id="add_contact_information" class="Darkbutton app">
+            أضف
+          </button>
+        </div>
+
+        <div id="contact_information_added" class="inserted"></div>
+      </div>
+      <button id="add" class="Darkbutton">حفظ و إنهاء</button>
       <button id="edit" class="Darkbutton">تعديل</button>
       <button id="cancelEdit" class="Darkbutton">إلغاء التعديل</button>
       <p id="not"></p>

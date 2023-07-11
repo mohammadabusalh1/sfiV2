@@ -1,0 +1,5 @@
+[06-Jul-2023 03:24:50 America/Chicago] PHP Warning:  mysqli::query(): Empty query in /home1/anascosfy/public_html/MS/controlPanal/phpFile/show.php on line 16
+[06-Jul-2023 03:24:50 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in /home1/anascosfy/public_html/MS/controlPanal/phpFile/show.php:19
+Stack trace:
+#0 {main}
+  thrown in /home1/anascosfy/public_html/MS/controlPanal/phpFile/show.php on line 19

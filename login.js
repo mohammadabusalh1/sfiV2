@@ -1,7 +1,27 @@
 $(document).ready(function () {
-  if(localStorage.getItem("login") == null){
+  if (localStorage.getItem("login") == null) {
     localStorage.setItem("login", 0);
   }
+
+  let enterCount = 0;
+  $(document).keydown(function (event) {
+    // Check if the "Enter" key is pressed (key code 13)
+    if (event.which === 13) {
+      event.preventDefault();
+
+      enterCount++; // Increment the enter count
+
+      if (enterCount === 1) {
+        // First time pressing "Enter" - Set focus on password input
+        $("#password").focus();
+      } else if (enterCount === 2) {
+        // Second time pressing "Enter" - Trigger login button
+        $("#login").trigger("click");
+        enterCount = 0;
+      }
+    }
+  });
+
   $("#login").click(function () {
     name = $("#nameIn").val();
     pass = $("#password").val();
@@ -31,10 +51,13 @@ $(document).ready(function () {
         } else {
           setInterval(function () {
             $("#massage").text("المستخدم غير موجود !");
-            $("#nameIn").css("border-color","red");
-            $("#password").css("border-color","red");
+            $("#nameIn").css("border-color", "red");
+            $("#password").css("border-color", "red");
           }, 300);
         }
+      },
+      error: function (err) {
+        console.log(err.responseText);
       },
     });
   });

@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sfi";
+$dbname = "anascosf_sfi";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

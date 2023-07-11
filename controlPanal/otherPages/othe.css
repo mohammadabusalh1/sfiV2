@@ -30,6 +30,48 @@ a {
   color: black;
 }
 
+.inserted {
+  border: 1px solid #c58940;
+  margin-bottom: 12px;
+  padding: 16px;
+  display: none;
+  white-space: nowrap;
+}
+
+.inserted div {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+.inserted div button {
+  padding: 0px 12px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.inserted div h6 {
+  padding: 8px;
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  border-radius: 8px;
+  margin: 4px;
+  text-align: start;
+  font-size: 14px;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.center_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 16px;
+  gap: 2rem;
+}
+
 .Darkbutton {
   padding: 8px 25px;
   background-color: transparent;
@@ -81,7 +123,6 @@ button {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  display: none;
   position: absolute;
   top: 70%;
   background-color: #f1f1f1;
@@ -90,6 +131,10 @@ button {
   z-index: 10;
   border-radius: 4px;
   padding: 8px;
+}
+
+.hideDropDown {
+  display: none;
 }
 
 /* Links inside the dropdown */
@@ -286,7 +331,7 @@ select {
   color: #222;
 }
 
-#hero div {
+#hero > div {
   width: 40%;
 }
 
@@ -435,7 +480,6 @@ td {
     padding: 8px;
     border-bottom: 1px solid #ddd;
   }
-
 }
 
 @media screen and (max-width: 576px) {

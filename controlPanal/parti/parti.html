@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link
@@ -25,7 +25,7 @@
       <div id="links">
         <img src="../img/logo.png" alt="..." />
         <a href="../home/Home.html">
-          <h6 >الرئيسية</h6>
+          <h6>الرئيسية</h6>
         </a>
         <a href="../users/users.html">
           <h6>المستخدمين</h6>
@@ -44,11 +44,13 @@
         </a>
 
         <div id="other">
-          <h6>
+          <h6 id="myDropdownText">
             المزيد
-            <span class="material-symbols-outlined"> arrow_drop_down </span>
+            <span id="myDropdownIcon" class="material-symbols-outlined">
+              arrow_drop_down
+            </span>
           </h6>
-          <div id="myDropdown" class="dropdown-content">
+          <div id="myDropdown" class="dropdown-content hideDropDown">
             <a href="../otherPages/aim/aim.html">إضافة أهداف</a>
             <a href="../otherPages/activityType/activityType.html"
               >إضافة أنواع للنشاط</a
@@ -106,7 +108,7 @@
       <div id="reloadIcons">
         <i id="save" class="fa-solid fa-floppy-disk relode"></i>
         <i id="reload" class="fa-solid fa-rotate-right relode"></i>
-       </div>
+      </div>
       <div id="info">
         <div>
           <h6>إسم السؤول</h6>

@@ -6,6 +6,29 @@ $(document).ready(function () {
     window.location.replace("../../login.html");
   }
 
+  $(document).on("click", function (event) {
+    // Get the target element that was clicked
+    const clickedElement = event.target;
+
+    // Get the dropdown element you want to exclude
+    const dropdownElement = $("#myDropdown");
+
+    const h = $("#myDropdownText");
+    const icon = $("#myDropdownIcon");
+
+    // Check if the clicked element is the dropdown or its child elements
+    if (
+      dropdownElement.has(clickedElement).length > 0 ||
+      h.is(clickedElement) ||
+      icon.is(clickedElement)
+    ) {
+      return; // Do nothing if the clicked element is inside the dropdown
+    }
+
+    // Add the hideDropDown class to the dropdown
+    dropdownElement.addClass("hideDropDown");
+  });
+
   // get all financier name to select when crate projects
   function finReload(sql) {
     $.ajax({
@@ -18,18 +41,10 @@ $(document).ready(function () {
         for (i = 0; i < data.length; i++) {
           ht +=
             '<option value="' +
-            data[i].project_financier_name +
-            " - " +
-            data[i].governorate +
-            " - " +
-            data[i].city +
+            data[i].organization +
             '">' +
-            data[i].project_financier_name +
-            " - " +
-            data[i].governorate +
-            " - " +
-            data[i].city +
-            "</option>";
+            data[i].organization;
+          ("</option>");
         }
         $("#fins").html(ht);
       },
@@ -303,8 +318,8 @@ $(document).ready(function () {
   });
   //=============================================
 
-  function add(sql) {
-    $.ajax({
+  async function add(sql) {
+    await $.ajax({
       url: "../phpFile/add.php",
       data: { sqlAdd: sql },
       type: "post",
@@ -347,6 +362,63 @@ $(document).ready(function () {
   }
   reload("SELECT * FROM `project`");
 
+  async function addFins(name) {
+    if (finsArray.length > 0) {
+      for (i = 0; i < finsArray.length; i++) {
+        let sql =
+          "INSERT INTO `fin_pro`(`project_financier_name`, `project_name`) VALUES ('" +
+          finsArray[i] +
+          "','" +
+          name +
+          "')";
+        add(sql);
+      }
+    }
+  }
+
+  async function addGoals(name) {
+    if (goalsArray.length > 0) {
+      for (i = 0; i < goalsArray.length; i++) {
+        let sql =
+          "INSERT INTO `goal_pro`(`goal_name`, `project_name`) VALUES ('" +
+          goalsArray[i] +
+          "','" +
+          name +
+          "')";
+        console.log("i is: " + i + " sql:" + sql);
+        add(sql);
+      }
+    }
+  }
+
+  async function addAreas(name) {
+    if (areasArray.length > 0) {
+      for (i = 0; i < areasArray.length; i++) {
+        let sql =
+          "INSERT INTO `pro_area`(`area_name`, `project_name`) VALUES ('" +
+          areasArray[i] +
+          "','" +
+          name +
+          "')";
+        add(sql);
+      }
+    }
+  }
+
+  async function addTargets(name) {
+    if (targetsArray.length > 0) {
+      for (i = 0; i < targetsArray.length; i++) {
+        let sql =
+          "INSERT INTO `targ_pro`(`target_group`, `project_name`) VALUES ('" +
+          targetsArray[i] +
+          "','" +
+          name +
+          "')";
+        add(sql);
+      }
+    }
+  }
+
   $("#add").on("click", function () {
     // Check if any of the input values are empty
     if (
@@ -360,7 +432,7 @@ $(document).ready(function () {
     ) {
       $("#alert").text("يرجى ملء جميع الحقول بالشكل الصحيح !");
 
-      if(goalsArray.length === 0){
+      if (goalsArray.length === 0) {
         $("#alert").text("يرجى إضافة هدف واحد على الاقل !");
       }
       // Check if any of the input values are empty
@@ -423,73 +495,54 @@ $(document).ready(function () {
         endDate +
         "')";
 
-      $.ajax({
-        url: "../phpFile/add.php",
-        data: { sqlAdd: sqlAdd },
-        type: "post",
-        success: function (out) {
-          if (out == "successfully") {
-            if (finsArray.length > 0) {
-              for (i = 0; i < finsArray.length; i++) {
-                let sql =
-                  "INSERT INTO `fin_pro`(`project_financier_name`, `project_name`) VALUES ('" +
-                  finsArray[i] +
-                  "','" +
-                  name +
-                  "')";
-                add(sql);
-              }
-            }
-
-            if (goalsArray.length > 0) {
-              for (i = 0; i < goalsArray.length; i++) {
-                let sql =
-                  "INSERT INTO `goal_pro`(`goal_name`, `project_name`) VALUES ('" +
-                  goalsArray[i] +
-                  "','" +
-                  name +
-                  "')";
-                add(sql);
-              }
-            }
-
-            if (areasArray.length > 0) {
-              for (i = 0; i < areasArray.length; i++) {
-                let sql =
-                  "INSERT INTO `pro_area`(`area_name`, `project_name`) VALUES ('" +
-                  areasArray[i] +
-                  "','" +
-                  name +
-                  "')";
-                add(sql);
-              }
-            }
-
-            if (targetsArray.length > 0) {
-              for (i = 0; i < targetsArray.length; i++) {
-                let sql =
-                  "INSERT INTO `targ_pro`(`target_group`, `project_name`) VALUES ('" +
-                  targetsArray[i] +
-                  "','" +
-                  name +
-                  "')";
-                add(sql);
-              }
-            }
-
-            $("#alert").text("تمت الأضافة");
-            $("input, textarea").val("");
-            finsArray = [];
-            goalsArray = [];
-            areasArray = [];
-            targetsArray = [];
-            $(".inserted").hide();
-            reload("SELECT * FROM `project`");
-          } else {
-            $("#alert").text(" لم تتم الاضافة يرجى التأكد من البيانات: " + out);
-          }
-        },
-      });
+      add(sqlAdd)
+        .then(() => {
+          addFins(name)
+            .then(() => {
+              addAreas(name)
+                .then(() => {
+                  addGoals(name)
+                    .then(() => {
+                      addTargets(name)
+                        .then(() => {
+                          reload("SELECT * FROM `project`");
+                          $("#alert").text("تمت الأضافة");
+                          $("input, textarea").val("");
+                          finsArray = [];
+                          goalsArray = [];
+                          areasArray = [];
+                          targetsArray = [];
+                          $(".inserted").hide();
+                        })
+                        .catch((e) => {
+                          $("#alert").text(
+                            "لم تتم الأضافة يرجى أعادة المحاولة و التأكد من البيانات"
+                          );
+                        });
+                    })
+                    .catch((e) => {
+                      $("#alert").text(
+                        "لم تتم الأضافة يرجى أعادة المحاولة و التأكد من البيانات"
+                      );
+                    });
+                })
+                .catch((e) => {
+                  $("#alert").text(
+                    "لم تتم الأضافة يرجى أعادة المحاولة و التأكد من البيانات"
+                  );
+                });
+            })
+            .catch((e) => {
+              $("#alert").text(
+                "لم تتم الأضافة يرجى أعادة المحاولة و التأكد من البيانات"
+              );
+            });
+        })
+        .catch(() => {
+          $("#alert").text(
+            "لم تتم الأضافة يرجى أعادة المحاولة و التأكد من البيانات"
+          );
+        });
     }
   });
 
@@ -517,8 +570,8 @@ $(document).ready(function () {
   });
   //=============================================
 
-  function deleteRow(sql) {
-    $.ajax({
+  async function deleteRow(sql) {
+    await $.ajax({
       url: "../phpFile/remove.php",
       data: { sql: sql },
       type: "post",
@@ -539,16 +592,21 @@ $(document).ready(function () {
       let sql2 = "DELETE FROM `goal_pro` WHERE `" + feild + "` = '" + id + "'";
       let sql3 = "DELETE FROM `pro_area` WHERE `" + feild + "` = '" + id + "'";
       let sql4 = "DELETE FROM `targ_pro` WHERE `" + feild + "` = '" + id + "'";
-      deleteRow(sql);
-      deleteRow(sql1);
-      deleteRow(sql2);
-      deleteRow(sql3);
-      deleteRow(sql4);
+
+      deleteRow(sql).then(() => {
+        sql = "SELECT * FROM `project`";
+        reload(sql);
+        deleteRow(sql1);
+        deleteRow(sql2);
+        deleteRow(sql3);
+        deleteRow(sql4);
+      });
 
       let sql12 =
         "UPDATE `activities` SET `project_name`='' WHERE `project_name`='" +
         id +
         "';";
+
       $.ajax({
         url: "../phpFile/update.php",
         data: { sql: sql12 },
@@ -556,16 +614,13 @@ $(document).ready(function () {
         type: "post",
         success: function (data) {},
       });
-
-      sql = "SELECT * FROM `project`";
-      reload(sql);
     }
   });
 
   //=============================================
 
-  function remove(sql) {
-    $.ajax({
+  async function remove(sql) {
+    await $.ajax({
       url: "../phpFile/remove.php",
       data: { sql: sql },
       type: "post",
@@ -776,76 +831,66 @@ $(document).ready(function () {
         if (out == "New record update successfully") {
           let sqlFinDelete =
             "DELETE FROM `fin_pro` WHERE `project_name`='" + projectName + "'";
-          remove(sqlFinDelete);
           let sqlgoalDelete =
             "DELETE FROM `goal_pro` WHERE `project_name`='" + projectName + "'";
-          remove(sqlgoalDelete);
+
           let sqlareaDelete =
             "DELETE FROM `pro_area` WHERE `project_name`='" + projectName + "'";
-          remove(sqlareaDelete);
+
           let sqlTargetDelete =
             "DELETE FROM `targ_pro` WHERE `project_name`='" + projectName + "'";
-          remove(sqlTargetDelete);
 
-          if (finsArray.length > 0) {
-            for (i = 0; i < finsArray.length; i++) {
-              let sql =
-                "INSERT INTO `fin_pro`(`project_financier_name`, `project_name`) VALUES ('" +
-                finsArray[i] +
-                "','" +
-                nameAdd +
-                "')";
-              add(sql);
-            }
-          }
+          remove(sqlFinDelete)
+            .then(() => {
+              addFins(nameAdd).then(() => {
+                finsArray = [];
+              });
+              remove(sqlgoalDelete)
+                .then(() => {
+                  addGoals(nameAdd).then(() => {
+                    goalsArray = [];
+                  });
+                  remove(sqlareaDelete)
+                    .then(() => {
+                      addAreas(nameAdd).then(() => {
+                        areasArray = [];
+                      });
 
-          if (goalsArray.length > 0) {
-            for (i = 0; i < goalsArray.length; i++) {
-              let sql =
-                "INSERT INTO `goal_pro`(`goal_name`, `project_name`) VALUES ('" +
-                goalsArray[i] +
-                "','" +
-                nameAdd +
-                "')";
-              add(sql);
-            }
-          }
-
-          if (areasArray.length > 0) {
-            for (i = 0; i < areasArray.length; i++) {
-              let sql =
-                "INSERT INTO `pro_area`(`area_name`, `project_name`) VALUES ('" +
-                areasArray[i] +
-                "','" +
-                nameAdd +
-                "')";
-              add(sql);
-            }
-          }
-
-          if (targetsArray.length > 0) {
-            for (i = 0; i < targetsArray.length; i++) {
-              let sql =
-                "INSERT INTO `targ_pro`(`target_group`, `project_name`) VALUES ('" +
-                targetsArray[i] +
-                "','" +
-                nameAdd +
-                "')";
-              add(sql);
-            }
-          }
-          $("input").val("");
-          $("textarea").val("");
-          finsArray = [];
-          goalsArray = [];
-          areasArray = [];
-          targetsArray = [];
-          $(".inserted").hide();
-          $("#tableDis").show();
-          $("#edit").toggle();
-          $("#add").toggle();
-          $("#endWithoutSave").toggle();
-          reload("SELECT * FROM `project`");
+                      remove(sqlTargetDelete)
+                        .then(() => {
+                          addTargets(nameAdd).then(() => {
+                            targetsArray = [];
+                          });
+                          $("input").val("");
+                          $("textarea").val("");
+                          $(".inserted").hide();
+                          $("#tableDis").show();
+                          $("#edit").toggle();
+                          $("#add").toggle();
+                          $("#endWithoutSave").toggle();
+                          reload("SELECT * FROM `project`");
+                        })
+                        .catch((e) => {
+                          $("#alert").text(
+                            "لم يتم التعديل يرجى إعادة المحاولة"
+                          );
+                          return;
+                        });
+                    })
+                    .catch((e) => {
+                      $("#alert").text("لم يتم التعديل يرجى إعادة المحاولة");
+                      return;
+                    });
+                })
+                .catch((e) => {
+                  $("#alert").text("لم يتم التعديل يرجى إعادة المحاولة");
+                  return;
+                });
+            })
+            .catch((e) => {
+              $("#alert").text("لم يتم التعديل يرجى إعادة المحاولة");
+              return;
+            });
         } else {
           $("#alert").text(" لم تتم الاضافة يرجى التأكد من البيانات: " + out);
         }
@@ -873,7 +918,7 @@ $(document).ready(function () {
   });
 
   $("#other").click(function () {
-    $(".dropdown-content").toggle();
+    $(".dropdown-content").toggleClass("hideDropDown");
   });
 
   $("#nav i").click(function () {
@@ -881,7 +926,6 @@ $(document).ready(function () {
   });
 
   $("#save").click(function () {
-
     var name = $("#name").val();
     var value = $("#value").val();
     var valueType = $("#valueType").val();
@@ -902,7 +946,6 @@ $(document).ready(function () {
   });
 
   $("#reload").click(function () {
-
     $("#name").val(localStorage.getItem("name"));
     $("#value").val(localStorage.getItem("value"));
     $("#valueType").val(localStorage.getItem("valueType"));
@@ -930,8 +973,8 @@ $(document).ready(function () {
     targetsInsertedDiv.html(newTargetArray);
     targetsInsertedDiv.show();
 
-     // Map AreaArray to an array of HTML elements
-     const newAreaArray = areasArray.map((e) => {
+    // Map AreaArray to an array of HTML elements
+    const newAreaArray = areasArray.map((e) => {
       const div = $("<div>");
       const h6 = $("<h6>").text(e);
       const button = $("<button>")
@@ -946,8 +989,8 @@ $(document).ready(function () {
     areasInsertedDiv.html(newAreaArray);
     areasInsertedDiv.show();
 
-     // Map goalArray to an array of HTML elements
-     const newGoalArray = goalsArray.map((e) => {
+    // Map goalArray to an array of HTML elements
+    const newGoalArray = goalsArray.map((e) => {
       const div = $("<div>");
       const h6 = $("<h6>").text(e);
       const button = $("<button>")
@@ -976,6 +1019,5 @@ $(document).ready(function () {
     // Add the new HTML elements to finsInsertedDiv
     finsInsertedDiv.html(newFinsArray);
     finsInsertedDiv.show();
-
   });
 });

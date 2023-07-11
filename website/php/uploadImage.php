@@ -1,5 +1,11 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "sfi");
+$servername = "localhost";
+$username = "anascosf_sfi";
+$password = "SfiA!cxpw2Y";
+$dbname = "anascosf_sfi";
+
+// Create connection
+$con = new mysqli($servername, $username, $password, $dbname);
 $con->set_charset("utf8");
 if (!$con) {
     die("Error connecting to database: " . mysqli_connect_error());

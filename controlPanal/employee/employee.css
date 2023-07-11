@@ -86,7 +86,6 @@ button:hover {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  display: none;
   position: absolute;
   top: 70%;
   background-color: #f1f1f1;
@@ -95,6 +94,10 @@ button:hover {
   z-index: 10;
   border-radius: 4px;
   padding: 8px;
+}
+
+.hideDropDown {
+  display: none;
 }
 
 /* Links inside the dropdown */
@@ -373,13 +376,13 @@ td {
   display: none;
 }
 
-#reloadIcons{
+#reloadIcons {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-.relode{
+.relode {
   padding: 12px;
   margin-bottom: 24px;
   background-color: #c58940;
@@ -388,7 +391,7 @@ td {
   cursor: pointer;
 }
 
-.relode:hover{
+.relode:hover {
   opacity: 0.8;
 }
 
@@ -407,7 +410,8 @@ td {
 @media screen and (max-width: 992px) {
   #links a,
   #other,
-  #nav button span,#nav button {
+  #nav button span,
+  #nav button {
     display: none;
   }
 

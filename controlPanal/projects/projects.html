@@ -24,7 +24,7 @@
       <div id="links">
         <img src="../img/logo.png" alt="..." />
         <a href="../home/Home.html">
-          <h6 >الرئيسية</h6>
+          <h6>الرئيسية</h6>
         </a>
         <a href="../users/users.html">
           <h6>المستخدمين</h6>
@@ -43,11 +43,13 @@
         </a>
 
         <div id="other">
-          <h6>
+          <h6 id="myDropdownText">
             المزيد
-            <span class="material-symbols-outlined"> arrow_drop_down </span>
+            <span class="material-symbols-outlined" id="myDropdownIcon">
+              arrow_drop_down
+            </span>
           </h6>
-          <div id="myDropdown" class="dropdown-content">
+          <div id="myDropdown" class="dropdown-content hideDropDown">
             <a href="../otherPages/aim/aim.html">إضافة أهداف</a>
             <a href="../otherPages/activityType/activityType.html"
               >إضافة أنواع للنشاط</a
@@ -94,7 +96,9 @@
         <a href="../otherPages/area/area.html"><h6>إضافة محافظات</h6></a>
         <a href="../otherPages/fin/fin.html"><h6>إضافة ممولين</h6></a>
         <a href="../otherPages/target/target.html"><h6>إضافة فئات عمرية</h6></a>
-        <a href="../otherPages/nickname/nickname.html"><h6>إضافة المسميات</h6></a>
+        <a href="../otherPages/nickname/nickname.html"
+          ><h6>إضافة المسميات</h6></a
+        >
       </div>
       <a href="../../login.html">
         <h6 id="logout_word">تسجيل الخروج</h6>
@@ -103,10 +107,10 @@
 
     <section id="hero">
       <div id="info">
-       <div id="reloadIcons">
-        <i id="save" class="fa-solid fa-floppy-disk relode"></i>
-        <i id="reload" class="fa-solid fa-rotate-right relode"></i>
-       </div>
+        <div id="reloadIcons">
+          <i id="save" class="fa-solid fa-floppy-disk relode"></i>
+          <i id="reload" class="fa-solid fa-rotate-right relode"></i>
+        </div>
         <div id="part1">
           <h6>إسم المشروع</h6>
           <input type="text" id="name" />
@@ -177,7 +181,7 @@
           </div>
 
           <button id="add" class="Darkbutton">أضف</button>
-          <button id="edit" class="Darkbutton">إنهاء</button>
+          <button id="edit" class="Darkbutton">إنهاء وحفظ</button>
           <button id="endWithoutSave" class="Darkbutton">إنهاء دون حفظ</button>
           <p id="alert"></p>
         </div>

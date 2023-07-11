@@ -6,6 +6,29 @@ $(document).ready(function () {
     window.location.replace("../../login.html");
   }
 
+  $(document).on("click", function (event) {
+    // Get the target element that was clicked
+    const clickedElement = event.target;
+
+    // Get the dropdown element you want to exclude
+    const dropdownElement = $("#myDropdown");
+
+    const h = $("#myDropdownText");
+    const icon = $("#myDropdownIcon");
+
+    // Check if the clicked element is the dropdown or its child elements
+    if (
+      dropdownElement.has(clickedElement).length > 0 ||
+      h.is(clickedElement) ||
+      icon.is(clickedElement)
+    ) {
+      return; // Do nothing if the clicked element is inside the dropdown
+    }
+
+    // Add the hideDropDown class to the dropdown
+    dropdownElement.addClass("hideDropDown");
+  });
+
   function reload(sql) {
     $.ajax({
       url: "../phpFile/show.php",
@@ -169,6 +192,6 @@ $(document).ready(function () {
   });
 
   $("#other").click(function () {
-    $(".dropdown-content").toggle();
+    $(".dropdown-content").toggleClass("hideDropDown");
   });
 });
